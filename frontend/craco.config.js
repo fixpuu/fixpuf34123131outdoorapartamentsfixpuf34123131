@@ -23,7 +23,7 @@ function makeDevServerV5Compatible(devServerConfig) {
 
   compatibleConfig.server =
     typeof https === "object"
-      ? { type: "https", options: options }
+      ? { type: "https", options: https }
       : https
         ? "https"
         : "http";
@@ -70,7 +70,7 @@ if (config.enableHealthCheck) {
 }
 
 let webpackConfig = {
-  // Disattiva nativamente il controllo TypeScript in Craco per evitare crash di ajv
+  // Disattiva il type checking nativo lato Craco per bypassare ajv
   typescript: {
     enableTypeChecking: false,
   },
@@ -88,10 +88,13 @@ let webpackConfig = {
       '@': path.resolve(__dirname, 'src'),
     },
     configure: (webpackConfig) => {
-      // Rimuove ForkTsCheckerWebpackPlugin per impedire crash sugli schemi ajv obsoleti
+      // RIMOZIONE AGGRESSIVA DEL PLUGIN CHE FA CRASHARE IL BUILD
       if (webpackConfig.plugins) {
         webpackConfig.plugins = webpackConfig.plugins.filter(
-          (plugin) => plugin.constructor && plugin.constructor.name !== 'ForkTsCheckerWebpackPlugin'
+          (plugin) => {
+            const name = plugin.constructor ? plugin.constructor.name : '';
+            return name !== 'ForkTsCheckerWebpackPlugin';
+          }
         );
       }
 
