@@ -23,7 +23,7 @@ function makeDevServerV5Compatible(devServerConfig) {
 
   compatibleConfig.server =
     typeof https === "object"
-      ? { type: "https", options: https }
+      ? { type: "https", options: options }
       : https
         ? "https"
         : "http";
@@ -70,6 +70,10 @@ if (config.enableHealthCheck) {
 }
 
 let webpackConfig = {
+  // Disattiva nativamente il controllo TypeScript in Craco per evitare crash di ajv
+  typescript: {
+    enableTypeChecking: false,
+  },
   eslint: {
     configure: {
       extends: ["plugin:react-hooks/recommended"],
@@ -84,17 +88,23 @@ let webpackConfig = {
       '@': path.resolve(__dirname, 'src'),
     },
     configure: (webpackConfig) => {
+      // Rimuove ForkTsCheckerWebpackPlugin per impedire crash sugli schemi ajv obsoleti
+      if (webpackConfig.plugins) {
+        webpackConfig.plugins = webpackConfig.plugins.filter(
+          (plugin) => plugin.constructor && plugin.constructor.name !== 'ForkTsCheckerWebpackPlugin'
+        );
+      }
 
       // Add ignored patterns to reduce watched directories
-        webpackConfig.watchOptions = {
-          ...webpackConfig.watchOptions,
-          ignored: [
-            '**/node_modules/**',
-            '**/.git/**',
-            '**/build/**',
-            '**/dist/**',
-            '**/coverage/**',
-            '**/public/**',
+      webpackConfig.watchOptions = {
+        ...webpackConfig.watchOptions,
+        ignored: [
+          '**/node_modules/**',
+          '**/.git/**',
+          '**/build/**',
+          '**/dist/**',
+          '**/coverage/**',
+          '**/public/**',
         ],
       };
 
