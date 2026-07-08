@@ -62,7 +62,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "DISABLE_ESLINT_PLUGIN=true TSC_COMPILE_ON_ERROR=true react-scripts build",
+    "build": "echo \"module.exports = () => {};\" > node_modules/fork-ts-checker-webpack-plugin/node_modules/ajv-keywords/index.js && react-scripts build",    
     "test": "craco test"
   },
   "browserslist": {
