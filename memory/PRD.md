@@ -60,3 +60,24 @@ Sito web moderno per **OUTDOOR APARTMENTS**, azienda di gestione di appartamenti
 1. Fornire email reale e chiavi Resend per attivare invio form.
 2. Fornire script embed Octorate per attivare prenotazioni reali.
 3. Caricare foto reali appartamenti.
+
+## Iteration 2 (Dec 2025) — GDPR / Legal Compliance
+- Rimosso logo grande centrale nella hero (rimane solo in navbar). Eyebrow → titolo diretto.
+- Cambiata immagine hero: Pexels 1054218 (cima alpina innevata + boschi di conifere), placeholder documentato in codice.
+- **CookieBanner GDPR/Garante Privacy 2021 compliant**:
+  - Compare al primo accesso, blocca cookie non tecnici finché no consenso.
+  - Tre pulsanti di pari peso grafico (tutti outlined identici): Rifiuta tutti / Personalizza / Accetta tutti.
+  - Modal preferenze con 4 categorie (necessary locked-on, functional/analytics/marketing off di default).
+  - Stato persistito in `localStorage` chiave `oa_consent_v1` con versioning.
+  - Riapribile dal footer link "Gestisci cookie".
+- **Nuove rotte legali**:
+  - `/privacy-policy` — Informativa Privacy art. 13 GDPR (titolare, finalità, basi giuridiche, diritti, ecc.)
+  - `/cookie-policy` — con tabella cookie tecnici + sezione pronta per analytics/terze parti
+  - `/note-legali` — T&C, dati societari, limitazioni responsabilità, foro
+  - Tutte marcate "Bozza / placeholder" con banner di avviso in evidenza.
+- **Host form** — aggiunta checkbox obbligatoria non preselezionata "Ho letto e accetto l'Informativa Privacy" con link cliccabile alla pagina. Blocca invio se non spuntata.
+- Footer: link Privacy / Cookie Policy / Note Legali + "Gestisci cookie".
+- Consent Mode ready: Octorate, GA e altri script di terze parti devono controllare `useConsent().choices.marketing` (o `.analytics`) prima di caricarsi.
+
+## Testing
+- iteration_2.json — 17/17 pass. Fix polish: tre pulsanti banner ora identici (outlined, no fill preferenziale).

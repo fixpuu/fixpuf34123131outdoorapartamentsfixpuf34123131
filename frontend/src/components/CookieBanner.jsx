@@ -69,7 +69,7 @@ export const CookieBanner = () => {
                   type="button"
                   data-testid={CONSENT.rejectAll}
                   onClick={rejectAll}
-                  className="border border-white/25 hover:border-white text-white transition-colors px-5 py-3 text-[11px] tracking-[0.22em] uppercase whitespace-nowrap"
+                  className="bg-transparent border border-white/40 hover:border-white hover:bg-white/5 text-white transition-colors px-5 py-3 text-[11px] tracking-[0.22em] uppercase whitespace-nowrap"
                 >
                   Rifiuta tutti
                 </button>
@@ -77,7 +77,7 @@ export const CookieBanner = () => {
                   type="button"
                   data-testid={CONSENT.customize}
                   onClick={openPreferences}
-                  className="border border-white/25 hover:border-white text-white transition-colors px-5 py-3 text-[11px] tracking-[0.22em] uppercase whitespace-nowrap"
+                  className="bg-transparent border border-white/40 hover:border-white hover:bg-white/5 text-white transition-colors px-5 py-3 text-[11px] tracking-[0.22em] uppercase whitespace-nowrap"
                 >
                   Personalizza
                 </button>
@@ -85,7 +85,7 @@ export const CookieBanner = () => {
                   type="button"
                   data-testid={CONSENT.acceptAll}
                   onClick={acceptAll}
-                  className="bg-[#2E4F3E] hover:bg-[#233B2E] text-white transition-colors px-5 py-3 text-[11px] tracking-[0.22em] uppercase whitespace-nowrap"
+                  className="bg-transparent border border-white/40 hover:border-white hover:bg-white/5 text-white transition-colors px-5 py-3 text-[11px] tracking-[0.22em] uppercase whitespace-nowrap"
                 >
                   Accetta tutti
                 </button>
