@@ -1,0 +1,26 @@
+{
+  "summary": "First-finish smoke test for Outdoor Apartments (Pila) site. All backend endpoints, home/list/detail navigation, host-request form validation and submission, and contact page are working end-to-end via the public preview URL.",
+  "tested_scope": ["backend", "frontend", "integration"],
+  "passed": [
+    "GET /api/apartments -> 200, 8 apartments, expected fields (id, name, location, short_location, rating, reviews_count, amenities, description, image)",
+    "GET /api/apartments/{id} -> 200 for all 8 known IDs (white-relax, abete-n-10, pila-29, ski-sky-studio-85, chalet-saint-salod, studio-pila-1800, pila-63, pila-64); 404 for unknown id",
+    "POST /api/host-requests -> 422 on empty body with per-field 'missing' errors",
+    "POST /api/host-requests -> 422 on invalid email (Pydantic EmailStr)",
+    "POST /api/host-requests -> 200 on valid payload, persisted with UUID + created_at",
+    "GET /api/host-requests -> 200, returns the created record",
+    "Home: hero-title, about-section, booking-widget with octorate-placeholder, featured-apartments-grid with 4 cards, main-nav visible",
+    "/appartamenti: apartments-list renders all 8 apartment-card-{id} testids",
+    "Apartment card click -> /appartamenti/white-relax, apartment-detail + apartment-book-now visible",
+    "Nav links (home/apartments/host/contact) navigate correctly",
+    "/affidaci-il-tuo-immobile: empty submit shows 4 field errors (Inserisci nome/telefono/indirizzo/email...)",
+    "/affidaci-il-tuo-immobile: invalid email shows email error",
+    "/affidaci-il-tuo-immobile: valid submission shows host-success block (data persisted in Mongo)",
+    "/contatti: renders email (info@outdoorapartments.it) and phone info"
+  ],
+  "failed": [],
+  "action_items": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "retest_needed": false,
+  "notes": "Placeholder email/phone on /contatti (info@outdoorapartments.it, +39 000 000 000 0) — intentional per PRD. Octorate embed is a dashed placeholder as expected. No real email delivery (Resend deferred).",
+  "full_testing_deferred": true
+}
