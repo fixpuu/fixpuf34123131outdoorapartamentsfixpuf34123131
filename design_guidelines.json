@@ -1,0 +1,135 @@
+{
+  "project_name": "Outdoor Apartments Pila",
+  "theme_preference": "dark",
+  "typography": {
+    "headings": {
+      "family": "Playfair Display, serif",
+      "weights": ["400", "500", "600"],
+      "usage": "Use for all major headings (H1, H2, H3), apartment names. Tracking should be normal or slightly tight for large sizes."
+    },
+    "body": {
+      "family": "Manrope, sans-serif",
+      "weights": ["300", "400", "500"],
+      "usage": "Use for body text, overlines, labels, buttons, navigation. Overlines should be uppercase with wide tracking (tracking-widest)."
+    },
+    "scale": {
+      "h1": "text-5xl sm:text-6xl md:text-7xl lg:text-8xl",
+      "h2": "text-4xl sm:text-5xl lg:text-6xl",
+      "h3": "text-2xl sm:text-3xl lg:text-4xl",
+      "body": "text-base lg:text-lg",
+      "small": "text-sm"
+    }
+  },
+  "colors": {
+    "background": {
+      "primary": "#0A0A0A",
+      "secondary": "#141414",
+      "tertiary": "#1F1F1F"
+    },
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "#A3A3A3",
+      "accent": "#2E4F3E"
+    },
+    "brand": {
+      "primary": "#2E4F3E",
+      "primary_hover": "#233B2E",
+      "white": "#FFFFFF",
+      "black": "#000000"
+    }
+  },
+  "visual_enhancers": {
+    "border_radius": "rounded-none",
+    "shadows": "Minimal shadows, rely on 1px borders with low opacity (border-white/10).",
+    "overlays": "Images must have max bg-black/40 overlay. Do not hide the beauty of the Alps.",
+    "textures": "Subtle noise on dark backgrounds for a premium print feel."
+  },
+  "layouts": {
+    "spacing": "Generous padding. Use py-24 or py-32 for main sections.",
+    "hero": "h-screen flex flex-col justify-center relative. Image as background with object-cover. Content centered or bottom-left aligned.",
+    "bento_grid": "Use asymmetric grids for image galleries or featured content.",
+    "cards": "Minimalist. Image on top, text below. No card background, no border. Just the image and typography."
+  },
+  "components": {
+    "booking_widget": {
+      "description": "Octorate booking widget placeholder.",
+      "style": "A distinct rectangular block (can float over hero or sit below). Dark grey background (bg-zinc-900), 1px border (border-white/20). Inside: A highly visible dashed container (border-dashed border-zinc-600 p-6) with text 'Widget di prenotazione Octorate - incolla qui lo script embed'. Below/around it, a mock UI: Input fields for 'Check-in / Check-out', 'Ospiti' (Adulti, Bambini dropdown mock), and a large solid CTA button 'Cerca disponibilità' in dark green (#2E4F3E)."
+    },
+    "buttons": {
+      "primary": "bg-[#2E4F3E] text-white hover:bg-[#233B2E] transition-colors duration-300 px-8 py-4 text-sm tracking-widest uppercase font-medium",
+      "outline": "border border-white text-white hover:bg-white hover:text-black transition-colors duration-300 px-8 py-4 text-sm tracking-widest uppercase font-medium"
+    },
+    "inputs": {
+      "style": "bg-transparent border-b border-white/20 text-white focus:border-white focus:outline-none py-3 placeholder:text-white/40 font-manrope rounded-none transition-colors"
+    },
+    "navbar": {
+      "style": "fixed w-full top-0 z-50 transition-all duration-300 bg-black/50 backdrop-blur-md border-b border-white/10. Links are Manrope, uppercase, tracking-wider, text-xs or text-sm."
+    }
+  },
+  "motion": {
+    "scroll": "Use Lenis (if configured) or smooth scrolling. Sections should fade in and translate slightly up on scroll (Framer Motion 'whileInView').",
+    "hover": "Images in cards should have overflow-hidden and scale up (scale-105) softly on hover. Buttons should have color transitions.",
+    "page_transition": "Fade in on mount."
+  },
+  "image_urls": {
+    "logo": "https://customer-assets.emergentagent.com/job_0edc567d-bda4-4c1d-90f5-e4bdc5cabf5a/artifacts/tnx5w7d9_image.png",
+    "hero": [
+      "https://images.pexels.com/photos/30372740/pexels-photo-30372740.jpeg",
+      "https://images.unsplash.com/photo-1550503736-c1a2c9033c03"
+    ],
+    "about": [
+      "https://images.pexels.com/photos/17180776/pexels-photo-17180776.jpeg"
+    ],
+    "apartments": [
+      "https://images.unsplash.com/photo-1634849662801-a00d83441092",
+      "https://images.pexels.com/photos/775219/pexels-photo-775219.jpeg",
+      "https://images.unsplash.com/photo-1545158535-c3f7168c28b6",
+      "https://images.pexels.com/photos/15062485/pexels-photo-15062485.jpeg",
+      "https://images.unsplash.com/photo-1696861080288-0cc2f1cd48d5",
+      "https://images.pexels.com/photos/17181943/pexels-photo-17181943.jpeg",
+      "https://images.unsplash.com/photo-1771824980188-abd59db07585",
+      "https://images.unsplash.com/photo-1517404656827-b10222b9ec59"
+    ]
+  },
+  "pages": {
+    "Home": {
+      "Hero": "Full-screen background image of Alpine snow. Large centered text 'OUTDOOR APARTMENTS' in Playfair Display. Subtitle 'La tua vacanza in montagna a Pila'.",
+      "Booking_Widget": "Positioned overlapping the bottom of the hero or right underneath it in a dark section.",
+      "Chi_siamo": "Split layout. Left: Large image of a chalet interior with view. Right: Text 'L'ospitalità in alta quota', description, and a link to read more.",
+      "Featured_Apartments": "2x2 grid of featured apartments. Image-heavy cards, minimal text.",
+      "CTA_Section": "Banner image with text asking owners to trust us with their property. Button to 'Affidaci il tuo immobile'."
+    },
+    "Appartamenti": {
+      "Header": "Clean, minimal header (50vh) with title 'I nostri appartamenti' and a short description.",
+      "List": "Grid (1 col mobile, 2 col tablet, 3 col desktop) of all 8 apartments. Each card shows image, title, location (Pila, Valle d'Aosta), review score (e.g., ★ 4.9), and icon amenities (lucide-react icons for bed, bath, wifi). Clicking a card goes to detail page."
+    },
+    "Dettaglio_Appartamento": {
+      "Hero": "Full screen image of the selected apartment.",
+      "Content": "Main column (2/3 width) with description, photo gallery, and features. Sidebar (1/3 width, sticky) containing the 'Prenota ora' widget (Octorate placeholder mock UI)."
+    },
+    "Affidaci_Immobile": {
+      "Content": "Elegant page with a split layout. Left side: Persuasive copy about maximizing rental income in Pila. Right side: Minimalist contact form (Name, Phone, Address, Email, Description) using bottom-border inputs and a dark green CTA."
+    }
+  },
+  "instructions_to_main_agent": [
+    "Build a premium, high-end editorial website inspired by lavi82.com, using React and Tailwind CSS.",
+    "Use a predominantly dark theme (Black, Dark Grey) with White text and Dark Green (#2E4F3E) accents. DO NOT use beige.",
+    "Load Google Fonts: 'Playfair Display' for all headings and 'Manrope' for body/UI text.",
+    "Implement fluid scroll animations using framer-motion (e.g., initial opacity 0, y 20 -> opacity 1, y 0 on whileInView).",
+    "For the Octorate widget, build a very clear placeholder: A block with a dashed border that explicitly says 'Widget di prenotazione Octorate - incolla qui lo script embed', alongside a mock UI (Dates, Guests, Search button) to show how it should look.",
+    "Ensure all interactive elements have data-testid attributes for testing.",
+    "Do not use generic Shadcn cards for apartments; build custom minimalist HTML/Tailwind structures where the image is the hero.",
+    "Never use completely transparent backgrounds for the sticky navbar; use a dark semi-transparent color with backdrop-blur.",
+    "Build pages using React Router or equivalent if it's a multi-page app structure, or handle view switching via state if single page."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters.",
+    "You MUST NOT apply universal transition (e.g., `transition: all`). Always add transitions for specific interactive elements.",
+    "You MUST NOT center align the app container, i.e., do not add `.App { text-align: center; }`.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Main agent relies on these image URLs. Missing categories = main agent will use placeholder text which is FORBIDDEN."
+  ]
+}
