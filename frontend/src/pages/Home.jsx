@@ -7,15 +7,15 @@ import { BookingWidget } from "@/components/BookingWidget";
 import { ApartmentCard } from "@/components/ApartmentCard";
 import { fetchApartments } from "@/lib/api";
 
+// PLACEHOLDER IMAGE — Cima alpina innevata con boschi di conifere in primo piano,
+// atmosfera Valle d'Aosta / Monte Emilius. Da sostituire con foto reali di Pila
+// appena disponibili.
 const HERO_IMAGE =
-  "https://images.pexels.com/photos/30372740/pexels-photo-30372740.jpeg";
+  "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=2400";
 const ABOUT_IMAGE =
   "https://images.pexels.com/photos/17180776/pexels-photo-17180776.jpeg";
 const CTA_IMAGE =
   "https://images.unsplash.com/photo-1550503736-c1a2c9033c03";
-
-const LOGO_URL =
-  "https://customer-assets.emergentagent.com/job_0edc567d-bda4-4c1d-90f5-e4bdc5cabf5a/artifacts/tnx5w7d9_image.png";
 
 const fade = {
   hidden: { opacity: 0, y: 30 },
@@ -42,19 +42,11 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/50" />
         <div className="grain" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-          <motion.img
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-            src={LOGO_URL}
-            alt="Outdoor Apartments"
-            className="w-20 h-20 md:w-24 md:h-24 mb-10"
-          />
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2 }}
-            className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-white/70 mb-6"
+            transition={{ duration: 0.9, delay: 0.1 }}
+            className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-white/70 mb-8"
           >
             Pila — Valle d'Aosta — 1800 m
           </motion.p>

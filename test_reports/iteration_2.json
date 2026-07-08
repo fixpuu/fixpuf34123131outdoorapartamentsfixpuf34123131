@@ -1,0 +1,55 @@
+{
+  "summary": "Frontend GDPR/consent iteration test on Outdoor Apartments (Pila). All 14 requested checks PASSED. Cookie banner appears on first visit with three equal-sized buttons (reject/customize/accept), all consent flows (reject/accept/customize+save) persist correctly to localStorage under 'oa_consent_v1' with the exact expected choices, banner is hidden after decision, footer 'Gestisci cookie' reopens the preferences modal, legal pages (/privacy-policy, /cookie-policy, /note-legali) render with the visible 'Bozza / placeholder' banner, host form privacy checkbox is not preselected and blocks submission until consent is given (correct error text; no backend call), submission with privacy checked triggers POST /api/host-requests and shows host-success, hero has NO logo image (only Pexels 1054218 background which loads), and all existing pages (/, /appartamenti, /appartamenti/:id, /affidaci-il-tuo-immobile, /contatti) still render without console errors. Backend GET /api/apartments still returns 8 apartments.",
+  "tested_scope": ["frontend", "consent/gdpr", "integration"],
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "CookieBanner",
+        "issues": [
+          "Garante Privacy 'equal graphic weight' nuance: the 'Accetta tutti' button has a filled green background (#2E4F3E) while 'Rifiuta tutti' and 'Personalizza' have only a transparent background with a white/25 border. Bounding boxes and typography are identical (157x144, 12px 20px padding, 11px font). Strictly, Garante 2021 guidelines discourage making Accept visually more prominent than Reject. Consider giving all three buttons the same visual treatment (all outlined OR all filled with same accent) to fully align with the guidelines. This is a design nuance, not a blocker."
+        ]
+      }
+    ]
+  },
+  "test_results_detail": {
+    "banner_appears_on_first_visit": true,
+    "three_buttons_visible_equal_size": true,
+    "hero_no_logo_image": true,
+    "hero_image_loaded_pexels_1054218": true,
+    "reject_all_persists_correct_choices": true,
+    "banner_hidden_after_reject_and_no_reappear_on_reload": true,
+    "accept_all_persists_all_true": true,
+    "customize_opens_modal_all_non_necessary_unchecked": true,
+    "custom_save_analytics_only_persists_correctly": true,
+    "footer_gestisci_cookie_reopens_modal": true,
+    "footer_privacy_link_navigates_and_bozza_visible": true,
+    "footer_cookie_link_navigates_and_bozza_visible": true,
+    "footer_legal_link_navigates_and_bozza_visible": true,
+    "host_privacy_checkbox_not_preselected": true,
+    "host_submit_without_privacy_shows_error_no_backend_call": true,
+    "host_submit_with_privacy_triggers_POST_and_shows_success": true,
+    "backend_apartments_returns_8": true,
+    "all_existing_pages_render_without_errors": true
+  },
+  "test_report_links": [],
+  "action_items": [
+    "OPTIONAL/POLISH: Consider making the three cookie banner buttons visually identical (same background/border treatment) to fully align with Garante Privacy 2021 'equal graphic weight' guidance — currently 'Accetta tutti' is filled green while the other two are outlined transparent."
+  ],
+  "critical_code_review_comments": [
+    "ConsentContext.reopenBanner() sets showPreferences=true (opens the preferences modal) but does NOT toggle showBanner. Given the footer button is labeled 'Gestisci cookie' and jumps directly to the granular modal, this behaviour matches the intent. Name could be misleading (function is called 'reopenBanner' but actually opens the preferences modal); minor.",
+    "In HostWithUs.jsx, submitHostRequest is awaited but its response is not inspected — if the backend returns a non-2xx JSON payload the frontend would still surface a toast error via the try/catch. Fine as-is.",
+    "Home.jsx hero uses a native <img> for the background — good for LCP; alt text 'Pila, Valle d Aosta' is appropriate. HERO_IMAGE comment clearly documents placeholder status.",
+    "Legal pages consistently use LegalLayout with the AlertTriangle 'Bozza / placeholder' banner — clean, DRY."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "n/a",
+  "seed_data_creation": "One additional host-request record created via /affidaci-il-tuo-immobile flow (name 'Mario Rossi', email mario.test@example.com) as part of the happy-path submission test.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Consent state persisted under localStorage key 'oa_consent_v1' (version 1). To re-test banner appearance, clear localStorage on origin then reload. Public URL from frontend/.env: https://pila-mountain-stays.preview.emergentagent.com (differs from URL in review request; used the env one per system guidelines). All 14 review items PASS. Only remark is a minor Garante design nuance about Accept-button prominence vs Reject.",
+  "rca of the issue": "n/a — no bugs found; all requested behaviors verified working."
+}

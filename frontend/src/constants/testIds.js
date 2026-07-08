@@ -42,10 +42,27 @@ export const HOST = {
   address: "host-address",
   email: "host-email",
   description: "host-description",
+  privacyConsent: "host-privacy-consent",
   submit: "host-submit",
   success: "host-success",
 };
 
 export const FOOTER = {
   root: "site-footer",
+  privacyLink: "footer-privacy-link",
+  cookieLink: "footer-cookie-link",
+  legalLink: "footer-legal-link",
+  cookieManage: "footer-cookie-manage",
+};
+
+export const CONSENT = {
+  banner: "cookie-banner",
+  acceptAll: "cookie-accept-all",
+  rejectAll: "cookie-reject-all",
+  customize: "cookie-customize",
+  prefsModal: "cookie-prefs-modal",
+  prefsSave: "cookie-prefs-save",
+  toggleAnalytics: "cookie-toggle-analytics",
+  toggleMarketing: "cookie-toggle-marketing",
+  toggleFunctional: "cookie-toggle-functional",
 };

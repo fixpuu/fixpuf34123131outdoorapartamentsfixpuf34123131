@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, Send } from "lucide-react";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { submitHostRequest } from "@/lib/api";
 import { HOST } from "@/constants/testIds";
@@ -18,6 +19,7 @@ const initial = {
 
 export default function HostWithUs() {
   const [form, setForm] = useState(initial);
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -34,6 +36,8 @@ export default function HostWithUs() {
       e.property_address = "Inserisci l'indirizzo dell'immobile";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       e.email = "Inserisci un'email valida";
+    if (!privacyAccepted)
+      e.privacy = "Per inviare la richiesta devi accettare l'informativa privacy";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -46,6 +50,7 @@ export default function HostWithUs() {
       await submitHostRequest(form);
       setSuccess(true);
       setForm(initial);
+      setPrivacyAccepted(false);
       toast.success("Richiesta inviata correttamente. Ti contatteremo a breve.");
     } catch (err) {
       toast.error("Errore nell'invio. Riprova tra qualche istante.");
@@ -228,6 +233,34 @@ export default function HostWithUs() {
                   />
                 </Field>
 
+                <div>
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      data-testid={HOST.privacyConsent}
+                      checked={privacyAccepted}
+                      onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                      className="mt-1 w-4 h-4 accent-[#2E4F3E] cursor-pointer flex-shrink-0"
+                    />
+                    <span className="text-xs text-white/70 leading-relaxed">
+                      Ho letto e accetto l'
+                      <Link
+                        to="/privacy-policy"
+                        target="_blank"
+                        rel="noopener"
+                        className="underline text-[#B7CFC0] hover:text-white transition-colors"
+                      >
+                        Informativa Privacy
+                      </Link>{" "}
+                      e autorizzo il trattamento dei miei dati per la finalità di
+                      contatto commerciale. *
+                    </span>
+                  </label>
+                  {errors.privacy && (
+                    <p className="mt-2 text-[11px] text-red-400/80">{errors.privacy}</p>
+                  )}
+                </div>
+
                 <button
                   type="submit"
                   data-testid={HOST.submit}
@@ -239,8 +272,8 @@ export default function HostWithUs() {
                   )}
                 </button>
                 <p className="text-white/40 text-[11px] leading-relaxed">
-                  Inviando la richiesta acconsenti al trattamento dei dati per finalità
-                  di contatto commerciale.
+                  I dati saranno trattati esclusivamente per rispondere alla tua
+                  richiesta. Vedi Informativa Privacy per dettagli.
                 </p>
               </form>
             )}
