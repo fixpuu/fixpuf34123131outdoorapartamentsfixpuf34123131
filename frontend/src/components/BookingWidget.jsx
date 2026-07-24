@@ -7,7 +7,7 @@ import { BOOKING } from "@/constants/testIds";
  * Contiene un contenitore evidenziato (dashed) dove incollare lo script embed di Octorate,
  * insieme a una mock UI (date, ospiti, CTA) coerente con lo stile del sito.
  */
-export const BookingWidget = ({ variant = "default" }) => {
+export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
   const today = new Date().toISOString().split("T")[0];
   const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
     .toISOString()
@@ -19,14 +19,28 @@ export const BookingWidget = ({ variant = "default" }) => {
   const [children, setChildren] = useState(0);
 
   const handleSearch = () => {
-    // Construct Octorate booking URL
+    // Map internal apartment IDs to Octorate network IDs if available
+    const OCTORATE_NETWORK_MAP = {
+      "chalet-saint-salod": "537964",
+      "pila-29": "760540",
+      "studio-11-centro": "32981",
+      "studio-pila-1800": "651718",
+    };
+
     const baseUrl = "https://book.octorate.com/octobook/site/reservation/result.xhtml";
     const params = new URLSearchParams({
-      sitekey: "octosite189658",
+      siteKey: "octosite189658",
       checkin: checkin,
       checkout: checkout,
-      guests: adults + children,
+      pax: (adults + children).toString(),
+      lang: "it",
+      ota: "false",
     });
+
+    if (apartmentId && OCTORATE_NETWORK_MAP[apartmentId]) {
+      params.set("network", OCTORATE_NETWORK_MAP[apartmentId]);
+    }
+
     window.open(`${baseUrl}?${params.toString()}`, "_blank");
   };
 
