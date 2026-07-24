@@ -14,8 +14,7 @@ export const SITE = {
     "Affitto appartamenti e chalet a Pila (Aosta): case vacanza sulla neve con sci ai piedi, WiFi e parcheggio. Gestione professionale e prenotazione diretta nel comprensorio sciistico di Pila, Valle d'Aosta.",
   locale: "it_IT",
   lang: "it",
-  logo:
-    "https://customer-assets.emergentagent.com/job_0edc567d-bda4-4c1d-90f5-e4bdc5cabf5a/artifacts/tnx5w7d9_image.png",
+  logo: "/logo.png",
   ogImage:
     "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1200",
   email: "info@outdoorapartments.it",
