@@ -1,11 +1,41 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, Plus, Minus } from "lucide-react";
+import { useState } from "react";
 import { HOME } from "@/constants/testIds";
 import { BookingWidget } from "@/components/BookingWidget";
 import { ApartmentCard } from "@/components/ApartmentCard";
+import { Seo } from "@/components/Seo";
 import { fetchApartments } from "@/lib/api";
+import {
+  websiteLd,
+  breadcrumbLd,
+  faqLd,
+} from "@/lib/structuredData";
+
+const FAQS = [
+  {
+    q: "Dove si trovano gli appartamenti di Outdoor Apartments?",
+    a: "Gli appartamenti e chalet gestiti da Outdoor Apartments si trovano a Pila, frazione del comune di Gressan in Valle d'Aosta (AO), a circa 1800 metri di altitudine, e nelle immediate vicinanze come Charvensod. Pila è un comprensorio sciistico collegato ad Aosta tramite telecabina.",
+  },
+  {
+    q: "Gli appartamenti hanno lo sci ai piedi?",
+    a: "Diversi appartamenti come White Relax, Pila 63 e Pila64 offrono l'accesso sci ai piedi (ski-in ski-out), permettendo di raggiungere le piste direttamente dall'alloggio. Ogni scheda appartamento indica i servizi disponibili.",
+  },
+  {
+    q: "Come si prenota un appartamento a Pila?",
+    a: "È possibile verificare disponibilità e prenotare direttamente dal sito tramite il sistema di prenotazione diretta, senza intermediari e senza commissioni aggiuntive dei portali.",
+  },
+  {
+    q: "Quali servizi sono inclusi negli appartamenti?",
+    a: "A seconda della struttura, gli appartamenti includono WiFi gratuito, parcheggio gratuito, camere non fumatori, camere familiari e in alcuni casi l'accesso sci ai piedi. Tutti gli alloggi sono seguiti da un team locale con ospitalità curata.",
+  },
+  {
+    q: "Sono un proprietario: posso affidare il mio appartamento in gestione?",
+    a: "Sì. Outdoor Apartments offre un servizio di gestione professionale per i proprietari di immobili a Pila: promozione, gestione prenotazioni, check-in, pulizie, manutenzione e rendicontazione trasparente. È possibile richiedere informazioni dalla pagina 'Affidaci il tuo immobile'.",
+  },
+];
 
 // PLACEHOLDER IMAGE — Cima alpina innevata con boschi di conifere in primo piano,
 // atmosfera Valle d'Aosta / Monte Emilius. Da sostituire con foto reali di Pila
@@ -27,16 +57,25 @@ export default function Home() {
     queryKey: ["apartments"],
     queryFn: fetchApartments,
   });
+  const [openFaq, setOpenFaq] = useState(0);
 
   const featured = apartments.slice(0, 4);
 
   return (
     <div className="bg-[#0A0A0A]">
+      <Seo
+        path="/"
+        jsonLd={[
+          websiteLd(),
+          breadcrumbLd([{ name: "Home", path: "/" }]),
+          faqLd(FAQS),
+        ]}
+      />
       {/* HERO */}
       <section className="relative h-screen w-full overflow-hidden">
         <img
           src={HERO_IMAGE}
-          alt="Pila, Valle d'Aosta"
+          alt="Appartamenti e chalet a Pila, Valle d'Aosta — vacanze sulla neve"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/50" />
@@ -216,11 +255,63 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FAQ — GEO / rich results */}
+      <section className="py-24 md:py-32 px-6 md:px-10">
+        <div className="max-w-[1000px] mx-auto">
+          <motion.div
+            variants={fade}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="mb-14"
+          >
+            <p className="text-[10px] uppercase tracking-[0.32em] text-[#5F8F76] mb-6">
+              Domande frequenti
+            </p>
+            <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
+              Tutto su Pila <span className="italic">e i nostri appartamenti.</span>
+            </h2>
+          </motion.div>
+
+          <div className="divide-y divide-white/10 border-t border-white/10">
+            {FAQS.map((f, i) => {
+              const open = openFaq === i;
+              return (
+                <div key={i} data-testid={`faq-item-${i}`}>
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(open ? -1 : i)}
+                    className="w-full flex items-center justify-between gap-6 py-7 text-left group"
+                    aria-expanded={open}
+                  >
+                    <span className="font-serif-display text-xl md:text-2xl text-white group-hover:text-[#B7CFC0] transition-colors">
+                      {f.q}
+                    </span>
+                    <span className="text-[#5F8F76] flex-shrink-0">
+                      {open ? <Minus size={20} /> : <Plus size={20} />}
+                    </span>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-500 ${
+                      open ? "max-h-96 pb-8" : "max-h-0"
+                    }`}
+                  >
+                    <p className="text-white/70 text-base leading-relaxed max-w-3xl">
+                      {f.a}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* CTA HOST */}
       <section className="relative py-32 md:py-48 px-6 md:px-10 overflow-hidden">
         <img
           src={CTA_IMAGE}
-          alt="Chalet in montagna"
+          alt="Chalet in montagna a Pila — servizio di gestione immobili"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/70" />

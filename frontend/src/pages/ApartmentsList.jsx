@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { ApartmentCard } from "@/components/ApartmentCard";
+import { Seo } from "@/components/Seo";
 import { fetchApartments } from "@/lib/api";
+import { itemListLd, breadcrumbLd } from "@/lib/structuredData";
 import { APT } from "@/constants/testIds";
 
 const HEADER_IMAGE =
@@ -15,6 +17,18 @@ export default function ApartmentsList() {
 
   return (
     <div className="bg-[#0A0A0A] min-h-screen">
+      <Seo
+        title="Appartamenti e chalet in affitto a Pila"
+        description="Scopri gli appartamenti e chalet in affitto a Pila, Valle d'Aosta: case vacanza sulla neve con sci ai piedi, WiFi e parcheggio. Prenotazione diretta senza commissioni."
+        path="/appartamenti"
+        jsonLd={[
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Appartamenti", path: "/appartamenti" },
+          ]),
+          apartments.length ? itemListLd(apartments) : null,
+        ].filter(Boolean)}
+      />
       {/* HEADER */}
       <section className="relative h-[70vh] w-full overflow-hidden">
         <img
