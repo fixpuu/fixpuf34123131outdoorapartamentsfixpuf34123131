@@ -1,14 +1,10 @@
 {
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build"
-    }
-  ],
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/build",
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "frontend/$1"
+      "destination": "/index.html"
     }
   ]
 }
