@@ -8,6 +8,8 @@ export default function CookiePolicy() {
       eyebrow="Cookie Policy"
       title="Informativa sui cookie"
       updated="Dicembre 2025 — bozza"
+      seoPath="/cookie-policy"
+      seoDescription="Cookie policy di Outdoor Apartments: tipologie di cookie utilizzati, finalità, durata e gestione delle preferenze secondo le linee guida del Garante Privacy."
     >
       <p>
         Questo sito utilizza cookie e tecnologie affini in conformità con la{" "}

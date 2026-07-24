@@ -81,3 +81,19 @@ Sito web moderno per **OUTDOOR APARTMENTS**, azienda di gestione di appartamenti
 
 ## Testing
 - iteration_2.json — 17/17 pass. Fix polish: tre pulsanti banner ora identici (outlined, no fill preferenziale).
+
+## Iteration 3 (Dec 2025) — SEO & GEO Optimization
+- Installato `react-helmet-async`; wrap `<HelmetProvider>` in index.js.
+- `src/lib/siteConfig.js`: config centralizzata (dominio prod www.outdoorapartments.it, geo Pila 45.6856;7.3019, keyword locali, business info).
+- `src/components/Seo.jsx`: meta per-pagina (title, description, keywords, canonical, robots, geo.*, Open Graph, Twitter) + JSON-LD.
+- `src/lib/structuredData.js`: LodgingBusiness, WebSite, BreadcrumbList, Apartment (+ aggregateRating dalle recensioni reali), ItemList, FAQPage.
+- Seo aggiunto a tutte le pagine con title/description/canonical univoci + structured data contestuale.
+- Home: sezione FAQ visibile (accordion) + FAQPage schema → GEO/AI answer engines + rich results.
+- Detail: title dinamico, Apartment + aggregateRating + breadcrumb.
+- `public/index.html`: lang=it, baseline title + JSON-LD LodgingBusiness statico (fallback no-JS); meta per-pagina delegati a Helmet (no duplicati verificati).
+- `public/robots.txt`: allow-all + esplicito allow per bot generativi (GPTBot, OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended, Applebot-Extended) + sitemap.
+- `public/sitemap.xml`: tutte le rotte (home, appartamenti, 8 dettagli, host, contatti, legali) con priorità.
+- `public/manifest.json`: PWA metadata IT.
+- Verificato via DOM: canonical/description/og:url unici per pagina, JSON-LD valido, geo meta presenti.
+
+⚠️ NOTA: aggiornare `SITE.url` in siteConfig.js + robots.txt + sitemap.xml + JSON-LD statico in index.html con il dominio reale al momento del go-live (ora placeholder www.outdoorapartments.it).
