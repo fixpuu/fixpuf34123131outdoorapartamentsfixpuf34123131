@@ -4,6 +4,8 @@ import { Check, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { submitHostRequest } from "@/lib/api";
+import { Seo } from "@/components/Seo";
+import { breadcrumbLd } from "@/lib/structuredData";
 import { HOST } from "@/constants/testIds";
 
 const HEADER_IMAGE =
@@ -66,11 +68,20 @@ export default function HostWithUs() {
 
   return (
     <div className="bg-[#0A0A0A] min-h-screen">
+      <Seo
+        title="Affidaci il tuo immobile — Gestione appartamenti a Pila"
+        description="Sei proprietario di un appartamento a Pila, Valle d'Aosta? Affidalo in gestione a Outdoor Apartments: promozione, prenotazioni, check-in, pulizie e rendicontazione trasparente. Richiedi informazioni."
+        path="/affidaci-il-tuo-immobile"
+        jsonLd={breadcrumbLd([
+          { name: "Home", path: "/" },
+          { name: "Affidaci il tuo immobile", path: "/affidaci-il-tuo-immobile" },
+        ])}
+      />
       {/* HEADER */}
       <section className="relative h-[70vh] w-full overflow-hidden">
         <img
           src={HEADER_IMAGE}
-          alt="Chalet in montagna"
+          alt="Chalet in montagna a Pila — gestione immobili per proprietari"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/60" />

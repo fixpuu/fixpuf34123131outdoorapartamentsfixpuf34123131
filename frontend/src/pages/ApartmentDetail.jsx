@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Star, MapPin, ArrowLeft, Wifi, Car, Snowflake, CigaretteOff, Users, Check } from "lucide-react";
 import { fetchApartment } from "@/lib/api";
 import { BookingWidget } from "@/components/BookingWidget";
+import { Seo } from "@/components/Seo";
+import { apartmentLd, breadcrumbLd } from "@/lib/structuredData";
 import { APT } from "@/constants/testIds";
 
 const AMENITY_META = {
@@ -40,8 +42,25 @@ export default function ApartmentDetail() {
     );
   }
 
+  const metaDesc = `${apt.name} a ${apt.short_location}: ${apt.description.slice(0, 120)}… Prenota direttamente il tuo soggiorno a Pila con Outdoor Apartments.`;
+
   return (
     <div className="bg-[#0A0A0A] min-h-screen" data-testid={APT.detail}>
+      <Seo
+        title={`${apt.name} — ${apt.short_location}`}
+        description={metaDesc}
+        path={`/appartamenti/${apt.id}`}
+        type="article"
+        image={apt.image}
+        jsonLd={[
+          apartmentLd(apt),
+          breadcrumbLd([
+            { name: "Home", path: "/" },
+            { name: "Appartamenti", path: "/appartamenti" },
+            { name: apt.name, path: `/appartamenti/${apt.id}` },
+          ]),
+        ]}
+      />
       {/* HERO */}
       <section className="relative h-[90vh] w-full overflow-hidden">
         <img src={apt.image} alt={apt.name} className="absolute inset-0 w-full h-full object-cover" />

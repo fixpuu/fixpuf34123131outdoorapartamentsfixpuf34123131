@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
+import { Seo } from "@/components/Seo";
+import { breadcrumbLd } from "@/lib/structuredData";
 
 const IMG =
   "https://images.unsplash.com/photo-1517404656827-b10222b9ec59";
@@ -7,8 +9,17 @@ const IMG =
 export default function Contact() {
   return (
     <div className="bg-[#0A0A0A] min-h-screen">
+      <Seo
+        title="Contatti — Outdoor Apartments Pila"
+        description="Contatta Outdoor Apartments per informazioni su appartamenti e chalet in affitto a Pila, Valle d'Aosta. Email, telefono e sede a Frazione Pila (AO)."
+        path="/contatti"
+        jsonLd={breadcrumbLd([
+          { name: "Home", path: "/" },
+          { name: "Contatti", path: "/contatti" },
+        ])}
+      />
       <section className="relative h-[60vh] w-full overflow-hidden">
-        <img src={IMG} alt="Pila" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={IMG} alt="Pila, Valle d'Aosta — contatti Outdoor Apartments" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 h-full flex flex-col items-start justify-end px-6 md:px-10 pb-16 max-w-[1400px] mx-auto">
           <motion.p

@@ -6,6 +6,8 @@ export default function LegalNotes() {
       eyebrow="Note legali"
       title="Termini e condizioni di utilizzo"
       updated="Dicembre 2025 — bozza"
+      seoPath="/note-legali"
+      seoDescription="Note legali e termini di utilizzo del sito Outdoor Apartments: dati societari, proprietà intellettuale, limitazioni di responsabilità e foro competente."
     >
       <p>
         L'utilizzo del sito <strong className="text-white">outdoorapartments.it</strong>{" "}

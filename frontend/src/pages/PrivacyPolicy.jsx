@@ -6,6 +6,8 @@ export default function PrivacyPolicy() {
       eyebrow="Informativa Privacy"
       title="Informativa sul trattamento dei dati personali"
       updated="Dicembre 2025 — bozza"
+      seoPath="/privacy-policy"
+      seoDescription="Informativa privacy di Outdoor Apartments ai sensi degli artt. 13-14 GDPR: titolare, finalità, basi giuridiche, diritti dell'interessato."
     >
       <p>
         La presente informativa è resa ai sensi degli artt. 13 e 14 del Regolamento

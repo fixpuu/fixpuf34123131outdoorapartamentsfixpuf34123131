@@ -1,0 +1,17 @@
+{
+  "short_name": "Outdoor Apartments",
+  "name": "Outdoor Apartments — Pila, Valle d'Aosta",
+  "description": "Appartamenti e chalet in affitto a Pila, Valle d'Aosta. Vacanze sulla neve con sci ai piedi.",
+  "icons": [
+    {
+      "src": "https://customer-assets.emergentagent.com/job_0edc567d-bda4-4c1d-90f5-e4bdc5cabf5a/artifacts/tnx5w7d9_image.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0A0A0A",
+  "background_color": "#0A0A0A",
+  "lang": "it"
+}

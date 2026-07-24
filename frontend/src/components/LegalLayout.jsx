@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
 import { AlertTriangle } from "lucide-react";
+import { Seo } from "@/components/Seo";
 
 /**
  * Legal Layout — wrapper condiviso per le pagine legali.
  * Include un banner ben visibile che segnala la natura di BOZZA dei testi,
  * da far validare da un consulente privacy o avvocato prima della pubblicazione.
  */
-export const LegalLayout = ({ eyebrow, title, updated, children }) => (
+export const LegalLayout = ({ eyebrow, title, updated, seoPath, seoDescription, children }) => (
   <div className="bg-[#0A0A0A] min-h-screen">
+    <Seo title={eyebrow} description={seoDescription} path={seoPath} />
     <section className="pt-40 pb-16 px-6 md:px-10 border-b border-white/10">
       <div className="max-w-3xl mx-auto">
         <motion.p
