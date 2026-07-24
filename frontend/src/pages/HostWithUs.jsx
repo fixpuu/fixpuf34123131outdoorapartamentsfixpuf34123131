@@ -47,11 +47,16 @@ export default function HostWithUs() {
     if (!validate()) return;
     setSubmitting(true);
     try {
-      await submitHostRequest(form);
+      const subject = encodeURIComponent("Nuova richiesta: " + form.full_name);
+      const body = encodeURIComponent(
+        `Nome: ${form.full_name}\nTelefono: ${form.phone}\nEmail: ${form.email}\nIndirizzo immobile: ${form.property_address}\nDescrizione: ${form.description || 'Nessuna'}\n`
+      );
+      window.location.href = `mailto:info@outdoorapartments.it?subject=${subject}&body=${body}`;
+      
       setSuccess(true);
       setForm(initial);
       setPrivacyAccepted(false);
-      toast.success("Richiesta inviata correttamente. Ti contatteremo a breve.");
+      toast.success("Richiesta preparata. Si aprirà il tuo client email.");
     } catch (err) {
       toast.error("Errore nell'invio. Riprova tra qualche istante.");
     } finally {

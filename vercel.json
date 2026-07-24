@@ -3,17 +3,9 @@
     {
       "src": "frontend/package.json",
       "use": "@vercel/static-build"
-    },
-    {
-      "src": "backend/main.py",
-      "use": "@vercel/python"
     }
   ],
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "backend/server.py"
-    },
     {
       "source": "/(.*)",
       "destination": "frontend/$1"

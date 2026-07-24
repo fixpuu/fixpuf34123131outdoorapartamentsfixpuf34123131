@@ -1,21 +1,15 @@
-import axios from "axios";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-export const API = `${BACKEND_URL}/api`;
-
-export const api = axios.create({ baseURL: API, timeout: 15000 });
+import { APARTMENTS } from "../constants/apartments";
 
 export const fetchApartments = async () => {
-  const { data } = await api.get("/apartments");
-  return data;
+  return APARTMENTS;
 };
 
 export const fetchApartment = async (id) => {
-  const { data } = await api.get(`/apartments/${id}`);
-  return data;
+  const apartment = APARTMENTS.find(a => a.id === id);
+  if (!apartment) throw new Error("Apartment not found");
+  return apartment;
 };
 
 export const submitHostRequest = async (payload) => {
-  const { data } = await api.post("/host-requests", payload);
-  return data;
+  return true; // Frontend only email handled in component
 };

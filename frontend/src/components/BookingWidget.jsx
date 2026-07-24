@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CalendarDays, Users, Search } from "lucide-react";
 import { BOOKING } from "@/constants/testIds";
 
@@ -18,6 +18,18 @@ export const BookingWidget = ({ variant = "default" }) => {
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
 
+  const handleSearch = () => {
+    // Construct Octorate booking URL
+    const baseUrl = "https://book.octorate.com/octobook/site/reservation/result.xhtml";
+    const params = new URLSearchParams({
+      sitekey: "octosite189658",
+      checkin: checkin,
+      checkout: checkout,
+      guests: adults + children,
+    });
+    window.open(`${baseUrl}?${params.toString()}`, "_blank");
+  };
+
   return (
     <div
       data-testid={BOOKING.widget}
@@ -36,7 +48,7 @@ export const BookingWidget = ({ variant = "default" }) => {
         Verifica disponibilità
       </h3>
 
-      {/* Mock UI */}
+      {/* Custom Booking UI */}
       <div className={`grid ${variant === "sidebar" ? "grid-cols-1 gap-5" : "grid-cols-1 md:grid-cols-4 gap-5"}`}>
         <div>
           <label className="text-[10px] uppercase tracking-[0.22em] text-white/50 flex items-center gap-2 mb-2">
@@ -101,33 +113,11 @@ export const BookingWidget = ({ variant = "default" }) => {
       <button
         type="button"
         data-testid={BOOKING.search}
-        onClick={() => {
-          document
-            .getElementById("octorate-embed")
-            ?.scrollIntoView({ behavior: "smooth", block: "center" });
-        }}
+        onClick={handleSearch}
         className="mt-10 w-full md:w-auto inline-flex items-center justify-center gap-3 bg-[#2E4F3E] text-white hover:bg-[#233B2E] transition-colors duration-300 px-10 py-4 text-xs tracking-[0.28em] uppercase font-medium"
       >
         <Search size={14} /> Cerca disponibilità
       </button>
-
-      {/* Octorate embed placeholder */}
-      <div
-        id="octorate-embed"
-        data-testid={BOOKING.placeholder}
-        className="mt-10 border border-dashed border-white/25 p-6 md:p-8 text-center"
-      >
-        <p className="text-[10px] uppercase tracking-[0.28em] text-[#5F8F76] mb-3">
-          Widget di prenotazione Octorate
-        </p>
-        <p className="text-white/60 text-sm max-w-xl mx-auto leading-relaxed">
-          Incolla qui lo script embed di Octorate. Questo contenitore ospiterà
-          il sistema reale di disponibilità e prenotazione diretta.
-        </p>
-        <code className="mt-4 inline-block text-[11px] text-white/40 font-mono">
-          &lt;!-- OCTORATE EMBED SCRIPT --&gt;
-        </code>
-      </div>
     </div>
   );
 };

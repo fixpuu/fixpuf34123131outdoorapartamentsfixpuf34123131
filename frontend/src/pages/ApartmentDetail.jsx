@@ -132,14 +132,7 @@ export default function ApartmentDetail() {
           </div>
 
           <aside className="lg:sticky lg:top-28 h-fit">
-            <BookingWidget variant="sidebar" />
-            <a
-              href="#octorate-embed"
-              data-testid={APT.bookNow}
-              className="mt-6 w-full inline-flex items-center justify-center gap-3 bg-white text-black hover:bg-white/90 transition-colors duration-300 px-10 py-4 text-xs tracking-[0.28em] uppercase"
-            >
-              Prenota ora
-            </a>
+            <BookingWidget variant="sidebar" apartmentId={apt?.id} />
           </aside>
         </div>
       </section>
