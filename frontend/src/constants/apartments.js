@@ -1,13 +1,4 @@
-export const APARTMENT_IMAGES = [
-    "https://images.unsplash.com/photo-1634849662801-a00d83441092",
-    "https://images.pexels.com/photos/775219/pexels-photo-775219.jpeg",
-    "https://images.unsplash.com/photo-1545158535-c3f7168c28b6",
-    "https://images.pexels.com/photos/15062485/pexels-photo-15062485.jpeg",
-    "https://images.unsplash.com/photo-1696861080288-0cc2f1cd48d5",
-    "https://images.pexels.com/photos/17181943/pexels-photo-17181943.jpeg",
-    "https://images.unsplash.com/photo-1771824980188-abd59db07585",
-    "https://images.unsplash.com/photo-1517404656827-b10222b9ec59",
-];
+import { PHOTO_GALLERIES } from "./photoManifest";
 
 const APARTMENTS_SEED = [
     {
@@ -18,7 +9,7 @@ const APARTMENTS_SEED = [
         "rating": 9.6,
         "reviews_count": 6,
         "amenities": ["parking_free", "wifi_free", "ski_in_ski_out", "non_smoking"],
-        "image_index": 0,
+        "gallery_key": "white-relax",
         "description": "Un rifugio luminoso ai piedi delle piste di Pila. White Relax ti accoglie con superfici chiare, dettagli in legno e ampie vetrate che catturano la luce delle Alpi. Ideale per chi cerca il comfort dello sci ai piedi senza rinunciare all'eleganza.",
     },
     {
@@ -29,7 +20,7 @@ const APARTMENTS_SEED = [
         "rating": 9.4,
         "reviews_count": 17,
         "amenities": ["wifi_free", "non_smoking"],
-        "image_index": 1,
+        "gallery_key": "abete-n10",
         "description": "Abete N 10 unisce il calore del legno alpino a un design contemporaneo. Un appartamento raccolto e curato nei dettagli, perfetto per una fuga di coppia o piccoli gruppi che vogliono immergersi nell'atmosfera di Pila.",
     },
     {
@@ -40,7 +31,7 @@ const APARTMENTS_SEED = [
         "rating": 9.3,
         "reviews_count": 30,
         "amenities": ["parking_free", "family_rooms", "wifi_free", "non_smoking"],
-        "image_index": 2,
+        "gallery_key": "pila-29",
         "description": "Spazioso e pensato per le famiglie, Pila 29 offre ambienti versatili e una posizione strategica nel cuore della frazione. Le camere familiari e il parcheggio gratuito lo rendono la scelta ideale per chi viaggia con bambini.",
     },
     {
@@ -51,7 +42,7 @@ const APARTMENTS_SEED = [
         "rating": 10.0,
         "reviews_count": 12,
         "amenities": ["parking_free", "wifi_free", "non_smoking"],
-        "image_index": 3,
+        "gallery_key": "ski-and-sky",
         "description": "Un monolocale di design con affaccio sulle vette. Ski&Sky Studiò 85 celebra l'essenzialità alpina: materiali autentici, luce naturale e una vista che diventa protagonista di ogni soggiorno.",
     },
     {
@@ -62,7 +53,7 @@ const APARTMENTS_SEED = [
         "rating": 8.8,
         "reviews_count": 0,
         "amenities": ["non_smoking", "parking_free", "wifi_free"],
-        "image_index": 4,
+        "gallery_key": "saint-salod",
         "description": "Un vero chalet di montagna immerso nella quiete di Charvensod, a pochi minuti da Pila. Chalet Saint Salod restituisce l'anima autentica della Valle d'Aosta con travi a vista, pietra e legno locale.",
     },
     {
@@ -73,7 +64,7 @@ const APARTMENTS_SEED = [
         "rating": 9.3,
         "reviews_count": 46,
         "amenities": ["parking_free", "wifi_free", "non_smoking"],
-        "image_index": 5,
+        "gallery_key": "pila-1800",
         "description": "Studiò Pila 1800 prende il nome dall'altitudine che lo circonda. Un rifugio contemporaneo con arredi selezionati, ideale per chi cerca uno spazio intimo dopo una giornata sulle piste.",
     },
     {
@@ -84,7 +75,7 @@ const APARTMENTS_SEED = [
         "rating": 9.5,
         "reviews_count": 22,
         "amenities": ["parking_free", "ski_in_ski_out", "non_smoking"],
-        "image_index": 6,
+        "gallery_key": "pila-63",
         "description": "Pila 63 è la definizione di ski-in ski-out. Apri la porta e sei già sulla neve. Un appartamento essenziale, elegante, pensato per chi vive la montagna con intensità.",
     },
     {
@@ -95,12 +86,24 @@ const APARTMENTS_SEED = [
         "rating": 10.0,
         "reviews_count": 2,
         "amenities": ["parking_free", "wifi_free", "ski_in_ski_out", "non_smoking"],
-        "image_index": 7,
+        "gallery_key": "pila-64",
         "description": "Il gemello di Pila 63 con un'anima ancora più raccolta. Pila64 offre tutti i comfort di un appartamento moderno, con lo sci ai piedi e le luci del comprensorio a portata di sguardo.",
     },
 ];
 
-export const APARTMENTS = APARTMENTS_SEED.map(apt => ({
-    ...apt,
-    image: APARTMENT_IMAGES[apt.image_index % APARTMENT_IMAGES.length]
-}));
+export const APARTMENTS = APARTMENTS_SEED.map((apt) => {
+    const gallery = [
+        ...(PHOTO_GALLERIES[apt.gallery_key] || []),
+        ...(apt.id === "pila-29" ? (PHOTO_GALLERIES["pila-1400"] || []) : []),
+    ];
+    if (apt.id === "pila-63" && gallery.length > 1) {
+        gallery.unshift(gallery.splice(1, 1)[0]);
+    }
+    const cover = gallery[0];
+
+    return {
+        ...apt,
+        gallery,
+        image: cover || "/logo.png",
+    };
+});

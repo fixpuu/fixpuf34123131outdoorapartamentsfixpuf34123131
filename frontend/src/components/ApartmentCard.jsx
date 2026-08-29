@@ -2,6 +2,7 @@ import { Star, MapPin, Wifi, Car, Snowflake, CigaretteOff, Users } from "lucide-
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { APT } from "@/constants/testIds";
+import { ApartmentGallery } from "@/components/ApartmentGallery";
 
 const AMENITY_META = {
   wifi_free: { icon: Wifi, label: "Wifi gratuito" },
@@ -20,6 +21,7 @@ export const ApartmentCard = ({ apartment, index = 0 }) => {
     reviews_count,
     amenities,
     image,
+    gallery,
   } = apartment;
 
   return (
@@ -32,21 +34,17 @@ export const ApartmentCard = ({ apartment, index = 0 }) => {
       data-testid={APT.card(id)}
     >
       <Link to={`/appartamenti/${id}`} className="block">
-        <div className="relative overflow-hidden bg-[#141414] aspect-[4/5]">
-          <img
-            src={image}
-            alt={name}
-            loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-          <div className="absolute top-5 left-5 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-3 py-1.5">
-            <Star size={12} className="text-[#5F8F76] fill-[#5F8F76]" />
-            <span className="text-xs text-white font-medium">{rating.toFixed(1)}</span>
-            {reviews_count > 0 && (
-              <span className="text-[10px] text-white/60">({reviews_count})</span>
-            )}
-          </div>
+        <div className="relative aspect-[4/5]">
+          <ApartmentGallery images={gallery?.length ? gallery : [image]} name={name} className="h-full w-full" />
+          {rating > 0 && (
+            <div className="absolute top-5 left-5 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-3 py-1.5">
+              <Star size={12} className="text-[#5F8F76] fill-[#5F8F76]" />
+              <span className="text-xs text-white font-medium">{rating.toFixed(1)}</span>
+              {reviews_count > 0 && (
+                <span className="text-[10px] text-white/60">({reviews_count})</span>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="pt-6 pb-2">

@@ -7,7 +7,7 @@ import { itemListLd, breadcrumbLd } from "@/lib/structuredData";
 import { APT } from "@/constants/testIds";
 
 const HEADER_IMAGE =
-  "https://images.unsplash.com/photo-1550503736-c1a2c9033c03";
+  "/images/apartments/pila-1800/001.jpg";
 
 export default function ApartmentsList() {
   const { data: apartments = [], isLoading } = useQuery({

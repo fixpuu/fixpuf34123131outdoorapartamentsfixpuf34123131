@@ -41,11 +41,11 @@ const FAQS = [
 // atmosfera Valle d'Aosta / Monte Emilius. Da sostituire con foto reali di Pila
 // appena disponibili.
 const HERO_IMAGE =
-  "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=2400";
+  "/images/apartments/pila-1800/001.jpg";
 const ABOUT_IMAGE =
-  "https://images.pexels.com/photos/17180776/pexels-photo-17180776.jpeg";
+  "/images/chi-siamo-outdoor-apartments.png";
 const CTA_IMAGE =
-  "https://images.unsplash.com/photo-1550503736-c1a2c9033c03";
+  "/images/apartments/pila-1800/002.jpg";
 
 const fade = {
   hidden: { opacity: 0, y: 30 },
@@ -104,7 +104,7 @@ export default function Home() {
             transition={{ duration: 0.9, delay: 0.55 }}
             className="mt-8 text-white/70 max-w-xl text-base md:text-lg leading-relaxed"
           >
-            La tua vacanza in montagna a Pila.
+            Rifugi autentici, montagne davanti agli occhi e le piste a pochi passi.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -1,12 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { Star, MapPin, ArrowLeft, Wifi, Car, Snowflake, CigaretteOff, Users, Check } from "lucide-react";
+import { Star, MapPin, ArrowLeft, ArrowRight, Phone, Wifi, Car, Snowflake, CigaretteOff, Users, Check } from "lucide-react";
 import { fetchApartment } from "@/lib/api";
-import { BookingWidget } from "@/components/BookingWidget";
+import { ApartmentGallery } from "@/components/ApartmentGallery";
 import { Seo } from "@/components/Seo";
 import { apartmentLd, breadcrumbLd } from "@/lib/structuredData";
 import { APT } from "@/constants/testIds";
+import { SITE } from "@/lib/siteConfig";
 
 const AMENITY_META = {
   wifi_free: { icon: Wifi, label: "Wifi gratuito" },
@@ -63,8 +64,8 @@ export default function ApartmentDetail() {
       />
       {/* HERO */}
       <section className="relative h-[90vh] w-full overflow-hidden">
-        <img src={apt.image} alt={apt.name} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
+        <ApartmentGallery images={apt.gallery?.length ? apt.gallery : [apt.image]} name={apt.name} className="absolute inset-0 h-full w-full" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
         <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-10 pb-16 md:pb-24 max-w-[1400px] mx-auto">
           <Link
             to="/appartamenti"
@@ -88,20 +89,22 @@ export default function ApartmentDetail() {
           >
             {apt.name}
           </motion.h1>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.3 }}
-            className="mt-8 flex items-center gap-6 text-white/80"
-          >
-            <div className="flex items-center gap-2">
-              <Star size={16} className="text-[#5F8F76] fill-[#5F8F76]" />
-              <span className="text-base font-medium">{apt.rating.toFixed(1)} / 10</span>
-              {apt.reviews_count > 0 && (
-                <span className="text-white/60 text-sm">({apt.reviews_count} recensioni)</span>
-              )}
-            </div>
-          </motion.div>
+          {apt.rating > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.3 }}
+              className="mt-8 flex items-center gap-6 text-white/80"
+            >
+              <div className="flex items-center gap-2">
+                <Star size={16} className="text-[#5F8F76] fill-[#5F8F76]" />
+                <span className="text-base font-medium">{apt.rating.toFixed(1)} / 10</span>
+                {apt.reviews_count > 0 && (
+                  <span className="text-white/60 text-sm">({apt.reviews_count} recensioni)</span>
+                )}
+              </div>
+            </motion.div>
+          )}
         </div>
       </section>
 
@@ -150,8 +153,27 @@ export default function ApartmentDetail() {
             </div>
           </div>
 
-          <aside className="lg:sticky lg:top-28 h-fit">
-            <BookingWidget variant="sidebar" apartmentId={apt?.id} />
+          <aside className="lg:sticky lg:top-28 h-fit border border-white/10 bg-[#141414] p-7 md:p-8">
+            <p className="text-[10px] uppercase tracking-[0.28em] text-[#B7CFC0] mb-5">Prenotazione</p>
+            <h3 className="font-serif-display text-3xl leading-tight mb-4">Trova le date perfette.</h3>
+            <p className="text-sm leading-relaxed text-white/65 mb-8">
+              Verifica tutte le disponibilità e le tariffe direttamente dalla home.
+            </p>
+            <Link
+              to="/#booking"
+              className="w-full inline-flex min-h-11 items-center justify-center gap-3 bg-[#2E4F3E] px-5 py-4 text-center text-xs font-medium uppercase tracking-[0.18em] text-white transition-colors duration-200 hover:bg-[#233B2E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Vedi disponibilità <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+            <div className="mt-7 border-t border-white/10 pt-6">
+              <p className="text-sm text-white/85 mb-3">Vuoi prenotare proprio {apt.name}?</p>
+              <a
+                href={`tel:${SITE.phone.replace(/\s/g, "")}`}
+                className="inline-flex min-h-11 items-center gap-3 text-sm text-[#B7CFC0] transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                <Phone size={16} aria-hidden="true" /> Chiama per la disponibilità
+              </a>
+            </div>
           </aside>
         </div>
       </section>
