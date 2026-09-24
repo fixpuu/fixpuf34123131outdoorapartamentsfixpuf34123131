@@ -1,133 +1,105 @@
 import { LegalLayout, LegalSection } from "@/components/LegalLayout";
+import { SITE } from "@/lib/siteConfig";
 
 export default function PrivacyPolicy() {
   return (
     <LegalLayout
       eyebrow="Informativa Privacy"
-      title="Informativa sul trattamento dei dati personali"
-      updated="Dicembre 2025 — bozza"
+      title="Informativa sul trattamento dei dati personali (GDPR)"
+      updated="Settembre 2026"
       seoPath="/privacy-policy"
-      seoDescription="Informativa privacy di Outdoor Apartments ai sensi degli artt. 13-14 GDPR: titolare, finalità, basi giuridiche, diritti dell'interessato."
+      seoDescription="Informativa privacy di Outdoor Apartments ai sensi degli artt. 13-14 GDPR: titolare, finalità, basi giuridiche, servizi terzi (Octorate, WhatsApp, Google Maps) e diritti dell'interessato."
     >
       <p>
         La presente informativa è resa ai sensi degli artt. 13 e 14 del Regolamento
         (UE) 2016/679 (GDPR) e del D.Lgs. 196/2003 come modificato dal D.Lgs.
         101/2018, agli utenti che interagiscono con il sito{" "}
-        <strong className="text-white">outdoorapartments.it</strong>.
+        <strong className="text-white">outdoorapartments.it</strong> e fruiscono dei servizi di locazione turistica offerti.
       </p>
 
       <LegalSection n="1" title="Titolare del trattamento">
         <p>
-          Titolare del trattamento è <strong className="text-white">[Ragione sociale]</strong>,
-          con sede legale in <strong className="text-white">[Indirizzo completo]</strong>,
-          P.IVA <strong className="text-white">[Partita IVA]</strong>, C.F.{" "}
-          <strong className="text-white">[Codice fiscale]</strong>.
+          Titolare del trattamento dei dati personali è <strong className="text-white">{SITE.legalName}</strong>,
+          con sede legale in <strong className="text-white">{SITE.legalAddress}</strong>,
+          P.IVA <strong className="text-white">{SITE.vatId}</strong>, C.F.{" "}
+          <strong className="text-white">{SITE.fiscalCode}</strong>, R.E.A. <strong className="text-white">{SITE.rea}</strong>.
         </p>
-        <p>
-          Contatti: email <strong className="text-white">[info@outdoorapartments.it]</strong> —
-          PEC <strong className="text-white">[pec@…]</strong> — telefono{" "}
-          <strong className="text-white">[+39 …]</strong>.
-        </p>
-      </LegalSection>
-
-      <LegalSection n="2" title="Tipologie di dati raccolti">
-        <p>
-          Il Titolare raccoglie i dati personali che l'Utente fornisce volontariamente
-          compilando il form "Affidaci il tuo immobile": nome e cognome, numero di
-          telefono, indirizzo dell'immobile, indirizzo email, eventuale descrizione
-          dell'immobile.
-        </p>
-        <p>
-          Potrebbero inoltre essere raccolti dati di navigazione (indirizzo IP,
-          browser, sistema operativo, pagine visitate) tramite cookie tecnici e —
-          previo consenso — cookie analitici / di terze parti come descritto nella{" "}
-          <a href="/cookie-policy" className="underline text-[#B7CFC0]">Cookie Policy</a>.
+        <p className="mt-2">
+          Contatti per la privacy: email <strong className="text-white">{SITE.email}</strong> —
+          PEC <strong className="text-white">{SITE.pec}</strong> — telefono{" "}
+          <strong className="text-white">{SITE.phone}</strong>.
         </p>
       </LegalSection>
 
-      <LegalSection n="3" title="Finalità e basi giuridiche">
-        <ul className="list-disc list-inside space-y-2">
+      <LegalSection n="2" title="Tipologie di dati raccolti e servizi utilizzati">
+        <p>
+          Il Titolare raccoglie ed elabora le seguenti tipologie di dati personali:
+        </p>
+        <ul className="list-disc list-inside space-y-2 mt-2">
           <li>
-            <strong className="text-white">Gestione richieste di contatto</strong>{" "}
-            provenienti dal form "Affidaci il tuo immobile" — base giuridica: misure
-            precontrattuali su richiesta dell'interessato (art. 6.1.b GDPR).
+            <strong className="text-white">Dati forniti nei form di contatto o prenotazione:</strong> nome, cognome, indirizzo email, numero di telefono, indirizzo dell'immobile o preferenze di soggiorno.
           </li>
           <li>
-            <strong className="text-white">Gestione prenotazioni</strong> tramite widget
-            di terze parti (Octorate) — base giuridica: esecuzione del contratto (art.
-            6.1.b GDPR).
+            <strong className="text-white">Gestione prenotazioni (Octorate):</strong> il sistema di prenotazione e gestione della disponibilità si avvale della piattaforma terza <strong className="text-white">Octorate S.r.l.</strong>.
           </li>
           <li>
-            <strong className="text-white">Adempimenti di legge</strong> (fiscali,
-            contabili) — base giuridica: obbligo legale (art. 6.1.c GDPR).
+            <strong className="text-white">Comunicazioni operative e check-in (WhatsApp):</strong> utilizziamo l'applicazione WhatsApp per l'invio di informazioni pratiche, indicazioni stradali e video tutorial per facilitare le procedure di check-in ed il soggiorno degli ospiti.
           </li>
           <li>
-            <strong className="text-white">Comunicazioni commerciali / newsletter</strong>{" "}
-            — base giuridica: consenso libero, specifico e revocabile (art. 6.1.a GDPR).
+            <strong className="text-white">Mappe e annunci (Google Maps / Google MyBusiness):</strong> utilizziamo i servizi di Google per la geolocalizzazione degli appartamenti ed il posizionamento delle schede attività.
           </li>
           <li>
-            <strong className="text-white">Analisi statistiche anonime</strong> del sito
-            — base giuridica: consenso (art. 6.1.a GDPR).
+            <strong className="text-white">Dati di navigazione:</strong> indirizzi IP, tipo di browser e parametri di navigazione raccolti ai fini del corretto funzionamento e della sicurezza del sito.
           </li>
         </ul>
       </LegalSection>
 
-      <LegalSection n="4" title="Modalità del trattamento e tempi di conservazione">
-        <p>
-          Il trattamento avviene con strumenti elettronici, con misure di sicurezza
-          adeguate a prevenire perdita, accessi non autorizzati o usi illeciti dei
-          dati.
-        </p>
-        <p>
-          I dati raccolti tramite form sono conservati per il tempo strettamente
-          necessario a dar seguito alla richiesta e, in caso di successiva
-          contrattualizzazione, per la durata del rapporto contrattuale e per i
-          termini di legge fiscali (10 anni). I dati per finalità di marketing sono
-          conservati fino a revoca del consenso.
-        </p>
-      </LegalSection>
-
-      <LegalSection n="5" title="Destinatari e categorie di destinatari">
-        <p>
-          I dati potranno essere comunicati a soggetti che svolgono per conto del
-          Titolare attività strumentali, in qualità di responsabili del trattamento
-          ex art. 28 GDPR, tra cui:
-        </p>
+      <LegalSection n="3" title="Finalità e basi giuridiche del trattamento">
         <ul className="list-disc list-inside space-y-2">
-          <li>fornitori di hosting e servizi cloud <strong className="text-white">[Provider]</strong>;</li>
-          <li>fornitore del sistema di prenotazione <strong className="text-white">Octorate S.r.l.</strong> (per la gestione delle prenotazioni);</li>
-          <li>eventuale servizio di email transazionale <strong className="text-white">[es. Resend / SendGrid]</strong>;</li>
-          <li>consulenti contabili, fiscali e legali;</li>
-          <li>autorità giudiziarie o pubbliche autorità, quando previsto dalla legge.</li>
+          <li>
+            <strong className="text-white">Gestione richieste di contatto ed invio informazioni</strong> — base giuridica: esecuzione di misure precontrattuali su richiesta dell'interessato (art. 6.1.b GDPR).
+          </li>
+          <li>
+            <strong className="text-white">Gestione ed esecuzione dei contratti di locazione turistica</strong> (prenotazione, accoglienza, invio video check-in via WhatsApp) — base giuridica: esecuzione del contratto (art. 6.1.b GDPR).
+          </li>
+          <li>
+            <strong className="text-white">Adempimenti normativi, fiscali e di Pubblica Sicurezza</strong> (comunicazione schedine alloggiati alla Questura e gestione imposta di soggiorno) — base giuridica: obbligo legale (art. 6.1.c GDPR).
+          </li>
+          <li>
+            <strong className="text-white">Manutenzione e sicurezza del sito web</strong> — base giuridica: legittimo interesse del Titolare (art. 6.1.f GDPR).
+          </li>
         </ul>
       </LegalSection>
 
-      <LegalSection n="6" title="Trasferimenti extra-UE">
+      <LegalSection n="4" title="Modalità di trattamento e conservazione">
         <p>
-          Alcuni fornitori terzi potrebbero trattare i dati in Paesi extra UE. In tal
-          caso il trasferimento avviene sulla base di garanzie adeguate (decisioni di
-          adeguatezza della Commissione UE o Clausole Contrattuali Standard).
+          Il trattamento avviene con strumenti elettronici e cartacei, adottando misure di sicurezza idonee a garantire la riservatezza ed integrità dei dati.
+        </p>
+        <p className="mt-2">
+          I dati contrattuali e contabili vengono conservati per i termini stabiliti dalla legge (10 anni). I dati di contatto per richieste di informazioni vengono conservati per il tempo strettamente necessario a evadere la richiesta.
         </p>
       </LegalSection>
 
-      <LegalSection n="7" title="Diritti dell'interessato">
+      <LegalSection n="5" title="Destinatari dei dati">
         <p>
-          L'interessato può esercitare in qualsiasi momento i diritti previsti dagli
-          artt. 15-22 GDPR: accesso, rettifica, cancellazione, limitazione,
-          opposizione, portabilità e revoca del consenso.
+          I dati personali potranno essere comunicati a responsabili del trattamento e terzi fornitori di servizi legati all'operatività di Outdoor Apartments:
         </p>
-        <p>
-          Per esercitare tali diritti è sufficiente scrivere a{" "}
-          <strong className="text-white">[email dedicata privacy]</strong>. Resta salvo
-          il diritto di proporre reclamo al Garante per la Protezione dei Dati
-          Personali (www.garanteprivacy.it).
-        </p>
+        <ul className="list-disc list-inside space-y-2 mt-2">
+          <li>Fornitore del software gestionale di prenotazioni: <strong className="text-white">Octorate S.r.l.</strong></li>
+          <li>Fornitori di servizi per messaggistica e invio informazioni: <strong className="text-white">WhatsApp / Meta Platforms Ireland Ltd.</strong></li>
+          <li>Fornitori di servizi geografici ed elenchi: <strong className="text-white">Google Ireland Limited</strong> (Google Maps / MyBusiness)</li>
+          <li>Fornitori di infrastruttura hosting: <strong className="text-white">Vercel Inc.</strong></li>
+          <li>Consulenti fiscali, legali e amministratori di sistema</li>
+          <li>Autorità di Pubblica Sicurezza ed enti comunali per l'imposta di soggiorno</li>
+        </ul>
       </LegalSection>
 
-      <LegalSection n="8" title="Modifiche all'informativa">
+      <LegalSection n="6" title="Diritti dell'interessato">
         <p>
-          Il Titolare si riserva di aggiornare la presente informativa in qualsiasi
-          momento, dandone comunicazione tramite il sito.
+          L'interessato ha il diritto di chiedere al Titolare l'accesso ai propri dati personali, la rettifica, la cancellazione, la limitazione del trattamento o l'opposizione allo stesso, oltre al diritto alla portabilità dei dati (artt. 15-22 GDPR).
+        </p>
+        <p className="mt-2">
+          Per esercitare i propri diritti è possibile inviare una richiesta scritta a <strong className="text-white">{SITE.email}</strong> o via PEC a <strong className="text-white">{SITE.pec}</strong>. È sempre fatto salvo il diritto di proporre reclamo al Garante per la Protezione dei Dati Personali (www.garanteprivacy.it).
         </p>
       </LegalSection>
     </LegalLayout>

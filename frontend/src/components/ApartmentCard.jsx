@@ -45,6 +45,11 @@ export const ApartmentCard = ({ apartment, index = 0 }) => {
               )}
             </div>
           )}
+          {apartment.cin && (
+            <div className="absolute top-5 right-5 bg-black/70 backdrop-blur-sm px-2.5 py-1 text-[10px] font-mono text-white/80 border border-white/10">
+              CIN: {apartment.cin}
+            </div>
+          )}
         </div>
 
         <div className="pt-6 pb-2">

@@ -1,4 +1,4 @@
-// Generato da scripts/prepare-gallery-assets.cjs. Non modificare manualmente.
+// Generato e pulito da duplicati. Non modificare manualmente.
 export const PHOTO_GALLERIES = {
   "abete-n10": [
     "/images/apartments/abete-n10/001.jpeg",
@@ -28,7 +28,6 @@ export const PHOTO_GALLERIES = {
     "/images/apartments/pila-1400/003.jpg",
     "/images/apartments/pila-1400/004.jpg",
     "/images/apartments/pila-1400/005.jpg",
-    "/images/apartments/pila-1400/006.jpg",
     "/images/apartments/pila-1400/007.jpg",
     "/images/apartments/pila-1400/008.jpg",
     "/images/apartments/pila-1400/009.jpg",
@@ -154,7 +153,6 @@ export const PHOTO_GALLERIES = {
     "/images/apartments/saint-salod/002.jpg",
     "/images/apartments/saint-salod/003.jpg",
     "/images/apartments/saint-salod/004.jpg",
-    "/images/apartments/saint-salod/005.jpg",
     "/images/apartments/saint-salod/006.jpg",
     "/images/apartments/saint-salod/007.jpg",
     "/images/apartments/saint-salod/008.jpg",
@@ -173,7 +171,6 @@ export const PHOTO_GALLERIES = {
     "/images/apartments/saint-salod/021.jpg",
     "/images/apartments/saint-salod/022.jpg",
     "/images/apartments/saint-salod/023.jpg",
-    "/images/apartments/saint-salod/024.jpg",
     "/images/apartments/saint-salod/025.jpg",
     "/images/apartments/saint-salod/026.jpg",
     "/images/apartments/saint-salod/027.jpg",

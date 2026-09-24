@@ -1,13 +1,14 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { Star, MapPin, ArrowLeft, ArrowRight, Phone, Wifi, Car, Snowflake, CigaretteOff, Users, Check } from "lucide-react";
+import { Star, MapPin, ArrowLeft, ArrowRight, Phone, Wifi, Car, Snowflake, CigaretteOff, Users, Check, ShieldCheck, Clock, FileText, Ban, Dog } from "lucide-react";
 import { fetchApartment } from "@/lib/api";
 import { ApartmentGallery } from "@/components/ApartmentGallery";
 import { Seo } from "@/components/Seo";
 import { apartmentLd, breadcrumbLd } from "@/lib/structuredData";
 import { APT } from "@/constants/testIds";
 import { SITE } from "@/lib/siteConfig";
+import { GENERAL_HOUSE_RULES } from "@/constants/apartments";
 
 const AMENITY_META = {
   wifi_free: { icon: Wifi, label: "Wifi gratuito" },
@@ -79,7 +80,7 @@ export default function ApartmentDetail() {
             transition={{ duration: 0.9 }}
             className="text-[10px] uppercase tracking-[0.32em] text-[#B7CFC0] mb-6 flex items-center gap-3"
           >
-            <MapPin size={12} /> {apt.short_location}
+            <MapPin size={12} /> {apt.address || apt.location}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -89,13 +90,13 @@ export default function ApartmentDetail() {
           >
             {apt.name}
           </motion.h1>
-          {apt.rating > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.3 }}
-              className="mt-8 flex items-center gap-6 text-white/80"
-            >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.3 }}
+            className="mt-8 flex flex-wrap items-center gap-4 text-white/80"
+          >
+            {apt.rating > 0 && (
               <div className="flex items-center gap-2">
                 <Star size={16} className="text-[#5F8F76] fill-[#5F8F76]" />
                 <span className="text-base font-medium">{apt.rating.toFixed(1)} / 10</span>
@@ -103,22 +104,60 @@ export default function ApartmentDetail() {
                   <span className="text-white/60 text-sm">({apt.reviews_count} recensioni)</span>
                 )}
               </div>
-            </motion.div>
-          )}
+            )}
+            {apt.cin && (
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 text-xs font-mono tracking-wider border border-white/15">
+                <ShieldCheck size={14} className="text-[#5F8F76]" /> CIN: {apt.cin}
+              </div>
+            )}
+            {apt.cir && (
+              <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md px-3 py-1.5 text-xs font-mono tracking-wider border border-white/10 text-white/70">
+                CIR: {apt.cir}
+              </div>
+            )}
+          </motion.div>
         </div>
       </section>
 
       {/* CONTENT */}
       <section className="py-24 md:py-32 px-6 md:px-10">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-14 lg:gap-20">
-          <div className="lg:col-span-2">
-            <p className="text-[10px] uppercase tracking-[0.32em] text-[#5F8F76] mb-6">Descrizione</p>
+          <div className="lg:col-span-2 space-y-14">
+            {/* LEGAL DATA & BADGES */}
+            <div className="border border-white/15 bg-[#141414] p-6 md:p-8 space-y-6">
+              <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+                <ShieldCheck size={20} className="text-[#5F8F76]" />
+                <h3 className="font-serif-display text-xl text-white">Trasparenza Legale & Identificativi</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono text-white/80">
+                <div>
+                  <span className="text-white/40 block text-[10px] uppercase tracking-widest font-sans">Codice Identificativo Nazionale (CIN)</span>
+                  <span className="text-sm font-semibold text-[#B7CFC0]">{apt.cin || "In corso di registrazione"}</span>
+                </div>
+                <div>
+                  <span className="text-white/40 block text-[10px] uppercase tracking-widest font-sans">Codice Identificativo Regionale (CIR)</span>
+                  <span className="text-sm font-semibold text-[#B7CFC0]">{apt.cir || "In corso di registrazione"}</span>
+                </div>
+                <div>
+                  <span className="text-white/40 block text-[10px] uppercase tracking-widest font-sans">Indirizzo Struttura</span>
+                  <span className="text-white">{apt.address || apt.location}</span>
+                </div>
+                <div>
+                  <span className="text-white/40 block text-[10px] uppercase tracking-widest font-sans">Capienza Massima</span>
+                  <span className="text-white">{apt.max_guests ? `${apt.max_guests} Ospiti` : 'Vedi dettagli'} {apt.units_detail ? `(${apt.units_detail})` : ''}</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.32em] text-[#5F8F76] mb-6">Descrizione</p>
             <h2 className="font-serif-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] mb-10">
               Un rifugio <span className="italic">nella neve.</span>
             </h2>
             <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl">
               {apt.description}
             </p>
+            </div>
 
             <div className="mt-16">
               <p className="text-[10px] uppercase tracking-[0.32em] text-[#5F8F76] mb-8">
@@ -141,10 +180,63 @@ export default function ApartmentDetail() {
               </ul>
             </div>
 
+            {/* TOURIST TAX & PETS */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+              <div className="border border-white/10 bg-[#141414] p-6 space-y-3">
+                <div className="flex items-center gap-3 text-[#5F8F76]">
+                  <FileText size={18} />
+                  <h4 className="text-sm uppercase tracking-wider font-semibold text-white">Imposta di Soggiorno</h4>
+                </div>
+                {apt.tourist_tax && apt.tourist_tax.length > 0 ? (
+                  <ul className="space-y-2 text-xs text-white/70">
+                    {apt.tourist_tax.map((t, idx) => (
+                      <li key={idx} className="border-b border-white/5 pb-2 last:border-0">
+                        <span className="block text-white/40 text-[10px] font-mono">{t.period}:</span>
+                        <strong className="text-white">{t.rate}</strong>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-xs text-white/60">Secondo regolamento comunale locale.</p>
+                )}
+              </div>
+
+              <div className="border border-white/10 bg-[#141414] p-6 space-y-3">
+                <div className="flex items-center gap-3 text-[#5F8F76]">
+                  <Dog size={18} />
+                  <h4 className="text-sm uppercase tracking-wider font-semibold text-white">Politica Animali</h4>
+                </div>
+                <p className="text-xs text-white/80 leading-relaxed">
+                  {apt.pets_note || (apt.pets_allowed ? "Animali ammessi previa richiesta (con supplemento)." : "No animali ammessi.")}
+                </p>
+              </div>
+            </div>
+
+            {/* HOUSE RULES & CANCELLATION */}
+            <div className="border border-white/10 bg-[#141414] p-6 md:p-8 space-y-6">
+              <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+                <Clock size={20} className="text-[#5F8F76]" />
+                <h3 className="font-serif-display text-xl text-white">Orari & Condizioni di Soggiorno</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-white/80">
+                <div className="space-y-2">
+                  <p className="text-xs uppercase tracking-widest text-white/40 font-sans">Check-in & Check-out</p>
+                  <p><strong className="text-white">Check-in:</strong> {GENERAL_HOUSE_RULES.checkIn}</p>
+                  <p><strong className="text-white">Check-out:</strong> {GENERAL_HOUSE_RULES.checkOut}</p>
+                  <p className="text-xs text-white/50 pt-2"><Ban size={12} className="inline mr-1 text-red-400" /> {GENERAL_HOUSE_RULES.events} | {GENERAL_HOUSE_RULES.smoking}</p>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-xs uppercase tracking-widest text-white/40 font-sans">Caparra & Cancellazioni</p>
+                  <p className="text-xs text-white/70 leading-relaxed"><strong className="text-white">Caparra:</strong> {GENERAL_HOUSE_RULES.deposit}</p>
+                  <p className="text-xs text-white/70 leading-relaxed"><strong className="text-white">Rimborso:</strong> {GENERAL_HOUSE_RULES.cancellation}</p>
+                </div>
+              </div>
+            </div>
+
             <div className="mt-16 flex items-start gap-4 p-6 border border-white/10 bg-[#141414]">
               <Check size={18} className="text-[#5F8F76] mt-1" />
               <div>
-                <p className="text-sm text-white/90 mb-1">Ospitalità curata</p>
+                <p className="text-sm text-white/90 mb-1">Ospitalità curata e trasparente</p>
                 <p className="text-white/60 text-sm leading-relaxed">
                   Ogni soggiorno è seguito dal nostro team locale: check-in personalizzato,
                   pulizia impeccabile e assistenza durante tutta la permanenza.

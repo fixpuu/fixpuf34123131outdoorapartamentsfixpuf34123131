@@ -7,7 +7,7 @@ export default function CookiePolicy() {
     <LegalLayout
       eyebrow="Cookie Policy"
       title="Informativa sui cookie"
-      updated="Dicembre 2025 — bozza"
+      updated="Settembre 2026"
       seoPath="/cookie-policy"
       seoDescription="Cookie policy di Outdoor Apartments: tipologie di cookie utilizzati, finalità, durata e gestione delle preferenze secondo le linee guida del Garante Privacy."
     >

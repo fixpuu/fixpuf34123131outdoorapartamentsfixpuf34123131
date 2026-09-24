@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Facebook, ShieldCheck } from "lucide-react";
 import { Seo } from "@/components/Seo";
 import { breadcrumbLd } from "@/lib/structuredData";
+import { SITE } from "@/lib/siteConfig";
 
 const IMG =
   "https://images.unsplash.com/photo-1517404656827-b10222b9ec59";
@@ -11,7 +12,7 @@ export default function Contact() {
     <div className="bg-[#0A0A0A] min-h-screen">
       <Seo
         title="Contatti — Outdoor Apartments Pila"
-        description="Contatta Outdoor Apartments per informazioni su appartamenti e chalet in affitto a Pila, Valle d'Aosta. Email, telefono e sede a Frazione Pila (AO)."
+        description={`Contatta ${SITE.legalName} per informazioni su appartamenti e chalet in affitto a Pila ed Aosta, Valle d'Aosta. Email, PEC, telefono e sede legale.`}
         path="/contatti"
         jsonLd={breadcrumbLd([
           { name: "Home", path: "/" },
@@ -50,15 +51,22 @@ export default function Contact() {
             transition={{ duration: 0.9 }}
           >
             <p className="text-[10px] uppercase tracking-[0.32em] text-[#5F8F76] mb-6">
-              Outdoor Apartments
+              {SITE.name}
             </p>
             <h2 className="font-serif-display text-4xl md:text-5xl leading-[1.05] mb-10">
-              Pila, <span className="italic">Valle d'Aosta.</span>
+              Pila & Aosta, <span className="italic">Valle d'Aosta.</span>
             </h2>
             <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-md">
               Il nostro team è a disposizione per ogni informazione sui soggiorni,
               sugli appartamenti gestiti e sul servizio dedicato ai proprietari.
             </p>
+
+            <div className="mt-12 p-6 border border-white/10 bg-[#141414] text-xs font-mono text-white/60 space-y-1">
+              <p className="font-sans font-semibold text-white/80">{SITE.legalName}</p>
+              <p>Sede legale: {SITE.legalAddress}</p>
+              <p>P.IVA: {SITE.vatId} | C.F.: {SITE.fiscalCode}</p>
+              <p>REA: {SITE.rea} (Camera di Commercio di Aosta)</p>
+            </div>
           </motion.div>
 
           <motion.div
@@ -66,11 +74,13 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, delay: 0.1 }}
-            className="space-y-10"
+            className="space-y-8"
           >
-            <ContactRow icon={Mail} label="Email" value="info@outdoorapartments.it" href="mailto:info@outdoorapartments.it" />
-            <ContactRow icon={Phone} label="Telefono" value="+39 000 000 0000" href="tel:+390000000000" />
-            <ContactRow icon={MapPin} label="Sede" value="Frazione Pila, 11020 Pila (AO) — Italia" />
+            <ContactRow icon={Mail} label="Email Principale" value={SITE.email} href={`mailto:${SITE.email}`} />
+            <ContactRow icon={Mail} label="Email Informazioni" value={SITE.contactEmail} href={`mailto:${SITE.contactEmail}`} />
+            <ContactRow icon={ShieldCheck} label="PEC" value={SITE.pec} href={`mailto:${SITE.pec}`} />
+            <ContactRow icon={Phone} label="Telefono" value={SITE.phone} href={`tel:${SITE.phoneRaw}`} />
+            <ContactRow icon={MapPin} label="Sede Legale" value={`${SITE.legalAddress} — Italia`} />
 
             <div className="pt-6 border-t border-white/10">
               <p className="text-[10px] uppercase tracking-[0.28em] text-white/50 mb-5">Social</p>

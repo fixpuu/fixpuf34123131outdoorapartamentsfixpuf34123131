@@ -7,6 +7,7 @@ import { submitHostRequest } from "@/lib/api";
 import { Seo } from "@/components/Seo";
 import { breadcrumbLd } from "@/lib/structuredData";
 import { HOST } from "@/constants/testIds";
+import { SITE } from "@/lib/siteConfig";
 
 const HEADER_IMAGE =
   "https://images.unsplash.com/photo-1545158535-c3f7168c28b6";
@@ -53,7 +54,7 @@ export default function HostWithUs() {
       const body = encodeURIComponent(
         `Nome: ${form.full_name}\nTelefono: ${form.phone}\nEmail: ${form.email}\nIndirizzo immobile: ${form.property_address}\nDescrizione: ${form.description || 'Nessuna'}\n`
       );
-      window.location.href = `mailto:info@outdoorapartments.it?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
       
       setSuccess(true);
       setForm(initial);

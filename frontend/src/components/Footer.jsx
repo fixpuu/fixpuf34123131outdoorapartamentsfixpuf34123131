@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { Instagram, Facebook, Mail, Phone, Cookie } from "lucide-react";
+import { Instagram, Facebook, Mail, Phone, Cookie, ShieldCheck } from "lucide-react";
 import { useConsent } from "@/context/ConsentContext";
 import { FOOTER } from "@/constants/testIds";
+import { SITE } from "@/lib/siteConfig";
 
 const LOGO_URL =
   "https://customer-assets.emergentagent.com/job_0edc567d-bda4-4c1d-90f5-e4bdc5cabf5a/artifacts/tnx5w7d9_image.png";
@@ -22,11 +23,17 @@ export const Footer = () => {
               Outdoor <span className="italic text-white/70">Apartments</span>
             </span>
           </Link>
-          <p className="mt-8 text-white/60 max-w-md leading-relaxed text-sm">
+          <p className="mt-6 text-white/60 max-w-md leading-relaxed text-sm">
             Gestione professionale di appartamenti e chalet in affitto turistico a
             Pila, Valle d'Aosta. Ospitalità curata per gli ospiti, tranquillità
             garantita per i proprietari.
           </p>
+          <div className="mt-6 text-xs text-white/45 space-y-1 font-mono">
+            <p className="font-semibold text-white/70 font-sans">{SITE.legalName}</p>
+            <p>Sede legale: {SITE.legalAddress}</p>
+            <p>P.IVA: {SITE.vatId} | C.F.: {SITE.fiscalCode} | REA: {SITE.rea}</p>
+            <p>PEC: <a href={`mailto:${SITE.pec}`} className="underline hover:text-white">{SITE.pec}</a></p>
+          </div>
         </div>
 
         <div>
@@ -44,14 +51,20 @@ export const Footer = () => {
           <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-3 text-white/80">
               <Mail size={14} className="text-[#5F8F76]" />
-              <a href="mailto:info@outdoorapartments.it" className="hover:text-white transition-colors">
-                info@outdoorapartments.it
+              <a href={`mailto:${SITE.email}`} className="hover:text-white transition-colors">
+                {SITE.email}
+              </a>
+            </li>
+            <li className="flex items-center gap-3 text-white/80">
+              <Mail size={14} className="text-[#5F8F76]/60" />
+              <a href={`mailto:${SITE.contactEmail}`} className="hover:text-white transition-colors text-white/60">
+                {SITE.contactEmail}
               </a>
             </li>
             <li className="flex items-center gap-3 text-white/80">
               <Phone size={14} className="text-[#5F8F76]" />
-              <a href="tel:+390000000000" className="hover:text-white transition-colors">
-                +39 000 000 0000
+              <a href={`tel:${SITE.phoneRaw}`} className="hover:text-white transition-colors">
+                {SITE.phone}
               </a>
             </li>
           </ul>
@@ -67,9 +80,12 @@ export const Footer = () => {
       </div>
 
       <div className="max-w-[1600px] mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <p className="text-xs text-white/40">
-          © {new Date().getFullYear()} Outdoor Apartments — Pila, Valle d'Aosta
-        </p>
+        <div className="flex items-center gap-3">
+          <ShieldCheck size={14} className="text-[#5F8F76]" />
+          <p className="text-xs text-white/40">
+            © {new Date().getFullYear()} {SITE.legalName} — Tutti i diritti riservati
+          </p>
+        </div>
         <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.22em] text-white/50">
           <li>
             <Link to="/privacy-policy" data-testid={FOOTER.privacyLink} className="hover:text-white transition-colors">
