@@ -13,9 +13,9 @@ export const Footer = () => {
     <footer
       data-testid={FOOTER.root}
       id="contatti"
-      className="relative bg-black border-t border-white/10 pt-24 pb-10 px-6 md:px-10"
+      className="relative bg-black border-t border-white/10 pt-16 md:pt-24 pb-12 pb-safe px-5 sm:px-6 md:px-10"
     >
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-14">
+      <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-14">
         <div className="md:col-span-2">
           <Link to="/" className="flex items-center gap-3">
             <img src={LOGO_URL} alt="Outdoor Apartments" className="w-12 h-12" />

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { NAV } from "@/constants/testIds";
+import { SITE } from "@/lib/siteConfig";
 
 const LOGO_URL =
   "https://customer-assets.emergentagent.com/job_0edc567d-bda4-4c1d-90f5-e4bdc5cabf5a/artifacts/tnx5w7d9_image.png";
@@ -28,6 +29,18 @@ export const Navbar = () => {
   useEffect(() => {
     setOpen(false);
   }, [location.pathname]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
     <nav
@@ -75,27 +88,28 @@ export const Navbar = () => {
           type="button"
           onClick={() => setOpen((v) => !v)}
           data-testid={NAV.mobileToggle}
-          aria-label="Menu"
-          className="lg:hidden text-white p-2"
+          aria-label={open ? "Chiudi menu" : "Apri menu"}
+          className="lg:hidden text-white flex items-center justify-center min-h-[44px] min-w-[44px] p-2 active:bg-white/10 transition-colors"
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {open && (
         <div
           data-testid={NAV.mobileMenu}
-          className="lg:hidden bg-black/95 backdrop-blur-md border-t border-white/10"
+          className="lg:hidden bg-[#0A0A0A]/95 backdrop-blur-xl border-t border-white/10 max-h-[calc(100vh-80px)] overflow-y-auto"
         >
-          <ul className="px-6 py-8 flex flex-col gap-6">
+          <ul className="px-6 py-6 flex flex-col divide-y divide-white/5">
             {links.map((l) => (
               <li key={l.to}>
                 <NavLink
                   to={l.to}
                   data-testid={`${l.tid}-mobile`}
+                  onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    `text-sm uppercase tracking-[0.22em] ${
-                      isActive ? "text-white" : "text-white/70"
+                    `block py-4 text-sm uppercase tracking-[0.24em] font-medium transition-colors ${
+                      isActive ? "text-white" : "text-white/70 active:text-white"
                     }`
                   }
                   end={l.to === "/"}
@@ -105,6 +119,32 @@ export const Navbar = () => {
               </li>
             ))}
           </ul>
+
+          <div className="p-6 border-t border-white/10 bg-white/[0.02] flex flex-col gap-3 pb-safe">
+            <Link
+              to="/#booking"
+              onClick={() => setOpen(false)}
+              className="w-full min-h-[46px] flex items-center justify-center bg-[#2E4F3E] text-white text-xs uppercase tracking-[0.22em] font-medium"
+            >
+              Verifica disponibilità
+            </Link>
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <a
+                href={`tel:${SITE.phoneRaw}`}
+                className="min-h-[44px] flex items-center justify-center gap-2 border border-white/20 text-white/80 active:text-white text-xs uppercase tracking-wider"
+              >
+                <Phone size={14} /> Chiama
+              </a>
+              <a
+                href={`https://wa.me/${SITE.phoneRaw.replace(/[^0-9]/g, "")}?text=${encodeURIComponent("Ciao, vorrei informazioni sui vostri appartamenti a Pila.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="min-h-[44px] flex items-center justify-center gap-2 border border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366] text-xs uppercase tracking-wider"
+              >
+                <MessageCircle size={14} /> WhatsApp
+              </a>
+            </div>
+          </div>
         </div>
       )}
     </nav>

@@ -10,7 +10,7 @@ import { HOST } from "@/constants/testIds";
 import { SITE } from "@/lib/siteConfig";
 
 const HEADER_IMAGE =
-  "https://images.unsplash.com/photo-1545158535-c3f7168c28b6";
+  "/images/chi-siamo-outdoor-apartments.webp";
 
 const initial = {
   full_name: "",
@@ -79,19 +79,19 @@ export default function HostWithUs() {
         ])}
       />
       {/* HEADER */}
-      <section className="relative h-[70vh] w-full overflow-hidden">
+      <section className="relative h-[55vh] sm:h-[70vh] w-full overflow-hidden">
         <img
           src={HEADER_IMAGE}
           alt="Chalet in montagna a Pila — gestione immobili per proprietari"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 h-full flex flex-col items-start justify-end px-6 md:px-10 pb-16 md:pb-24 max-w-[1400px] mx-auto">
+        <div className="relative z-10 h-full flex flex-col items-start justify-end px-5 sm:px-6 md:px-10 pb-12 sm:pb-16 md:pb-24 max-w-[1400px] mx-auto">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9 }}
-            className="text-[10px] uppercase tracking-[0.32em] text-[#B7CFC0] mb-6"
+            className="text-[10px] uppercase tracking-[0.32em] text-[#B7CFC0] mb-4 sm:mb-6"
           >
             Per i proprietari
           </motion.p>
@@ -99,7 +99,7 @@ export default function HostWithUs() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.15 }}
-            className="font-serif-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] max-w-4xl"
+            className="font-serif-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] max-w-4xl"
           >
             Affidaci <span className="italic">il tuo immobile.</span>
           </motion.h1>
@@ -107,7 +107,7 @@ export default function HostWithUs() {
       </section>
 
       {/* CONTENT */}
-      <section className="py-24 md:py-32 px-6 md:px-10">
+      <section className="py-14 sm:py-24 md:py-32 px-5 sm:px-6 md:px-10">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Copy */}
           <motion.div
@@ -202,7 +202,7 @@ export default function HostWithUs() {
                     data-testid={HOST.fullName}
                     value={form.full_name}
                     onChange={(e) => setField("full_name", e.target.value)}
-                    className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-white text-sm"
+                    className="w-full min-h-[44px] bg-transparent border-b border-white/20 focus:border-white outline-none py-2.5 text-white text-base md:text-sm"
                     placeholder="Mario Rossi"
                   />
                 </Field>
@@ -212,7 +212,7 @@ export default function HostWithUs() {
                     data-testid={HOST.phone}
                     value={form.phone}
                     onChange={(e) => setField("phone", e.target.value)}
-                    className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-white text-sm"
+                    className="w-full min-h-[44px] bg-transparent border-b border-white/20 focus:border-white outline-none py-2.5 text-white text-base md:text-sm"
                     placeholder="+39 333 000 0000"
                   />
                 </Field>
@@ -225,7 +225,7 @@ export default function HostWithUs() {
                     data-testid={HOST.address}
                     value={form.property_address}
                     onChange={(e) => setField("property_address", e.target.value)}
-                    className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-white text-sm"
+                    className="w-full min-h-[44px] bg-transparent border-b border-white/20 focus:border-white outline-none py-2.5 text-white text-base md:text-sm"
                     placeholder="Via, numero civico, città (AO)"
                   />
                 </Field>
@@ -235,7 +235,7 @@ export default function HostWithUs() {
                     data-testid={HOST.email}
                     value={form.email}
                     onChange={(e) => setField("email", e.target.value)}
-                    className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-white text-sm"
+                    className="w-full min-h-[44px] bg-transparent border-b border-white/20 focus:border-white outline-none py-2.5 text-white text-base md:text-sm"
                     placeholder="tua@email.it"
                   />
                 </Field>
@@ -245,7 +245,7 @@ export default function HostWithUs() {
                     data-testid={HOST.description}
                     value={form.description}
                     onChange={(e) => setField("description", e.target.value)}
-                    className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-white text-sm resize-none"
+                    className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-2.5 text-white text-base md:text-sm resize-none"
                     placeholder="Metratura, numero di camere, servizi, note..."
                   />
                 </Field>
@@ -257,10 +257,10 @@ export default function HostWithUs() {
                       data-testid={HOST.privacyConsent}
                       checked={privacyAccepted}
                       onChange={(e) => setPrivacyAccepted(e.target.checked)}
-                      className="mt-1 w-4 h-4 accent-[#2E4F3E] cursor-pointer flex-shrink-0"
+                      className="mt-1 w-5 h-5 accent-[#2E4F3E] cursor-pointer flex-shrink-0"
                     />
                     <span className="text-xs text-white/70 leading-relaxed">
-                      Ho letto e accetto l'
+                      Ho letto e accetto l'{" "}
                       <Link
                         to="/privacy-policy"
                         target="_blank"
@@ -282,7 +282,7 @@ export default function HostWithUs() {
                   type="submit"
                   data-testid={HOST.submit}
                   disabled={submitting}
-                  className="w-full inline-flex items-center justify-center gap-3 bg-[#2E4F3E] text-white hover:bg-[#233B2E] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 px-10 py-4 text-xs tracking-[0.28em] uppercase"
+                  className="w-full min-h-[48px] inline-flex items-center justify-center gap-3 bg-[#2E4F3E] text-white hover:bg-[#233B2E] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed transition-all px-8 py-4 text-xs tracking-[0.24em] uppercase touch-manipulation font-medium"
                 >
                   {submitting ? "Invio in corso…" : (
                     <>Invia richiesta <Send size={14} /></>

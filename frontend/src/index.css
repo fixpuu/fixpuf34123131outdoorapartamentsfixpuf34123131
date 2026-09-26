@@ -6,6 +6,7 @@
 
 html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -15,6 +16,27 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-color: #0A0A0A;
     color: #FFFFFF;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Ottimizzazione touch: rimuove il delay di 300ms del tap su mobile */
+a, button, input, select, textarea {
+    touch-action: manipulation;
+}
+
+/* Evita che iOS Safari zoomi la schermata al focus dei campi form */
+@media screen and (max-width: 768px) {
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Safe areas per iPhone con notch/dynamic island e gesture bar */
+.pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
 }
 
 .font-serif-display {

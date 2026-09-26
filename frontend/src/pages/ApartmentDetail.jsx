@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { Star, MapPin, ArrowLeft, ArrowRight, Phone, Wifi, Car, Snowflake, CigaretteOff, Users, Check, ShieldCheck, Clock, FileText, Ban, Dog } from "lucide-react";
+import { Star, MapPin, ArrowLeft, ArrowRight, Phone, MessageCircle, Wifi, Car, Snowflake, CigaretteOff, Users, Check, ShieldCheck, Clock, FileText, Ban, Dog } from "lucide-react";
 import { fetchApartment } from "@/lib/api";
 import { ApartmentGallery } from "@/components/ApartmentGallery";
 import { Seo } from "@/components/Seo";
@@ -47,7 +47,7 @@ export default function ApartmentDetail() {
   const metaDesc = `${apt.name} a ${apt.short_location}: ${apt.description.slice(0, 120)}… Prenota direttamente il tuo soggiorno a Pila con Outdoor Apartments.`;
 
   return (
-    <div className="bg-[#0A0A0A] min-h-screen" data-testid={APT.detail}>
+    <div className="bg-[#0A0A0A] min-h-screen pb-24 lg:pb-0" data-testid={APT.detail}>
       <Seo
         title={`${apt.name} — ${apt.short_location}`}
         description={metaDesc}
@@ -64,7 +64,7 @@ export default function ApartmentDetail() {
         ]}
       />
       {/* HERO */}
-      <section className="relative h-[90vh] w-full overflow-hidden">
+      <section className="relative h-[78vh] sm:h-[88vh] w-full overflow-hidden">
         <ApartmentGallery images={apt.gallery?.length ? apt.gallery : [apt.image]} name={apt.name} className="absolute inset-0 h-full w-full" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
         <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-10 pb-16 md:pb-24 max-w-[1400px] mx-auto">
@@ -269,6 +269,43 @@ export default function ApartmentDetail() {
           </aside>
         </div>
       </section>
+
+      {/* MOBILE STICKY ACTION BAR */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#121212]/95 backdrop-blur-lg border-t border-white/15 px-4 py-3 pb-safe shadow-2xl flex items-center justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <p className="font-serif-display text-sm text-white truncate font-medium">
+            {apt.name}
+          </p>
+          <p className="text-[10px] uppercase tracking-wider text-[#B7CFC0] truncate">
+            {apt.short_location}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <a
+            href={`tel:${SITE.phoneRaw}`}
+            aria-label="Chiama direttamente"
+            className="flex h-11 w-11 items-center justify-center border border-white/20 bg-white/5 text-white active:bg-white/20 transition-colors"
+          >
+            <Phone size={18} />
+          </a>
+          <a
+            href={`https://wa.me/${SITE.phoneRaw.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(`Ciao, vorrei informazioni su ${apt.name} a Pila.`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Contatta su WhatsApp"
+            className="flex h-11 w-11 items-center justify-center border border-white/20 bg-[#25D366]/20 text-[#25D366] active:bg-[#25D366]/30 transition-colors"
+          >
+            <MessageCircle size={18} />
+          </a>
+          <Link
+            to="/#booking"
+            className="inline-flex h-11 items-center justify-center bg-[#2E4F3E] active:bg-[#233B2E] px-4 text-xs uppercase tracking-wider font-medium text-white transition-colors"
+          >
+            Prenota
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

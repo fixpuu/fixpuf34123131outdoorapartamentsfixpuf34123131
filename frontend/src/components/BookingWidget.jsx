@@ -63,8 +63,8 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
       </h3>
 
       {/* Custom Booking UI */}
-      <div className={`grid ${variant === "sidebar" ? "grid-cols-1 gap-5" : "grid-cols-1 md:grid-cols-4 gap-5"}`}>
-        <div>
+      <div className={`grid ${variant === "sidebar" ? "grid-cols-1 gap-5" : "grid-cols-2 md:grid-cols-4 gap-4 md:gap-5"}`}>
+        <div className="col-span-1">
           <label className="text-[10px] uppercase tracking-[0.22em] text-white/50 flex items-center gap-2 mb-2">
             <CalendarDays size={12} /> Check-in
           </label>
@@ -73,10 +73,10 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
             value={checkin}
             onChange={(e) => setCheckin(e.target.value)}
             data-testid={BOOKING.checkin}
-            className="w-full bg-transparent border-b border-white/20 text-white focus:border-white focus:outline-none py-3 font-manrope text-sm"
+            className="w-full min-h-[44px] bg-transparent border-b border-white/20 text-white focus:border-white focus:outline-none py-2 md:py-3 font-manrope text-base md:text-sm"
           />
         </div>
-        <div>
+        <div className="col-span-1">
           <label className="text-[10px] uppercase tracking-[0.22em] text-white/50 flex items-center gap-2 mb-2">
             <CalendarDays size={12} /> Check-out
           </label>
@@ -85,10 +85,10 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
             value={checkout}
             onChange={(e) => setCheckout(e.target.value)}
             data-testid={BOOKING.checkout}
-            className="w-full bg-transparent border-b border-white/20 text-white focus:border-white focus:outline-none py-3 font-manrope text-sm"
+            className="w-full min-h-[44px] bg-transparent border-b border-white/20 text-white focus:border-white focus:outline-none py-2 md:py-3 font-manrope text-base md:text-sm"
           />
         </div>
-        <div>
+        <div className="col-span-1">
           <label className="text-[10px] uppercase tracking-[0.22em] text-white/50 flex items-center gap-2 mb-2">
             <Users size={12} /> Adulti
           </label>
@@ -96,16 +96,16 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
             value={adults}
             onChange={(e) => setAdults(Number(e.target.value))}
             data-testid={BOOKING.adults}
-            className="w-full bg-transparent border-b border-white/20 text-white focus:border-white focus:outline-none py-3 font-manrope text-sm"
+            className="w-full min-h-[44px] bg-transparent border-b border-white/20 text-white focus:border-white focus:outline-none py-2 md:py-3 font-manrope text-base md:text-sm"
           >
             {[1, 2, 3, 4, 5, 6].map((n) => (
-              <option key={n} value={n} className="bg-black">
+              <option key={n} value={n} className="bg-[#141414]">
                 {n} {n === 1 ? "adulto" : "adulti"}
               </option>
             ))}
           </select>
         </div>
-        <div>
+        <div className="col-span-1">
           <label className="text-[10px] uppercase tracking-[0.22em] text-white/50 flex items-center gap-2 mb-2">
             <Users size={12} /> Bambini
           </label>
@@ -113,10 +113,10 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
             value={children}
             onChange={(e) => setChildren(Number(e.target.value))}
             data-testid={BOOKING.children}
-            className="w-full bg-transparent border-b border-white/20 text-white focus:border-white focus:outline-none py-3 font-manrope text-sm"
+            className="w-full min-h-[44px] bg-transparent border-b border-white/20 text-white focus:border-white focus:outline-none py-2 md:py-3 font-manrope text-base md:text-sm"
           >
             {[0, 1, 2, 3, 4].map((n) => (
-              <option key={n} value={n} className="bg-black">
+              <option key={n} value={n} className="bg-[#141414]">
                 {n} {n === 1 ? "bambino" : "bambini"}
               </option>
             ))}
@@ -128,7 +128,7 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
         type="button"
         data-testid={BOOKING.search}
         onClick={handleSearch}
-        className="mt-10 w-full md:w-auto inline-flex items-center justify-center gap-3 bg-[#2E4F3E] text-white hover:bg-[#233B2E] transition-colors duration-300 px-10 py-4 text-xs tracking-[0.28em] uppercase font-medium"
+        className="mt-8 md:mt-10 w-full md:w-auto min-h-[48px] inline-flex items-center justify-center gap-3 bg-[#2E4F3E] text-white hover:bg-[#233B2E] active:scale-[0.99] transition-all px-8 md:px-10 py-3.5 md:py-4 text-xs tracking-[0.24em] uppercase font-medium touch-manipulation"
       >
         <Search size={14} /> Cerca disponibilità
       </button>

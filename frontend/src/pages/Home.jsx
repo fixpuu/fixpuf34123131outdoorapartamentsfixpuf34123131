@@ -43,7 +43,7 @@ const FAQS = [
 const HERO_IMAGE =
   "/images/apartments/pila-1800/001.jpg";
 const ABOUT_IMAGE =
-  "/images/chi-siamo-outdoor-apartments.png";
+  "/images/chi-siamo-outdoor-apartments.webp";
 const CTA_IMAGE =
   "/images/apartments/pila-1800/002.jpg";
 
@@ -94,7 +94,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="font-serif-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] max-w-5xl"
+            className="font-serif-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] max-w-5xl"
           >
             Outdoor <span className="italic text-white/80">Apartments</span>
           </motion.h1>
@@ -110,18 +110,18 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.75 }}
-            className="mt-12 flex flex-col sm:flex-row items-center gap-5"
+            className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full sm:w-auto"
           >
             <a
               href="#booking"
               data-testid={HOME.heroCta}
-              className="inline-flex items-center gap-3 bg-[#2E4F3E] text-white hover:bg-[#233B2E] transition-colors duration-300 px-10 py-4 text-xs tracking-[0.28em] uppercase"
+              className="w-full sm:w-auto justify-center inline-flex items-center gap-3 bg-[#2E4F3E] text-white hover:bg-[#233B2E] active:scale-[0.99] transition-all px-8 sm:px-10 py-4 text-xs tracking-[0.28em] uppercase"
             >
               Prenota il tuo soggiorno <ArrowRight size={14} />
             </a>
             <Link
               to="/appartamenti"
-              className="inline-flex items-center gap-3 border border-white/40 hover:border-white hover:bg-white hover:text-black text-white transition-colors duration-300 px-10 py-4 text-xs tracking-[0.28em] uppercase"
+              className="w-full sm:w-auto justify-center inline-flex items-center gap-3 border border-white/40 hover:border-white hover:bg-white hover:text-black text-white active:bg-white/10 transition-all px-8 sm:px-10 py-4 text-xs tracking-[0.28em] uppercase"
             >
               Scopri gli appartamenti
             </Link>

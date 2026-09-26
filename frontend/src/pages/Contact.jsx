@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Instagram, Facebook, ShieldCheck } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Facebook, ShieldCheck, MessageCircle } from "lucide-react";
 import { Seo } from "@/components/Seo";
 import { breadcrumbLd } from "@/lib/structuredData";
 import { SITE } from "@/lib/siteConfig";
@@ -19,15 +19,15 @@ export default function Contact() {
           { name: "Contatti", path: "/contatti" },
         ])}
       />
-      <section className="relative h-[60vh] w-full overflow-hidden">
+      <section className="relative h-[48vh] sm:h-[60vh] w-full overflow-hidden">
         <img src={IMG} alt="Pila, Valle d'Aosta — contatti Outdoor Apartments" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 h-full flex flex-col items-start justify-end px-6 md:px-10 pb-16 max-w-[1400px] mx-auto">
+        <div className="relative z-10 h-full flex flex-col items-start justify-end px-5 sm:px-6 md:px-10 pb-12 sm:pb-16 max-w-[1400px] mx-auto">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9 }}
-            className="text-[10px] uppercase tracking-[0.32em] text-[#B7CFC0] mb-6"
+            className="text-[10px] uppercase tracking-[0.32em] text-[#B7CFC0] mb-4 sm:mb-6"
           >
             Contatti
           </motion.p>
@@ -35,14 +35,14 @@ export default function Contact() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.15 }}
-            className="font-serif-display text-5xl sm:text-6xl md:text-7xl leading-[1.02]"
+            className="font-serif-display text-4xl sm:text-6xl md:text-7xl leading-[1.02]"
           >
             Restiamo <span className="italic">in contatto.</span>
           </motion.h1>
         </div>
       </section>
 
-      <section className="py-24 md:py-32 px-6 md:px-10">
+      <section className="py-14 sm:py-24 md:py-32 px-5 sm:px-6 md:px-10">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -80,6 +80,7 @@ export default function Contact() {
             <ContactRow icon={Mail} label="Email Informazioni" value={SITE.contactEmail} href={`mailto:${SITE.contactEmail}`} />
             <ContactRow icon={ShieldCheck} label="PEC" value={SITE.pec} href={`mailto:${SITE.pec}`} />
             <ContactRow icon={Phone} label="Telefono" value={SITE.phone} href={`tel:${SITE.phoneRaw}`} />
+            <ContactRow icon={MessageCircle} label="WhatsApp" value={SITE.phone} href={`https://wa.me/${SITE.phoneRaw.replace(/[^0-9]/g, "")}?text=${encodeURIComponent("Ciao, vorrei informazioni sui vostri appartamenti a Pila.")}`} />
             <ContactRow icon={MapPin} label="Sede Legale" value={`${SITE.legalAddress} — Italia`} />
 
             <div className="pt-6 border-t border-white/10">
