@@ -67,55 +67,57 @@ export default function ApartmentDetail() {
       <section className="relative h-[78vh] sm:h-[88vh] w-full overflow-hidden">
         <ApartmentGallery images={apt.gallery?.length ? apt.gallery : [apt.image]} name={apt.name} className="absolute inset-0 h-full w-full" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
-        <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-10 pb-16 md:pb-24 max-w-[1400px] mx-auto">
-          <Link
-            to="/appartamenti"
-            className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors text-xs uppercase tracking-[0.28em] mb-8"
-          >
-            <ArrowLeft size={14} /> Tutti gli appartamenti
-          </Link>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            className="text-[10px] uppercase tracking-[0.32em] text-[#B7CFC0] mb-6 flex items-center gap-3"
-          >
-            <MapPin size={12} /> {apt.address || apt.location}
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.15 }}
-            className="font-serif-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02]"
-          >
-            {apt.name}
-          </motion.h1>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.3 }}
-            className="mt-8 flex flex-wrap items-center gap-4 text-white/80"
-          >
-            {apt.rating > 0 && (
-              <div className="flex items-center gap-2">
-                <Star size={16} className="text-[#5F8F76] fill-[#5F8F76]" />
-                <span className="text-base font-medium">{apt.rating.toFixed(1)} / 10</span>
-                {apt.reviews_count > 0 && (
-                  <span className="text-white/60 text-sm">({apt.reviews_count} recensioni)</span>
-                )}
-              </div>
-            )}
-            {apt.cin && (
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 text-xs font-mono tracking-wider border border-white/15">
-                <ShieldCheck size={14} className="text-[#5F8F76]" /> CIN: {apt.cin}
-              </div>
-            )}
-            {apt.cir && (
-              <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md px-3 py-1.5 text-xs font-mono tracking-wider border border-white/10 text-white/70">
-                CIR: {apt.cir}
-              </div>
-            )}
-          </motion.div>
+        <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-10 pb-16 md:pb-24 max-w-[1400px] mx-auto pointer-events-none">
+          <div className="pointer-events-auto">
+            <Link
+              to="/appartamenti"
+              className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors text-xs uppercase tracking-[0.28em] mb-8"
+            >
+              <ArrowLeft size={14} /> Tutti gli appartamenti
+            </Link>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9 }}
+              className="text-[10px] uppercase tracking-[0.32em] text-[#B7CFC0] mb-6 flex items-center gap-3"
+            >
+              <MapPin size={12} /> {apt.address || apt.location}
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.15 }}
+              className="font-serif-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] text-white"
+            >
+              {apt.name}
+            </motion.h1>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.3 }}
+              className="mt-8 flex flex-wrap items-center gap-4 text-white/80"
+            >
+              {apt.rating > 0 && (
+                <div className="flex items-center gap-2">
+                  <Star size={16} className="text-[#5F8F76] fill-[#5F8F76]" />
+                  <span className="text-base font-medium">{apt.rating.toFixed(1)} / 10</span>
+                  {apt.reviews_count > 0 && (
+                    <span className="text-white/60 text-sm">({apt.reviews_count} recensioni)</span>
+                  )}
+                </div>
+              )}
+              {apt.cin && (
+                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 text-xs font-mono tracking-wider border border-white/15">
+                  <ShieldCheck size={14} className="text-[#5F8F76]" /> CIN: {apt.cin}
+                </div>
+              )}
+              {apt.cir && (
+                <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md px-3 py-1.5 text-xs font-mono tracking-wider border border-white/10 text-white/70">
+                  CIR: {apt.cir}
+                </div>
+              )}
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -151,9 +153,9 @@ export default function ApartmentDetail() {
 
             <div>
               <p className="text-[10px] uppercase tracking-[0.32em] text-[#5F8F76] mb-6">Descrizione</p>
-            <h2 className="font-serif-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] mb-10">
-              Un rifugio <span className="italic">nella neve.</span>
-            </h2>
+              <h2 className="font-serif-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] mb-10 text-white">
+                {apt.name}
+              </h2>
             <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl">
               {apt.description}
             </p>

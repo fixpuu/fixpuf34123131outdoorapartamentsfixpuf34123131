@@ -160,6 +160,13 @@ export const ApartmentGallery = ({
           </span>
         </>
       )}
+
+      {/* Apartment Name */}
+      {name && (
+        <span className="absolute left-4 bottom-4 z-20 bg-black/65 backdrop-blur-sm px-2.5 py-1 text-[11px] font-mono tracking-wider text-white/90 border border-white/10 rounded-sm">
+          {name}
+        </span>
+      )}
     </div>
   );
 };
