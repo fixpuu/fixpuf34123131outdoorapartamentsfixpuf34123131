@@ -22,6 +22,8 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
     // Map internal apartment IDs to Octorate network IDs if available
     const OCTORATE_NETWORK_MAP = {
       "chalet-saint-salod": "537964",
+      "chalet-saint-salod-fienile": "537964",
+      "chalet-saint-salod-zia": "537964",
       "pila-29": "760540",
       "studio-11-centro": "32981",
       "studio-pila-1800": "651718",
