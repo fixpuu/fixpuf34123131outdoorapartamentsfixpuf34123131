@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { Star, MapPin, ArrowLeft, ArrowRight, Phone, MessageCircle, Wifi, Car, Snowflake, CigaretteOff, Users, Check, ShieldCheck, Clock, FileText, Ban, Dog } from "lucide-react";
+import { Star, MapPin, ArrowLeft, ArrowRight, Phone, MessageCircle, Wifi, Car, Snowflake, CigaretteOff, Users, Check, ShieldCheck, Clock, FileText, Ban, Dog, SlidersHorizontal } from "lucide-react";
 import { fetchApartment } from "@/lib/api";
 import { ApartmentGallery } from "@/components/ApartmentGallery";
 import { Seo } from "@/components/Seo";
@@ -9,6 +9,7 @@ import { apartmentLd, breadcrumbLd } from "@/lib/structuredData";
 import { APT } from "@/constants/testIds";
 import { SITE } from "@/lib/siteConfig";
 import { GENERAL_HOUSE_RULES } from "@/constants/apartments";
+import { buildOctorateUrl } from "@/lib/octorate";
 
 const AMENITY_META = {
   wifi_free: { icon: Wifi, label: "Wifi gratuito" },
@@ -65,6 +66,18 @@ export default function ApartmentDetail() {
       />
       {/* HERO */}
       <section className="relative h-[78vh] sm:h-[88vh] w-full overflow-hidden">
+        {/* Pulsante di navigazione desktop / header ben visibile */}
+        <div className="absolute top-24 left-6 md:left-10 z-30 pointer-events-auto">
+          <Link
+            to="/appartamenti"
+            aria-label="Torna a tutti gli appartamenti"
+            className="inline-flex items-center gap-2.5 px-4 py-2.5 bg-black/65 hover:bg-black/90 text-white border border-white/20 hover:border-white/40 backdrop-blur-md text-xs uppercase tracking-[0.22em] transition-all duration-200 shadow-xl group"
+          >
+            <ArrowLeft size={14} className="text-[#5F8F76] transition-transform group-hover:-translate-x-1" />
+            <span>← Tutti gli appartamenti</span>
+          </Link>
+        </div>
+
         <ApartmentGallery images={apt.gallery?.length ? apt.gallery : [apt.image]} name={apt.name} className="absolute inset-0 h-full w-full" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
         <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-10 pb-16 md:pb-24 max-w-[1400px] mx-auto pointer-events-none">
@@ -156,9 +169,35 @@ export default function ApartmentDetail() {
               <h2 className="font-serif-display text-3xl md:text-4xl lg:text-5xl leading-[1.1] mb-10 text-white">
                 {apt.name}
               </h2>
-            <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl">
-              {apt.description}
-            </p>
+              <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl">
+                {apt.description}
+              </p>
+            </div>
+
+            {/* CARATTERISTICHE E DETTAGLI TECNICI */}
+            <div className="border border-white/15 bg-[#141414] p-6 md:p-8 space-y-6">
+              <div className="flex items-center gap-3 border-b border-white/10 pb-4">
+                <SlidersHorizontal size={20} className="text-[#5F8F76]" />
+                <h3 className="font-serif-display text-xl text-white">Caratteristiche e dettagli tecnici</h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 text-sm">
+                <div className="p-4 bg-white/[0.02] border border-white/5 space-y-1.5">
+                  <span className="text-white/40 block text-[10px] uppercase tracking-widest font-sans">Tipologia</span>
+                  <p className="font-medium text-white">{apt.specs?.typology || "Appartamento"}</p>
+                </div>
+                <div className="p-4 bg-white/[0.02] border border-white/5 space-y-1.5">
+                  <span className="text-white/40 block text-[10px] uppercase tracking-widest font-sans">Disposizione / N° Piani</span>
+                  <p className="font-medium text-white">{apt.specs?.floors || "Piano unico"}</p>
+                </div>
+                <div className="p-4 bg-white/[0.02] border border-white/5 space-y-1.5">
+                  <span className="text-white/40 block text-[10px] uppercase tracking-widest font-sans">Posti Letto</span>
+                  <p className="font-medium text-white">{apt.specs?.beds || `${apt.max_guests} posti letto`}</p>
+                </div>
+                <div className="p-4 bg-white/[0.02] border border-white/5 space-y-1.5">
+                  <span className="text-white/40 block text-[10px] uppercase tracking-widest font-sans">Composizione Vani</span>
+                  <p className="font-medium text-white leading-relaxed">{apt.specs?.rooms || "Zona giorno con cucina, camera da letto, bagno"}</p>
+                </div>
+              </div>
             </div>
 
             <div className="mt-16">
@@ -251,14 +290,16 @@ export default function ApartmentDetail() {
             <p className="text-[10px] uppercase tracking-[0.28em] text-[#B7CFC0] mb-5">Prenotazione</p>
             <h3 className="font-serif-display text-3xl leading-tight mb-4">Trova le date perfette.</h3>
             <p className="text-sm leading-relaxed text-white/65 mb-8">
-              Verifica tutte le disponibilità e le tariffe direttamente dalla home.
+              Verifica disponibilità e tariffe in tempo reale direttamente su Octorate.
             </p>
-            <Link
-              to="/#booking"
+            <a
+              href={buildOctorateUrl({ apartmentId: apt.id })}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full inline-flex min-h-11 items-center justify-center gap-3 bg-[#2E4F3E] px-5 py-4 text-center text-xs font-medium uppercase tracking-[0.18em] text-white transition-colors duration-200 hover:bg-[#233B2E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              Vedi disponibilità <ArrowRight size={15} aria-hidden="true" />
-            </Link>
+              Verifica disponibilità <ArrowRight size={15} aria-hidden="true" />
+            </a>
             <div className="mt-7 border-t border-white/10 pt-6">
               <p className="text-sm text-white/85 mb-3">Vuoi prenotare proprio {apt.name}?</p>
               <a
@@ -300,12 +341,14 @@ export default function ApartmentDetail() {
           >
             <MessageCircle size={18} />
           </a>
-          <Link
-            to="/#booking"
+          <a
+            href={buildOctorateUrl({ apartmentId: apt.id })}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex h-11 items-center justify-center bg-[#2E4F3E] active:bg-[#233B2E] px-4 text-xs uppercase tracking-wider font-medium text-white transition-colors"
           >
-            Prenota
-          </Link>
+            Verifica disponibilità
+          </a>
         </div>
       </div>
     </div>

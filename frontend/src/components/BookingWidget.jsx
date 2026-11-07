@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CalendarDays, Users, Search } from "lucide-react";
 import { BOOKING } from "@/constants/testIds";
+import { buildOctorateUrl } from "@/lib/octorate";
 
 /**
- * BookingWidget — Octorate placeholder.
- * Contiene un contenitore evidenziato (dashed) dove incollare lo script embed di Octorate,
- * insieme a una mock UI (date, ospiti, CTA) coerente con lo stile del sito.
+ * BookingWidget — Octorate booking engine interface.
+ * Permette di selezionare date/ospiti e reindirizza direttamente al booking engine esterno Octorate
+ * con i parametri necessari.
  */
 export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
   const today = new Date().toISOString().split("T")[0];
@@ -19,31 +20,13 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
   const [children, setChildren] = useState(0);
 
   const handleSearch = () => {
-    // Map internal apartment IDs to Octorate network IDs if available
-    const OCTORATE_NETWORK_MAP = {
-      "chalet-saint-salod": "537964",
-      "chalet-saint-salod-fienile": "537964",
-      "chalet-saint-salod-zia": "537964",
-      "pila-29": "760540",
-      "studio-11-centro": "32981",
-      "studio-pila-1800": "651718",
-    };
-
-    const baseUrl = "https://book.octorate.com/octobook/site/reservation/result.xhtml";
-    const params = new URLSearchParams({
-      siteKey: "octosite189658",
-      checkin: checkin,
-      checkout: checkout,
-      pax: (adults + children).toString(),
-      lang: "it",
-      ota: "false",
+    const url = buildOctorateUrl({
+      apartmentId,
+      checkin,
+      checkout,
+      pax: adults + children,
     });
-
-    if (apartmentId && OCTORATE_NETWORK_MAP[apartmentId]) {
-      params.set("network", OCTORATE_NETWORK_MAP[apartmentId]);
-    }
-
-    window.open(`${baseUrl}?${params.toString()}`, "_blank");
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -132,7 +115,7 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
         onClick={handleSearch}
         className="mt-8 md:mt-10 w-full md:w-auto min-h-[48px] inline-flex items-center justify-center gap-3 bg-[#2E4F3E] text-white hover:bg-[#233B2E] active:scale-[0.99] transition-all px-8 md:px-10 py-3.5 md:py-4 text-xs tracking-[0.24em] uppercase font-medium touch-manipulation"
       >
-        <Search size={14} /> Cerca disponibilità
+        <Search size={14} /> Verifica disponibilità
       </button>
     </div>
   );

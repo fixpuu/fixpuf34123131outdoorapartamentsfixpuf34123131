@@ -23,7 +23,7 @@ export default function LegalNotes() {
           <li>Codice fiscale: <strong className="text-white">{SITE.fiscalCode}</strong></li>
           <li>Iscrizione R.E.A.: <strong className="text-white">{SITE.rea} (Camera di Commercio di Aosta)</strong></li>
           <li>PEC: <strong className="text-white">{SITE.pec}</strong></li>
-          <li>Email: <strong className="text-white">{SITE.email}</strong> / <strong className="text-white">{SITE.contactEmail}</strong></li>
+          <li>Email: <strong className="text-white">{SITE.email}</strong></li>
           <li>Telefono: <strong className="text-white">{SITE.phone}</strong></li>
         </ul>
       </LegalSection>

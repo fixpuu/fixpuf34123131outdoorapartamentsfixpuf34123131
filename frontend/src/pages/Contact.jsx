@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Instagram, Facebook, ShieldCheck, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, ShieldCheck, MessageCircle } from "lucide-react";
 import { Seo } from "@/components/Seo";
 import { breadcrumbLd } from "@/lib/structuredData";
 import { SITE } from "@/lib/siteConfig";
@@ -76,8 +76,7 @@ export default function Contact() {
             transition={{ duration: 0.9, delay: 0.1 }}
             className="space-y-8"
           >
-            <ContactRow icon={Mail} label="Email Principale" value={SITE.email} href={`mailto:${SITE.email}`} />
-            <ContactRow icon={Mail} label="Email Informazioni" value={SITE.contactEmail} href={`mailto:${SITE.contactEmail}`} />
+            <ContactRow icon={Mail} label="Email" value={SITE.email} href={`mailto:${SITE.email}`} />
             <ContactRow icon={ShieldCheck} label="PEC" value={SITE.pec} href={`mailto:${SITE.pec}`} />
             <ContactRow icon={Phone} label="Telefono" value={SITE.phone} href={`tel:${SITE.phoneRaw}`} />
             <ContactRow icon={MessageCircle} label="WhatsApp" value={SITE.phone} href={`https://wa.me/${SITE.phoneRaw.replace(/[^0-9]/g, "")}?text=${encodeURIComponent("Ciao, vorrei informazioni sui vostri appartamenti a Pila.")}`} />
@@ -86,11 +85,14 @@ export default function Contact() {
             <div className="pt-6 border-t border-white/10">
               <p className="text-[10px] uppercase tracking-[0.28em] text-white/50 mb-5">Social</p>
               <div className="flex gap-4">
-                <a href="#" className="p-3 border border-white/15 hover:border-white transition-colors" aria-label="Instagram">
+                <a
+                  href={SITE.instagram || "https://www.instagram.com/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 border border-white/15 hover:border-white transition-colors"
+                  aria-label="Instagram"
+                >
                   <Instagram size={16} />
-                </a>
-                <a href="#" className="p-3 border border-white/15 hover:border-white transition-colors" aria-label="Facebook">
-                  <Facebook size={16} />
                 </a>
               </div>
             </div>

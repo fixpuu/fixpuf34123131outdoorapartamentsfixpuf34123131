@@ -47,6 +47,14 @@ const ABOUT_IMAGE =
 const CTA_IMAGE =
   "/images/apartments/pila-1800/002.jpg";
 
+/**
+ * Configurazione badge / claim stagionale:
+ * - Default / Inverno: "Piste da sci a pochi passi"
+ * - Variante estiva (decommentare per la stagione estiva): "La natura a pochi passi"
+ */
+const SEASONAL_CLAIM = "Piste da sci a pochi passi";
+// const SEASONAL_CLAIM = "La natura a pochi passi"; // Variante estiva
+
 const fade = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] } },
@@ -104,7 +112,7 @@ export default function Home() {
             transition={{ duration: 0.9, delay: 0.55 }}
             className="mt-8 text-white/70 max-w-xl text-base md:text-lg leading-relaxed"
           >
-            Rifugi autentici, montagne davanti agli occhi e le piste a pochi passi.
+            Rifugi autentici, viste alpine e {SEASONAL_CLAIM.toLowerCase()}.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -232,8 +240,8 @@ export default function Home() {
                 I nostri appartamenti
               </p>
               <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
-                Una collezione <br />
-                <span className="italic">curata di rifugi.</span>
+                Rifugi selezionati <br />
+                <span className="italic">tra Aosta e Pila.</span>
               </h2>
             </div>
             <Link

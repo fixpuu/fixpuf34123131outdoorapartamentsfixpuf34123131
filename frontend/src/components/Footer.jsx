@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Facebook, Mail, Phone, Cookie, ShieldCheck } from "lucide-react";
+import { Instagram, Mail, Phone, Cookie, ShieldCheck } from "lucide-react";
 import { useConsent } from "@/context/ConsentContext";
 import { FOOTER } from "@/constants/testIds";
 import { SITE } from "@/lib/siteConfig";
@@ -56,12 +56,6 @@ export const Footer = () => {
               </a>
             </li>
             <li className="flex items-center gap-3 text-white/80">
-              <Mail size={14} className="text-[#5F8F76]/60" />
-              <a href={`mailto:${SITE.contactEmail}`} className="hover:text-white transition-colors text-white/60">
-                {SITE.contactEmail}
-              </a>
-            </li>
-            <li className="flex items-center gap-3 text-white/80">
               <Phone size={14} className="text-[#5F8F76]" />
               <a href={`tel:${SITE.phoneRaw}`} className="hover:text-white transition-colors">
                 {SITE.phone}
@@ -69,11 +63,14 @@ export const Footer = () => {
             </li>
           </ul>
           <div className="flex gap-4 mt-8">
-            <a href="#" aria-label="Instagram" className="p-2 border border-white/15 hover:border-white transition-colors">
+            <a
+              href={SITE.instagram || "https://www.instagram.com/"}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="p-2 border border-white/15 hover:border-white transition-colors"
+            >
               <Instagram size={16} />
-            </a>
-            <a href="#" aria-label="Facebook" className="p-2 border border-white/15 hover:border-white transition-colors">
-              <Facebook size={16} />
             </a>
           </div>
         </div>

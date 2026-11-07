@@ -60,8 +60,7 @@ export default function ApartmentsList() {
             transition={{ duration: 0.9, delay: 0.35 }}
             className="mt-4 sm:mt-6 text-white/70 text-sm sm:text-base md:text-lg max-w-xl"
           >
-            Otto rifugi selezionati a Pila e Charvensod, ognuno con la propria
-            anima, tutti con lo stesso standard di ospitalità curata.
+            Rifugi selezionati tra Aosta e Pila
           </motion.p>
         </div>
       </section>

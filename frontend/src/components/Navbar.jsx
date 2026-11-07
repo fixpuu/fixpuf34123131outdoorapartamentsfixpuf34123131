@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { NAV } from "@/constants/testIds";
 import { SITE } from "@/lib/siteConfig";
+import { buildOctorateUrl } from "@/lib/octorate";
 
 const LOGO_URL =
   "https://customer-assets.emergentagent.com/job_0edc567d-bda4-4c1d-90f5-e4bdc5cabf5a/artifacts/tnx5w7d9_image.png";
@@ -121,13 +122,15 @@ export const Navbar = () => {
           </ul>
 
           <div className="p-6 border-t border-white/10 bg-white/[0.02] flex flex-col gap-3 pb-safe">
-            <Link
-              to="/#booking"
+            <a
+              href={buildOctorateUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="w-full min-h-[46px] flex items-center justify-center bg-[#2E4F3E] text-white text-xs uppercase tracking-[0.22em] font-medium"
+              className="w-full min-h-[46px] flex items-center justify-center bg-[#2E4F3E] text-white text-xs uppercase tracking-[0.22em] font-medium transition-colors hover:bg-[#233B2E]"
             >
               Verifica disponibilità
-            </Link>
+            </a>
             <div className="grid grid-cols-2 gap-3 pt-2">
               <a
                 href={`tel:${SITE.phoneRaw}`}
