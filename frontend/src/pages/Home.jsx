@@ -7,7 +7,7 @@ import { HOME } from "@/constants/testIds";
 import { BookingWidget } from "@/components/BookingWidget";
 import { ApartmentCard } from "@/components/ApartmentCard";
 import { Seo } from "@/components/Seo";
-import { fetchApartments } from "@/lib/api";
+import { fetchApartments, fetchHomeApartments } from "@/lib/api";
 import {
   websiteLd,
   breadcrumbLd,
@@ -61,13 +61,11 @@ const fade = {
 };
 
 export default function Home() {
-  const { data: apartments = [] } = useQuery({
-    queryKey: ["apartments"],
-    queryFn: fetchApartments,
+  const { data: featured = [] } = useQuery({
+    queryKey: ["home-apartments"],
+    queryFn: fetchHomeApartments,
   });
   const [openFaq, setOpenFaq] = useState(0);
-
-  const featured = apartments.slice(0, 4);
 
   return (
     <div className="bg-[#0A0A0A]">

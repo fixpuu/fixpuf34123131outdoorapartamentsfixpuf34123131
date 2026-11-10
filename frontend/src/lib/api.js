@@ -1,7 +1,11 @@
-import { APARTMENTS } from "../constants/apartments";
+import { APARTMENTS, HOME_APARTMENTS } from "../constants/apartments";
 
 export const fetchApartments = async () => {
   return APARTMENTS;
+};
+
+export const fetchHomeApartments = async () => {
+  return HOME_APARTMENTS;
 };
 
 export const fetchApartment = async (id) => {

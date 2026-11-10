@@ -64,11 +64,11 @@ export const Footer = () => {
           </ul>
           <div className="flex gap-4 mt-8">
             <a
-              href={SITE.instagram || "https://www.instagram.com/"}
+              href={SITE.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="p-2 border border-white/15 hover:border-white transition-colors"
+              aria-label="Instagram @outdoor_apartments"
+              className="p-2 border border-white/15 hover:border-white transition-colors text-white/80 hover:text-white"
             >
               <Instagram size={16} />
             </a>

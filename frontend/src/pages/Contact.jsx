@@ -86,13 +86,14 @@ export default function Contact() {
               <p className="text-[10px] uppercase tracking-[0.28em] text-white/50 mb-5">Social</p>
               <div className="flex gap-4">
                 <a
-                  href={SITE.instagram || "https://www.instagram.com/"}
+                  href={SITE.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 border border-white/15 hover:border-white transition-colors"
-                  aria-label="Instagram"
+                  className="inline-flex items-center gap-2.5 px-3.5 py-2.5 border border-white/15 hover:border-white text-white/80 hover:text-white transition-colors"
+                  aria-label="Instagram @outdoor_apartments"
                 >
-                  <Instagram size={16} />
+                  <Instagram size={16} className="text-[#5F8F76]" />
+                  <span className="text-xs font-mono">@{SITE.instagramHandle}</span>
                 </a>
               </div>
             </div>

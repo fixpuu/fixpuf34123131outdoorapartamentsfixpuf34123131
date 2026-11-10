@@ -36,7 +36,11 @@ export const ApartmentCard = ({ apartment, index = 0 }) => {
       <Link to={`/appartamenti/${id}`} className="block">
         <div className="relative aspect-[4/5]">
           <ApartmentGallery images={gallery?.length ? gallery : [image]} name={name} className="h-full w-full" />
-          {rating > 0 && (
+          {apartment.coming_soon ? (
+            <div className="absolute top-5 left-5 flex items-center gap-1.5 bg-[#1B3327]/90 border border-[#5F8F76] backdrop-blur-md px-3 py-1.5 shadow-lg">
+              <span className="text-[11px] uppercase tracking-wider text-white font-medium">Prossima apertura</span>
+            </div>
+          ) : rating > 0 ? (
             <div className="absolute top-5 left-5 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-3 py-1.5">
               <Star size={12} className="text-[#5F8F76] fill-[#5F8F76]" />
               <span className="text-xs text-white font-medium">{rating.toFixed(1)}</span>
@@ -44,8 +48,8 @@ export const ApartmentCard = ({ apartment, index = 0 }) => {
                 <span className="text-[10px] text-white/60">({reviews_count})</span>
               )}
             </div>
-          )}
-          {apartment.cin && (
+          ) : null}
+          {apartment.cin && !apartment.cin.toLowerCase().includes("corso") && (
             <div className="absolute top-5 right-5 bg-black/70 backdrop-blur-sm px-2.5 py-1 text-[10px] font-mono text-white/80 border border-white/10">
               CIN: {apartment.cin}
             </div>

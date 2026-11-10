@@ -61,6 +61,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.outdoorapartments.it/appartamenti/la-tana-delle-marmotte</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.outdoorapartments.it/appartamenti/studio-33</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.outdoorapartments.it/affidaci-il-tuo-immobile</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

@@ -1,4 +1,4 @@
-// Generato e pulito da duplicati. Non modificare manualmente.
+// Generato da scripts/prepare-gallery-assets.cjs. Non modificare manualmente.
 export const PHOTO_GALLERIES = {
   "abete-n10": [
     "/images/apartments/abete-n10/001.jpeg",
@@ -22,12 +22,29 @@ export const PHOTO_GALLERIES = {
     "/images/apartments/abete-n10/019.jpeg",
     "/images/apartments/abete-n10/020.jpeg"
   ],
+  "la-tana-delle-marmotte-pila-1800": [
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/001.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/002.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/003.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/004.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/005.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/006.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/007.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/008.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/009.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/010.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/011.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/012.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/013.jpeg",
+    "/images/apartments/la-tana-delle-marmotte-pila-1800/014.jpeg"
+  ],
   "pila-1400": [
     "/images/apartments/pila-1400/001.jpg",
     "/images/apartments/pila-1400/002.jpg",
     "/images/apartments/pila-1400/003.jpg",
     "/images/apartments/pila-1400/004.jpg",
     "/images/apartments/pila-1400/005.jpg",
+    "/images/apartments/pila-1400/006.jpg",
     "/images/apartments/pila-1400/007.jpg",
     "/images/apartments/pila-1400/008.jpg",
     "/images/apartments/pila-1400/009.jpg",
@@ -251,6 +268,9 @@ export const PHOTO_GALLERIES = {
     "/images/apartments/ski-and-sky/007.jpg",
     "/images/apartments/ski-and-sky/008.jpg",
     "/images/apartments/ski-and-sky/009.jpg"
+  ],
+  "studio-33": [
+    "/images/apartments/studio-33/001.jpg"
   ],
   "white-relax": [
     "/images/apartments/white-relax/001.jpg",

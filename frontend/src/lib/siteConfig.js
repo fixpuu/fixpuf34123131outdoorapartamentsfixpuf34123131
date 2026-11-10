@@ -26,8 +26,9 @@ export const SITE = {
   contactEmail: "outdoor.apartments@gmail.com",
   phone: "+39 346 161 5188",
   phoneRaw: "+393461615188",
-  // Profilo Instagram ufficiale (aggiornare qui l'URL con l'handle definitivo se disponibile)
-  instagram: "https://www.instagram.com/",
+  // Profilo Instagram ufficiale
+  instagramHandle: "outdoor_apartments",
+  instagram: "https://www.instagram.com/outdoor_apartments/",
   // Coordinate del comprensorio di Pila (Gressan, AO)
   geo: {
     latitude: 45.6856,
@@ -41,7 +42,7 @@ export const SITE = {
     elevation: "1800",
   },
   sameAs: [
-    "https://www.instagram.com/",
+    "https://www.instagram.com/outdoor_apartments/",
   ],
   keywords: [
     "appartamenti Pila",

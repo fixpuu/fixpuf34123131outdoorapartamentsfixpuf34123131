@@ -100,7 +100,7 @@ export default function ApartmentDetail() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.15 }}
-              className="font-serif-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] text-white"
+              className="font-serif-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] text-white break-words"
             >
               {apt.name}
             </motion.h1>
@@ -110,7 +110,12 @@ export default function ApartmentDetail() {
               transition={{ duration: 0.9, delay: 0.3 }}
               className="mt-8 flex flex-wrap items-center gap-4 text-white/80"
             >
-              {apt.rating > 0 && (
+              {apt.coming_soon && (
+                <div className="inline-flex items-center gap-2 bg-[#1B3327]/90 border border-[#5F8F76] backdrop-blur-md px-3.5 py-1.5 text-xs uppercase tracking-wider font-medium text-white shadow-lg">
+                  Prossima apertura
+                </div>
+              )}
+              {!apt.coming_soon && apt.rating > 0 && (
                 <div className="flex items-center gap-2">
                   <Star size={16} className="text-[#5F8F76] fill-[#5F8F76]" />
                   <span className="text-base font-medium">{apt.rating.toFixed(1)} / 10</span>
@@ -287,10 +292,16 @@ export default function ApartmentDetail() {
           </div>
 
           <aside className="lg:sticky lg:top-28 h-fit border border-white/10 bg-[#141414] p-7 md:p-8">
-            <p className="text-[10px] uppercase tracking-[0.28em] text-[#B7CFC0] mb-5">Prenotazione</p>
-            <h3 className="font-serif-display text-3xl leading-tight mb-4">Trova le date perfette.</h3>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-[#B7CFC0] mb-5">
+              {apt.coming_soon ? "Prossima Apertura" : "Prenotazione"}
+            </p>
+            <h3 className="font-serif-display text-3xl leading-tight mb-4">
+              {apt.coming_soon ? "Apertura imminente." : "Trova le date perfette."}
+            </h3>
             <p className="text-sm leading-relaxed text-white/65 mb-8">
-              Verifica disponibilità e tariffe in tempo reale direttamente su Octorate.
+              {apt.coming_soon
+                ? "L'alloggio è in fase di ultimazione arredi. Puoi verificare le prossime disponibilità o contattarci per qualsiasi informazione in anteprima."
+                : "Verifica disponibilità e tariffe in tempo reale direttamente su Octorate."}
             </p>
             <a
               href={buildOctorateUrl({ apartmentId: apt.id })}
