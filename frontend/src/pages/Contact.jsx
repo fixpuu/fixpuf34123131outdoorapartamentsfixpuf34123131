@@ -3,20 +3,23 @@ import { Mail, Phone, MapPin, Instagram, ShieldCheck, MessageCircle } from "luci
 import { Seo } from "@/components/Seo";
 import { breadcrumbLd } from "@/lib/structuredData";
 import { SITE } from "@/lib/siteConfig";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const IMG =
   "https://images.unsplash.com/photo-1517404656827-b10222b9ec59";
 
 export default function Contact() {
+  const { t } = useLanguage();
+
   return (
     <div className="bg-[#0A0A0A] min-h-screen">
       <Seo
-        title="Contatti — Outdoor Apartments Pila"
-        description={`Contatta ${SITE.legalName} per informazioni su appartamenti e chalet in affitto a Pila ed Aosta, Valle d'Aosta. Email, PEC, telefono e sede legale.`}
+        title={`${t("contact.tag")} — Outdoor Apartments Pila`}
+        description={t("contact.desc")}
         path="/contatti"
         jsonLd={breadcrumbLd([
-          { name: "Home", path: "/" },
-          { name: "Contatti", path: "/contatti" },
+          { name: t("nav.home"), path: "/" },
+          { name: t("contact.tag"), path: "/contatti" },
         ])}
       />
       <section className="relative h-[48vh] sm:h-[60vh] w-full overflow-hidden">
@@ -29,7 +32,7 @@ export default function Contact() {
             transition={{ duration: 0.9 }}
             className="text-[10px] uppercase tracking-[0.32em] text-[#B7CFC0] mb-4 sm:mb-6"
           >
-            Contatti
+            {t("contact.tag")}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -37,7 +40,7 @@ export default function Contact() {
             transition={{ duration: 1, delay: 0.15 }}
             className="font-serif-display text-4xl sm:text-6xl md:text-7xl leading-[1.02]"
           >
-            Restiamo <span className="italic">in contatto.</span>
+            {t("contact.title")}
           </motion.h1>
         </div>
       </section>
@@ -54,11 +57,10 @@ export default function Contact() {
               {SITE.name}
             </p>
             <h2 className="font-serif-display text-4xl md:text-5xl leading-[1.05] mb-10">
-              Pila & Aosta, <span className="italic">Valle d'Aosta.</span>
+              {t("contact.subTitle")}
             </h2>
             <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-md">
-              Il nostro team è a disposizione per ogni informazione sui soggiorni,
-              sugli appartamenti gestiti e sul servizio dedicato ai proprietari.
+              {t("contact.desc")}
             </p>
 
             <div className="mt-12 p-6 border border-white/10 bg-[#141414] text-xs font-mono text-white/60 space-y-1">
@@ -76,11 +78,11 @@ export default function Contact() {
             transition={{ duration: 0.9, delay: 0.1 }}
             className="space-y-8"
           >
-            <ContactRow icon={Mail} label="Email" value={SITE.email} href={`mailto:${SITE.email}`} />
-            <ContactRow icon={ShieldCheck} label="PEC" value={SITE.pec} href={`mailto:${SITE.pec}`} />
-            <ContactRow icon={Phone} label="Telefono" value={SITE.phone} href={`tel:${SITE.phoneRaw}`} />
-            <ContactRow icon={MessageCircle} label="WhatsApp" value={SITE.phone} href={`https://wa.me/${SITE.phoneRaw.replace(/[^0-9]/g, "")}?text=${encodeURIComponent("Ciao, vorrei informazioni sui vostri appartamenti a Pila.")}`} />
-            <ContactRow icon={MapPin} label="Sede Legale" value={`${SITE.legalAddress} — Italia`} />
+            <ContactRow icon={Mail} label={t("contact.emailUs")} value={SITE.email} href={`mailto:${SITE.email}`} />
+            <ContactRow icon={ShieldCheck} label={t("contact.pecLabel")} value={SITE.pec} href={`mailto:${SITE.pec}`} />
+            <ContactRow icon={Phone} label={t("contact.directCall")} value={SITE.phone} href={`tel:${SITE.phoneRaw}`} />
+            <ContactRow icon={MessageCircle} label={t("contact.whatsappUs")} value={SITE.phone} href={`https://wa.me/${SITE.phoneRaw.replace(/[^0-9]/g, "")}?text=${encodeURIComponent("Ciao, vorrei informazioni sui vostri appartamenti a Pila.")}`} />
+            <ContactRow icon={MapPin} label={t("contact.headquarters")} value={`${SITE.legalAddress} — Italia`} />
 
             <div className="pt-6 border-t border-white/10">
               <p className="text-[10px] uppercase tracking-[0.28em] text-white/50 mb-5">Social</p>

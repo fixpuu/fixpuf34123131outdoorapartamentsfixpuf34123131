@@ -16,13 +16,13 @@ export default {
     rating: 0,
     reviews_count: 0,
     coming_soon: true,
-    amenities: ["parking_free", "wifi_free", "non_smoking", "family_rooms"],
+    amenities: ["terrazzino_panoramico", "parking_free", "wifi_free", "non_smoking"],
     gallery_key: "studio-33",
     description: "Un piccolo rifugio di montagna, appena ristrutturato, dove il comfort incontra il fascino alpino. Accogliente e curato in ogni dettaglio, ospita fino a 4 persone ed è il luogo ideale per lasciarsi conquistare dalla magia della neve, a pochi passi dalle piste da sci.",
     specs: {
         typology: "Monolocale Studio appena ristrutturato",
         floors: "Piano unico",
         beds: "Fino a 4 posti letto",
-        rooms: "Spazio living accogliente con terrazza panoramica, angolo cottura (cucina in allestimento), bagno moderno e posto auto privato coperto"
+        rooms: "Spazio living accogliente con terrazzino panoramico, angolo cottura, bagno e posto auto privato coperto"
     }
 };

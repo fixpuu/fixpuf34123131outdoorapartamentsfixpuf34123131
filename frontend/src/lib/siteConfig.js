@@ -10,7 +10,7 @@ export const SITE = {
   vatId: "01273100071",
   fiscalCode: "STVFRC82L22A326P",
   rea: "AO-81282",
-  pec: "OUTDOOR.APARTMENTS@PEC.IT",
+  pec: "outdoor.apartments@pec.it",
   legalAddress: "Via E.Aubert 51, 11100 Aosta (AO)",
   brand: "Outdoor Apartments — Pila, Valle d'Aosta",
   defaultTitle:

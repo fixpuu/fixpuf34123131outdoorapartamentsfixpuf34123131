@@ -20,7 +20,7 @@ export default {
     description: "Un rifugio luminoso ai piedi delle piste di Pila. White Relax ti accoglie con superfici chiare, dettagli in legno e ampie vetrate che catturano la luce delle Alpi. Ideale per chi cerca il comfort dello sci ai piedi senza rinunciare all'eleganza.",
     specs: {
         typology: "Bilocale panoramico Ski-in / Ski-out",
-        floors: "Piano unico",
+        floors: "Due piani",
         beds: "4 posti letto (1 letto matrimoniale, 1 divano letto)",
         rooms: "Zona giorno luminosa con ampie vetrate e angolo cottura, camera da letto, bagno con doccia, terrazzino panoramico"
     }

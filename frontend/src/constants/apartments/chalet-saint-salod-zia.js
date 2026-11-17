@@ -17,11 +17,11 @@ export default {
     reviews_count: 0,
     amenities: ["non_smoking", "parking_free", "wifi_free"],
     gallery_key: "saint-salod-zia",
-    description: "Intimo e caratteristico alloggio alpino al piano terra con finiture in pietra e legno locale, confortevole letto matrimoniale, angolo cottura completo e accesso diretto allo splendido dehors esterno con tavolo in pietra, sdraio e prato privato immerso nella natura.",
+    description: "Intimo e caratteristico alloggio alpino al piano terra con finiture in pietra e legno locale, confortevole letto matrimoniale, angolo cottura completo e accesso diretto allo splendido dehors esterno con tavolo in pietra, sdraio e prato immerso nella natura.",
     specs: {
-        typology: "Monolocale alpino con dehors privato",
-        floors: "Piano terra con prato privato",
-        beds: "3 posti letto (1 letto matrimoniale, 1 letto singolo/poltrona letto)",
-        rooms: "Ambiente unico accogliente con letto matrimoniale, angolo cottura in legno, bagno, ampio dehors esterno privato in pietra"
+        typology: "Monolocale alpino con dehors",
+        floors: "Piano terra con prato",
+        beds: "Fino a 3 posti letto (1 letto matrimoniale con possibilità di aggiunta letto singolo / divano letto)",
+        rooms: "Ambiente unico accogliente con letto matrimoniale, divano letto, angolo cottura in legno, bagno, ampio dehors esterno in pietra"
     }
 };

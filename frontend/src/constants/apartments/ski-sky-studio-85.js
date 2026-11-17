@@ -15,13 +15,13 @@ export default {
     ],
     rating: 10.0,
     reviews_count: 12,
-    amenities: ["parking_free", "wifi_free", "non_smoking"],
+    amenities: ["ski_in_ski_out", "parking_free", "wifi_free", "non_smoking"],
     gallery_key: "ski-and-sky",
     description: "Un monolocale di design con affaccio sulle vette. Ski&Sky Studiò 85 celebra l'essenzialità alpina: materiali autentici, luce naturale e una vista che diventa protagonista di ogni soggiorno.",
     specs: {
-        typology: "Monolocale Studio di design panoramico",
-        floors: "Piano unico panoramico",
-        beds: "3 posti letto (1 letto matrimoniale, 1 divano letto)",
+        typology: "Monolocale panoramico",
+        floors: "Piano unico",
+        beds: "Fino a 3 posti letto (1 divano letto, 1 letto alla francese)",
         rooms: "Open space contemporaneo, angolo cottura su misura, zona pranzo, bagno con doccia"
     }
 };

@@ -17,7 +17,7 @@ export default {
     reviews_count: 17,
     amenities: ["wifi_free", "non_smoking"],
     gallery_key: "abete-n10",
-    description: "Abete N 10 unisce il calore del legno alpino a un design contemporaneo. Un appartamento raccolto e curato nei dettagli, perfetto per una fuga di coppia o piccoli gruppi che vogliono immergersi nell'atmosfera di Aosta e Pila.",
+    description: "Abete N 10 unisce il calore del legno alpino a un design contemporaneo. Un appartamento raccolto e curato nei dettagli, perfetto per una fuga di coppia o piccoli gruppi che vogliono immergersi nell'atmosfera di Aosta.",
     specs: {
         typology: "Bilocale moderno",
         floors: "Piano unico",

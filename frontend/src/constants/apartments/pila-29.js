@@ -14,13 +14,13 @@ export default {
     ],
     rating: 9.3,
     reviews_count: 30,
-    amenities: ["parking_free", "family_rooms", "wifi_free", "non_smoking"],
+    amenities: ["panoramic_terrace", "parking_free", "wifi_free", "non_smoking"],
     gallery_key: "pila-29",
-    description: "Spazioso e pensato per le famiglie, Pila 29 offre ambienti versatili e una posizione strategica nel cuore della frazione. Le camere familiari e il parcheggio gratuito lo rendono la scelta ideale per chi viaggia con bambini.",
+    description: "Monolocale pensato per famiglie, offre un ambiente versatile e una posizione strategica nel cuore di Pila. La vicinanza alle piste e il parcheggio gratuito lo rendono una scelta ideale per chi viaggia anche con bambini.",
     specs: {
-        typology: "Appartamento familiare per vacanze sulla neve",
+        typology: "Monolocale",
         floors: "Piano unico",
-        beds: "4 posti letto (1 camera matrimoniale, 2 letti singoli)",
-        rooms: "Zona giorno con tavolo da pranzo, angolo cottura, camere familiari, bagno"
+        beds: "4 posti letto (1 letto matrimoniale, 1 letto a castello)",
+        rooms: "Monolocale con tavolo da pranzo, angolo cottura e bagno"
     }
 };

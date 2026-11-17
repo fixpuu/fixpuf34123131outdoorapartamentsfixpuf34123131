@@ -3,12 +3,16 @@ import { Instagram, Mail, Phone, Cookie, ShieldCheck } from "lucide-react";
 import { useConsent } from "@/context/ConsentContext";
 import { FOOTER } from "@/constants/testIds";
 import { SITE } from "@/lib/siteConfig";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 const LOGO_URL =
   "https://customer-assets.emergentagent.com/job_0edc567d-bda4-4c1d-90f5-e4bdc5cabf5a/artifacts/tnx5w7d9_image.png";
 
 export const Footer = () => {
   const { reopenBanner } = useConsent();
+  const { t } = useLanguage();
+
   return (
     <footer
       data-testid={FOOTER.root}
@@ -24,9 +28,7 @@ export const Footer = () => {
             </span>
           </Link>
           <p className="mt-6 text-white/60 max-w-md leading-relaxed text-sm">
-            Gestione professionale di appartamenti e chalet in affitto turistico a
-            Pila, Valle d'Aosta. Ospitalità curata per gli ospiti, tranquillità
-            garantita per i proprietari.
+            {t("footer.desc")}
           </p>
           <div className="mt-6 text-xs text-white/45 space-y-1 font-mono">
             <p className="font-semibold text-white/70 font-sans">{SITE.legalName}</p>
@@ -37,17 +39,21 @@ export const Footer = () => {
         </div>
 
         <div>
-          <p className="text-xs uppercase tracking-[0.22em] text-white/40 mb-5">Naviga</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-white/40 mb-5">
+            {t("footer.navTitle")}
+          </p>
           <ul className="space-y-3 text-sm">
-            <li><Link to="/" className="text-white/80 hover:text-white transition-colors">Home</Link></li>
-            <li><Link to="/appartamenti" className="text-white/80 hover:text-white transition-colors">Appartamenti</Link></li>
-            <li><Link to="/affidaci-il-tuo-immobile" className="text-white/80 hover:text-white transition-colors">Affidaci il tuo immobile</Link></li>
-            <li><Link to="/contatti" className="text-white/80 hover:text-white transition-colors">Contatti</Link></li>
+            <li><Link to="/" className="text-white/80 hover:text-white transition-colors">{t("nav.home")}</Link></li>
+            <li><Link to="/appartamenti" className="text-white/80 hover:text-white transition-colors">{t("nav.apartments")}</Link></li>
+            <li><Link to="/affidaci-il-tuo-immobile" className="text-white/80 hover:text-white transition-colors">{t("nav.hostWithUs")}</Link></li>
+            <li><Link to="/contatti" className="text-white/80 hover:text-white transition-colors">{t("nav.contact")}</Link></li>
           </ul>
         </div>
 
         <div>
-          <p className="text-xs uppercase tracking-[0.22em] text-white/40 mb-5">Contatti</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-white/40 mb-5">
+            {t("footer.contactTitle")}
+          </p>
           <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-3 text-white/80">
               <Mail size={14} className="text-[#5F8F76]" />
@@ -62,7 +68,15 @@ export const Footer = () => {
               </a>
             </li>
           </ul>
-          <div className="flex gap-4 mt-8">
+
+          <div className="mt-6">
+            <p className="text-[10px] uppercase tracking-[0.24em] text-white/40 mb-3">
+              {t("lang.chooseLang")}
+            </p>
+            <LanguageSelector variant="segmented" className="max-w-[240px]" />
+          </div>
+
+          <div className="flex gap-4 mt-6">
             <a
               href={SITE.instagram}
               target="_blank"
@@ -80,23 +94,23 @@ export const Footer = () => {
         <div className="flex items-center gap-3">
           <ShieldCheck size={14} className="text-[#5F8F76]" />
           <p className="text-xs text-white/40">
-            © {new Date().getFullYear()} {SITE.legalName} — Tutti i diritti riservati
+            © {new Date().getFullYear()} {SITE.legalName} — {t("footer.copyright")}
           </p>
         </div>
         <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.22em] text-white/50">
           <li>
             <Link to="/privacy-policy" data-testid={FOOTER.privacyLink} className="hover:text-white transition-colors">
-              Privacy
+              {t("footer.privacy")}
             </Link>
           </li>
           <li>
             <Link to="/cookie-policy" data-testid={FOOTER.cookieLink} className="hover:text-white transition-colors">
-              Cookie Policy
+              {t("footer.cookie")}
             </Link>
           </li>
           <li>
             <Link to="/note-legali" data-testid={FOOTER.legalLink} className="hover:text-white transition-colors">
-              Note Legali
+              {t("footer.legalNotes")}
             </Link>
           </li>
           <li>
@@ -106,7 +120,7 @@ export const Footer = () => {
               data-testid={FOOTER.cookieManage}
               className="inline-flex items-center gap-2 hover:text-white transition-colors"
             >
-              <Cookie size={12} /> Gestisci cookie
+              <Cookie size={12} /> {t("footer.manageCookies")}
             </button>
           </li>
         </ul>

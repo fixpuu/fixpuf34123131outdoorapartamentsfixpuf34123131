@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import { Check, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { submitHostRequest } from "@/lib/api";
 import { Seo } from "@/components/Seo";
 import { breadcrumbLd } from "@/lib/structuredData";
 import { HOST } from "@/constants/testIds";
 import { SITE } from "@/lib/siteConfig";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const HEADER_IMAGE =
   "/images/chi-siamo-outdoor-apartments.webp";
@@ -21,6 +21,7 @@ const initial = {
 };
 
 export default function HostWithUs() {
+  const { lang, t } = useLanguage();
   const [form, setForm] = useState(initial);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [errors, setErrors] = useState({});
@@ -32,15 +33,15 @@ export default function HostWithUs() {
   const validate = () => {
     const e = {};
     if (!form.full_name.trim() || form.full_name.trim().length < 2)
-      e.full_name = "Inserisci nome e cognome";
+      e.full_name = lang === "it" ? "Inserisci nome e cognome" : lang === "fr" ? "Veuillez saisir votre nom et prénom" : "Please enter your full name";
     if (!form.phone.trim() || form.phone.trim().length < 4)
-      e.phone = "Inserisci un numero di telefono valido";
+      e.phone = lang === "it" ? "Inserisci un numero di telefono valido" : lang === "fr" ? "Veuillez saisir un numéro de téléphone valide" : "Please enter a valid phone number";
     if (!form.property_address.trim() || form.property_address.trim().length < 4)
-      e.property_address = "Inserisci l'indirizzo dell'immobile";
+      e.property_address = lang === "it" ? "Inserisci l'indirizzo dell'immobile" : lang === "fr" ? "Veuillez saisir l'adresse du bien" : "Please enter property address";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-      e.email = "Inserisci un'email valida";
+      e.email = lang === "it" ? "Inserisci un'email valida" : lang === "fr" ? "Veuillez saisir une adresse e-mail valide" : "Please enter a valid email";
     if (!privacyAccepted)
-      e.privacy = "Per inviare la richiesta devi accettare l'informativa privacy";
+      e.privacy = lang === "it" ? "Per inviare la richiesta devi accettare l'informativa privacy" : lang === "fr" ? "Veuillez accepter la politique de confidentialité" : "Please accept the privacy policy to proceed";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -50,39 +51,59 @@ export default function HostWithUs() {
     if (!validate()) return;
     setSubmitting(true);
     try {
-      const subject = encodeURIComponent("Nuova richiesta: " + form.full_name);
+      const subject = encodeURIComponent("Nuova richiesta gestione: " + form.full_name);
       const body = encodeURIComponent(
-        `Nome: ${form.full_name}\nTelefono: ${form.phone}\nEmail: ${form.email}\nIndirizzo immobile: ${form.property_address}\nDescrizione: ${form.description || 'Nessuna'}\n`
+        `Nome: ${form.full_name}\nTelefono: ${form.phone}\nEmail: ${form.email}\nIndirizzo immobile: ${form.property_address}\nDescrizione: ${form.description || 'Nessuna'}\nLingua: ${lang}\n`
       );
       window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
       
       setSuccess(true);
       setForm(initial);
       setPrivacyAccepted(false);
-      toast.success("Richiesta preparata. Si aprirà il tuo client email.");
+      toast.success(
+        lang === "it"
+          ? "Richiesta preparata. Si aprirà il tuo client email."
+          : lang === "fr"
+          ? "Demande préparée. Votre messagerie va s'ouvrir."
+          : "Request prepared. Your email client will now open."
+      );
     } catch (err) {
-      toast.error("Errore nell'invio. Riprova tra qualche istante.");
+      toast.error(
+        lang === "it"
+          ? "Errore nell'invio. Riprova tra qualche istante."
+          : lang === "fr"
+          ? "Une erreur est survenue. Veuillez réessayer."
+          : "Error preparing request. Please try again shortly."
+      );
     } finally {
       setSubmitting(false);
     }
   };
 
+  const pillars = t("hostWithUs.pillars") || [];
+
   return (
     <div className="bg-[#0A0A0A] min-h-screen">
       <Seo
-        title="Affidaci il tuo immobile — Gestione appartamenti a Pila"
-        description="Sei proprietario di un appartamento a Pila, Valle d'Aosta? Affidalo in gestione a Outdoor Apartments: promozione, prenotazioni, check-in, pulizie e rendicontazione trasparente. Richiedi informazioni."
+        title={
+          lang === "it"
+            ? "Affidaci il tuo immobile — Gestione appartamenti a Pila"
+            : lang === "fr"
+            ? "Confiez-nous votre bien — Gestion locative à Pila"
+            : "Host with us — Property Management in Pila"
+        }
+        description={t("hostWithUs.subtitle")}
         path="/affidaci-il-tuo-immobile"
         jsonLd={breadcrumbLd([
           { name: "Home", path: "/" },
-          { name: "Affidaci il tuo immobile", path: "/affidaci-il-tuo-immobile" },
+          { name: t("hostWithUs.title"), path: "/affidaci-il-tuo-immobile" },
         ])}
       />
       {/* HEADER */}
       <section className="relative h-[55vh] sm:h-[70vh] w-full overflow-hidden">
         <img
           src={HEADER_IMAGE}
-          alt="Chalet in montagna a Pila — gestione immobili per proprietari"
+          alt={t("hostWithUs.title")}
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/60" />
@@ -93,7 +114,7 @@ export default function HostWithUs() {
             transition={{ duration: 0.9 }}
             className="text-[10px] uppercase tracking-[0.32em] text-[#B7CFC0] mb-4 sm:mb-6"
           >
-            Per i proprietari
+            {t("hostWithUs.tag")}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -101,7 +122,7 @@ export default function HostWithUs() {
             transition={{ duration: 1, delay: 0.15 }}
             className="font-serif-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] max-w-4xl"
           >
-            Affidaci <span className="italic">il tuo immobile.</span>
+            {t("hostWithUs.title")}
           </motion.h1>
         </div>
       </section>
@@ -117,37 +138,32 @@ export default function HostWithUs() {
             transition={{ duration: 0.9 }}
           >
             <p className="text-[10px] uppercase tracking-[0.32em] text-[#5F8F76] mb-6">
-              Il nostro servizio
+              {t("hostWithUs.introTag")}
             </p>
             <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] mb-10">
-              Gestione professionale, <span className="italic">senza pensieri.</span>
+              {t("hostWithUs.introTitle")}
             </h2>
             <div className="space-y-6 text-white/70 text-base md:text-lg leading-relaxed max-w-lg">
-              <p>
-                Ci occupiamo dell'intero ciclo di ospitalità del tuo appartamento a
-                Pila: promozione multi-canale, gestione delle prenotazioni, accoglienza
-                degli ospiti, pulizie, manutenzione e assistenza continua.
-              </p>
-              <p>
-                Tu ricevi rendimenti chiari, report trasparenti e la tranquillità di
-                sapere che la tua casa è in mani esperte. Il resto lo facciamo noi.
-              </p>
+              <p>{t("hostWithUs.introDesc")}</p>
+              <p>{t("hostWithUs.subtitle")}</p>
             </div>
 
-            <ul className="mt-14 space-y-5">
-              {[
-                "Promozione su portali e canale diretto",
-                "Check-in e check-out gestiti dal nostro team",
-                "Pulizie e biancheria professionali",
-                "Manutenzione ordinaria e straordinaria",
-                "Reportistica e rendicontazione mensile",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-4 text-white/85">
-                  <Check size={16} className="text-[#5F8F76] mt-1" />
-                  <span className="text-sm md:text-base">{item}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-12 space-y-6">
+              {Array.isArray(pillars) &&
+                pillars.map((pillar, idx) => (
+                  <div
+                    key={idx}
+                    className="border-l-2 border-[#5F8F76]/40 pl-5 py-1"
+                  >
+                    <h4 className="text-white text-base font-medium mb-1">
+                      {pillar.title}
+                    </h4>
+                    <p className="text-white/60 text-sm leading-relaxed">
+                      {pillar.desc}
+                    </p>
+                  </div>
+                ))}
+            </div>
           </motion.div>
 
           {/* Form */}
@@ -159,11 +175,14 @@ export default function HostWithUs() {
             className="bg-[#141414] border border-white/10 p-8 md:p-12"
           >
             <p className="text-[10px] uppercase tracking-[0.32em] text-[#5F8F76] mb-4">
-              Richiedi informazioni
+              {t("hostWithUs.formTag")}
             </p>
-            <h3 className="font-serif-display text-3xl md:text-4xl mb-10 leading-tight">
-              Parliamone.
+            <h3 className="font-serif-display text-3xl md:text-4xl mb-6 leading-tight">
+              {t("hostWithUs.formTitle")}
             </h3>
+            <p className="text-white/60 text-sm mb-10 leading-relaxed">
+              {t("hostWithUs.formDesc")}
+            </p>
 
             {success ? (
               <div
@@ -172,18 +191,21 @@ export default function HostWithUs() {
               >
                 <Check size={28} className="mx-auto text-[#5F8F76] mb-4" />
                 <h4 className="font-serif-display text-2xl mb-3">
-                  Richiesta ricevuta.
+                  {t("hostWithUs.successTitle")}
                 </h4>
                 <p className="text-white/70 text-sm leading-relaxed">
-                  Grazie per averci contattato. Il nostro team ti risponderà entro
-                  48 ore.
+                  {t("hostWithUs.successDesc")}
                 </p>
                 <button
                   type="button"
                   onClick={() => setSuccess(false)}
                   className="mt-8 text-xs uppercase tracking-[0.28em] text-[#5F8F76] hover:text-white transition-colors"
                 >
-                  Invia un'altra richiesta
+                  {lang === "it"
+                    ? "Invia un'altra richiesta"
+                    : lang === "fr"
+                    ? "Envoyer une autre demande"
+                    : "Submit another request"}
                 </button>
               </div>
             ) : (
@@ -194,7 +216,7 @@ export default function HostWithUs() {
                 className="space-y-8"
               >
                 <Field
-                  label="Nome e cognome *"
+                  label={t("hostWithUs.nameLabel")}
                   error={errors.full_name}
                 >
                   <input
@@ -203,21 +225,21 @@ export default function HostWithUs() {
                     value={form.full_name}
                     onChange={(e) => setField("full_name", e.target.value)}
                     className="w-full min-h-[44px] bg-transparent border-b border-white/20 focus:border-white outline-none py-2.5 text-white text-base md:text-sm"
-                    placeholder="Mario Rossi"
+                    placeholder={t("hostWithUs.namePlaceholder")}
                   />
                 </Field>
-                <Field label="Numero di telefono *" error={errors.phone}>
+                <Field label={t("hostWithUs.phoneLabel")} error={errors.phone}>
                   <input
                     type="tel"
                     data-testid={HOST.phone}
                     value={form.phone}
                     onChange={(e) => setField("phone", e.target.value)}
                     className="w-full min-h-[44px] bg-transparent border-b border-white/20 focus:border-white outline-none py-2.5 text-white text-base md:text-sm"
-                    placeholder="+39 333 000 0000"
+                    placeholder={t("hostWithUs.phonePlaceholder")}
                   />
                 </Field>
                 <Field
-                  label="Indirizzo completo dell'immobile *"
+                  label={t("hostWithUs.addressLabel")}
                   error={errors.property_address}
                 >
                   <input
@@ -226,27 +248,27 @@ export default function HostWithUs() {
                     value={form.property_address}
                     onChange={(e) => setField("property_address", e.target.value)}
                     className="w-full min-h-[44px] bg-transparent border-b border-white/20 focus:border-white outline-none py-2.5 text-white text-base md:text-sm"
-                    placeholder="Via, numero civico, città (AO)"
+                    placeholder={t("hostWithUs.addressPlaceholder")}
                   />
                 </Field>
-                <Field label="Indirizzo email *" error={errors.email}>
+                <Field label={t("hostWithUs.emailLabel")} error={errors.email}>
                   <input
                     type="email"
                     data-testid={HOST.email}
                     value={form.email}
                     onChange={(e) => setField("email", e.target.value)}
                     className="w-full min-h-[44px] bg-transparent border-b border-white/20 focus:border-white outline-none py-2.5 text-white text-base md:text-sm"
-                    placeholder="tua@email.it"
+                    placeholder={t("hostWithUs.emailPlaceholder")}
                   />
                 </Field>
-                <Field label="Descrizione dell'immobile (facoltativo)">
+                <Field label={t("hostWithUs.descLabel")}>
                   <textarea
                     rows={4}
                     data-testid={HOST.description}
                     value={form.description}
                     onChange={(e) => setField("description", e.target.value)}
                     className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-2.5 text-white text-base md:text-sm resize-none"
-                    placeholder="Metratura, numero di camere, servizi, note..."
+                    placeholder={t("hostWithUs.descPlaceholder")}
                   />
                 </Field>
 
@@ -260,17 +282,15 @@ export default function HostWithUs() {
                       className="mt-1 w-5 h-5 accent-[#2E4F3E] cursor-pointer flex-shrink-0"
                     />
                     <span className="text-xs text-white/70 leading-relaxed">
-                      Ho letto e accetto l'{" "}
+                      {t("hostWithUs.privacyNotice")}{" "}
                       <Link
                         to="/privacy-policy"
                         target="_blank"
                         rel="noopener"
                         className="underline text-[#B7CFC0] hover:text-white transition-colors"
                       >
-                        Informativa Privacy
-                      </Link>{" "}
-                      e autorizzo il trattamento dei miei dati per la finalità di
-                      contatto commerciale. *
+                        {t("footer.privacy")}
+                      </Link>
                     </span>
                   </label>
                   {errors.privacy && (
@@ -284,14 +304,14 @@ export default function HostWithUs() {
                   disabled={submitting}
                   className="w-full min-h-[48px] inline-flex items-center justify-center gap-3 bg-[#2E4F3E] text-white hover:bg-[#233B2E] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed transition-all px-8 py-4 text-xs tracking-[0.24em] uppercase touch-manipulation font-medium"
                 >
-                  {submitting ? "Invio in corso…" : (
-                    <>Invia richiesta <Send size={14} /></>
+                  {submitting ? (
+                    t("hostWithUs.submitting")
+                  ) : (
+                    <>
+                      {t("hostWithUs.submitBtn")} <Send size={14} />
+                    </>
                   )}
                 </button>
-                <p className="text-white/40 text-[11px] leading-relaxed">
-                  I dati saranno trattati esclusivamente per rispondere alla tua
-                  richiesta. Vedi Informativa Privacy per dettagli.
-                </p>
               </form>
             )}
           </motion.div>

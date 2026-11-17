@@ -1,12 +1,12 @@
 export default {
     id: "pila-64",
-    name: "Pila64",
+    name: "Pila 64",
     location: "Fraz. Pila 40, 11020 Gressan (AO)",
     address: "Fraz. Pila 40, 11020 Gressan (AO)",
     short_location: "Pila, Valle d'Aosta",
     cin: "IT007031C2MU2PUVDE",
     cir: "VDA_LT_GRESSAN_0172",
-    max_guests: 6,
+    max_guests: 4,
     pets_allowed: false,
     pets_note: "No animali",
     tourist_tax: [
@@ -17,11 +17,11 @@ export default {
     reviews_count: 2,
     amenities: ["parking_free", "wifi_free", "ski_in_ski_out", "non_smoking"],
     gallery_key: "pila-64",
-    description: "Il gemello di Pila 63 con un'anima ancora più raccolta. Pila64 offre tutti i comfort di un appartamento moderno, con lo sci ai piedi e le luci del comprensorio a portata di sguardo.",
+    description: "Monolocale spazioso con cucina separata, ideale per un intimo e romantico soggiorno alpino sulla neve. L'alloggio può accogliere fino a 4 ospiti offrendo un accogliente soggiorno con letto matrimoniale a scomparsa e una cameretta con letto a castello, a pochi passi dalle piste di Pila.",
     specs: {
-        typology: "Appartamento contemporaneo Ski-in / Ski-out",
-        floors: "Piano unico con affaccio sul comprensorio",
-        beds: "6 posti letto (1 matrimoniale, 2 letti a castello, 1 divano letto)",
-        rooms: "Soggiorno con cucina accessoriata, camera padronale, seconda camera da letto, bagno, ski room"
+        typology: "Monolocale spazioso con cucina separata",
+        floors: "Piano unico",
+        beds: "4 posti letto (soggiorno con letto matrimoniale a scomparsa e cameretta con letto a castello)",
+        rooms: "Soggiorno con letto matrimoniale a scomparsa e cameretta con letto a castello, cucina accessoriata, bagno e deposito sci"
     }
 };

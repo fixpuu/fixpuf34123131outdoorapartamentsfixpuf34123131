@@ -15,13 +15,13 @@ export default {
     ],
     rating: 9.5,
     reviews_count: 22,
-    amenities: ["parking_free", "ski_in_ski_out", "non_smoking"],
+    amenities: ["ski_in_ski_out", "family_friendly", "parking_free", "non_smoking"],
     gallery_key: "pila-63",
-    description: "Pila 63 è la definizione di ski-in ski-out. Apri la porta e sei già sulla neve. Un appartamento essenziale, elegante, pensato per chi vive la montagna con intensità.",
+    description: "Pila 63 è la definizione di ski-in ski-out. Apri la porta e sei già sulla neve. Un appartamento essenziale ed elegante, adatto a famiglie numerose o gruppi di amici che vogliono vivere la montagna con intensità.",
     specs: {
         typology: "Bilocale / Trilocale Ski-in / Ski-out",
         floors: "Piano unico con accesso diretto alle piste",
-        beds: "6 posti letto (1 matrimoniale, 2 letti a castello, 1 divano letto)",
-        rooms: "Ampio living con cucina a vista, camera matrimoniale, camera secondaria, bagno, ski room"
+        beds: "6 posti letto (1 letto matrimoniale, 1 letto a castello, 1 divano letto)",
+        rooms: "Ampio living con divano letto e tavolo da pranzo, camera matrimoniale, cucina accessoriata, bagno e ski room"
     }
 };

@@ -19,9 +19,6 @@ export const GENERAL_HOUSE_RULES = {
  */
 export const APARTMENTS = ALL_APARTMENTS.map((apt) => {
     const gallery = [...(PHOTO_GALLERIES[apt.gallery_key] || [])];
-    if (apt.id === "pila-63" && gallery.length > 1) {
-        gallery.unshift(gallery.splice(1, 1)[0]);
-    }
     const cover = gallery[0];
 
     return {

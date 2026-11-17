@@ -4,21 +4,24 @@ import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { NAV } from "@/constants/testIds";
 import { SITE } from "@/lib/siteConfig";
 import { buildOctorateUrl } from "@/lib/octorate";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 const LOGO_URL =
   "https://customer-assets.emergentagent.com/job_0edc567d-bda4-4c1d-90f5-e4bdc5cabf5a/artifacts/tnx5w7d9_image.png";
 
-const links = [
-  { to: "/", label: "Home", tid: NAV.linkHome },
-  { to: "/appartamenti", label: "Appartamenti", tid: NAV.linkApartments },
-  { to: "/affidaci-il-tuo-immobile", label: "Affidaci il tuo immobile", tid: NAV.linkHost },
-  { to: "/contatti", label: "Contatti", tid: NAV.linkContact },
-];
-
 export const Navbar = () => {
+  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  const links = [
+    { to: "/", label: t("nav.home"), tid: NAV.linkHome },
+    { to: "/appartamenti", label: t("nav.apartments"), tid: NAV.linkApartments },
+    { to: "/affidaci-il-tuo-immobile", label: t("nav.hostWithUs"), tid: NAV.linkHost },
+    { to: "/contatti", label: t("nav.contact"), tid: NAV.linkContact },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -66,42 +69,60 @@ export const Navbar = () => {
           </span>
         </Link>
 
-        <ul className="hidden lg:flex items-center gap-10">
-          {links.map((l) => (
-            <li key={l.to}>
-              <NavLink
-                to={l.to}
-                data-testid={l.tid}
-                className={({ isActive }) =>
-                  `text-xs uppercase tracking-[0.22em] transition-colors duration-300 ${
-                    isActive ? "text-white" : "text-white/60 hover:text-white"
-                  }`
-                }
-                end={l.to === "/"}
-              >
-                {l.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+        {/* DESKTOP NAV LINKS + LANGUAGE SELECTOR */}
+        <div className="hidden lg:flex items-center gap-10">
+          <ul className="flex items-center gap-8 xl:gap-10">
+            {links.map((l) => (
+              <li key={l.to}>
+                <NavLink
+                  to={l.to}
+                  data-testid={l.tid}
+                  className={({ isActive }) =>
+                    `text-xs uppercase tracking-[0.22em] transition-colors duration-300 ${
+                      isActive ? "text-white" : "text-white/60 hover:text-white"
+                    }`
+                  }
+                  end={l.to === "/"}
+                >
+                  {l.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+          <div className="pl-2 border-l border-white/10">
+            <LanguageSelector variant="dropdown" />
+          </div>
+        </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          data-testid={NAV.mobileToggle}
-          aria-label={open ? "Chiudi menu" : "Apri menu"}
-          className="lg:hidden text-white flex items-center justify-center min-h-[44px] min-w-[44px] p-2 active:bg-white/10 transition-colors"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* MOBILE CONTROLS (LANGUAGE + HAMBURGER) */}
+        <div className="lg:hidden flex items-center gap-2">
+          <LanguageSelector variant="dropdown" />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            data-testid={NAV.mobileToggle}
+            aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
+            className="text-white flex items-center justify-center min-h-[44px] min-w-[44px] p-2 active:bg-white/10 transition-colors"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
+      {/* MOBILE MENU DRAWER */}
       {open && (
         <div
           data-testid={NAV.mobileMenu}
           className="lg:hidden bg-[#0A0A0A]/95 backdrop-blur-xl border-t border-white/10 max-h-[calc(100vh-80px)] overflow-y-auto"
         >
-          <ul className="px-6 py-6 flex flex-col divide-y divide-white/5">
+          <div className="px-6 pt-5 pb-3 border-b border-white/5">
+            <p className="text-[10px] uppercase tracking-[0.28em] text-white/40 mb-2.5">
+              {t("lang.chooseLang")}
+            </p>
+            <LanguageSelector variant="segmented" />
+          </div>
+
+          <ul className="px-6 py-4 flex flex-col divide-y divide-white/5">
             {links.map((l) => (
               <li key={l.to}>
                 <NavLink
@@ -129,14 +150,14 @@ export const Navbar = () => {
               onClick={() => setOpen(false)}
               className="w-full min-h-[46px] flex items-center justify-center bg-[#2E4F3E] text-white text-xs uppercase tracking-[0.22em] font-medium transition-colors hover:bg-[#233B2E]"
             >
-              Verifica disponibilità
+              {t("nav.checkAvailability")}
             </a>
             <div className="grid grid-cols-2 gap-3 pt-2">
               <a
                 href={`tel:${SITE.phoneRaw}`}
                 className="min-h-[44px] flex items-center justify-center gap-2 border border-white/20 text-white/80 active:text-white text-xs uppercase tracking-wider"
               >
-                <Phone size={14} /> Chiama
+                <Phone size={14} /> {t("nav.call")}
               </a>
               <a
                 href={`https://wa.me/${SITE.phoneRaw.replace(/[^0-9]/g, "")}?text=${encodeURIComponent("Ciao, vorrei informazioni sui vostri appartamenti a Pila.")}`}

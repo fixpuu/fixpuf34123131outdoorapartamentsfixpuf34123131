@@ -5,11 +5,13 @@ import { Seo } from "@/components/Seo";
 import { fetchApartments } from "@/lib/api";
 import { itemListLd, breadcrumbLd } from "@/lib/structuredData";
 import { APT } from "@/constants/testIds";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const HEADER_IMAGE =
   "/images/apartments/pila-1800/001.jpg";
 
 export default function ApartmentsList() {
+  const { t } = useLanguage();
   const { data: apartments = [], isLoading } = useQuery({
     queryKey: ["apartments"],
     queryFn: fetchApartments,
@@ -18,13 +20,13 @@ export default function ApartmentsList() {
   return (
     <div className="bg-[#0A0A0A] min-h-screen">
       <Seo
-        title="Appartamenti e chalet in affitto a Pila"
-        description="Scopri gli appartamenti e chalet in affitto a Pila, Valle d'Aosta: case vacanza sulla neve con sci ai piedi, WiFi e parcheggio. Prenotazione diretta senza commissioni."
+        title={t("apartmentsList.title")}
+        description={t("apartmentsList.subtitle")}
         path="/appartamenti"
         jsonLd={[
           breadcrumbLd([
-            { name: "Home", path: "/" },
-            { name: "Appartamenti", path: "/appartamenti" },
+            { name: t("nav.home"), path: "/" },
+            { name: t("nav.apartments"), path: "/appartamenti" },
           ]),
           apartments.length ? itemListLd(apartments) : null,
         ].filter(Boolean)}
@@ -44,7 +46,7 @@ export default function ApartmentsList() {
             transition={{ duration: 0.9 }}
             className="text-[10px] uppercase tracking-[0.32em] text-[#B7CFC0] mb-4 sm:mb-6"
           >
-            La collezione
+            {t("apartmentsList.tag")}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -52,7 +54,7 @@ export default function ApartmentsList() {
             transition={{ duration: 1, delay: 0.15 }}
             className="font-serif-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] max-w-4xl"
           >
-            I nostri <span className="italic">appartamenti.</span>
+            {t("apartmentsList.title")}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -60,7 +62,7 @@ export default function ApartmentsList() {
             transition={{ duration: 0.9, delay: 0.35 }}
             className="mt-4 sm:mt-6 text-white/70 text-sm sm:text-base md:text-lg max-w-xl"
           >
-            Rifugi selezionati tra Aosta e Pila
+            {t("apartmentsList.subtitle")}
           </motion.p>
         </div>
       </section>
@@ -69,7 +71,7 @@ export default function ApartmentsList() {
       <section className="py-14 sm:py-24 md:py-32 px-5 sm:px-6 md:px-10">
         <div className="max-w-[1400px] mx-auto">
           {isLoading ? (
-            <p className="text-white/50 text-sm">Caricamento…</p>
+            <p className="text-white/50 text-sm">{t("common.loading")}</p>
           ) : (
             <div
               data-testid={APT.list}

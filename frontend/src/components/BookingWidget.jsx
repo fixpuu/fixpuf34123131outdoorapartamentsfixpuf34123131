@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CalendarDays, Users, Search } from "lucide-react";
 import { BOOKING } from "@/constants/testIds";
 import { buildOctorateUrl } from "@/lib/octorate";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 /**
  * BookingWidget — Octorate booking engine interface.
@@ -9,6 +10,7 @@ import { buildOctorateUrl } from "@/lib/octorate";
  * con i parametri necessari.
  */
 export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
+  const { t } = useLanguage();
   const today = new Date().toISOString().split("T")[0];
   const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
     .toISOString()
@@ -39,19 +41,19 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
       <div className="flex items-center gap-3 mb-6">
         <div className="w-1.5 h-1.5 bg-[#5F8F76] rounded-full" />
         <p className="text-[10px] uppercase tracking-[0.28em] text-white/50">
-          Prenotazione diretta
+          {t("booking.directBooking")}
         </p>
       </div>
 
       <h3 className="font-serif-display text-2xl md:text-3xl mb-8 leading-tight">
-        Verifica disponibilità
+        {t("booking.title")}
       </h3>
 
       {/* Custom Booking UI */}
       <div className={`grid ${variant === "sidebar" ? "grid-cols-1 gap-5" : "grid-cols-2 md:grid-cols-4 gap-4 md:gap-5"}`}>
         <div className="col-span-1">
           <label className="text-[10px] uppercase tracking-[0.22em] text-white/50 flex items-center gap-2 mb-2">
-            <CalendarDays size={12} /> Check-in
+            <CalendarDays size={12} /> {t("booking.checkin")}
           </label>
           <input
             type="date"
@@ -63,7 +65,7 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
         </div>
         <div className="col-span-1">
           <label className="text-[10px] uppercase tracking-[0.22em] text-white/50 flex items-center gap-2 mb-2">
-            <CalendarDays size={12} /> Check-out
+            <CalendarDays size={12} /> {t("booking.checkout")}
           </label>
           <input
             type="date"
@@ -75,7 +77,7 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
         </div>
         <div className="col-span-1">
           <label className="text-[10px] uppercase tracking-[0.22em] text-white/50 flex items-center gap-2 mb-2">
-            <Users size={12} /> Adulti
+            <Users size={12} /> {t("booking.adults")}
           </label>
           <select
             value={adults}
@@ -85,14 +87,14 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
           >
             {[1, 2, 3, 4, 5, 6].map((n) => (
               <option key={n} value={n} className="bg-[#141414]">
-                {n} {n === 1 ? "adulto" : "adulti"}
+                {n} {n === 1 ? t("booking.adults").slice(0, -1) : t("booking.adults")}
               </option>
             ))}
           </select>
         </div>
         <div className="col-span-1">
           <label className="text-[10px] uppercase tracking-[0.22em] text-white/50 flex items-center gap-2 mb-2">
-            <Users size={12} /> Bambini
+            <Users size={12} /> {t("booking.children")}
           </label>
           <select
             value={children}
@@ -102,7 +104,7 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
           >
             {[0, 1, 2, 3, 4].map((n) => (
               <option key={n} value={n} className="bg-[#141414]">
-                {n} {n === 1 ? "bambino" : "bambini"}
+                {n} {t("booking.children")}
               </option>
             ))}
           </select>
@@ -115,7 +117,7 @@ export const BookingWidget = ({ variant = "default", apartmentId = null }) => {
         onClick={handleSearch}
         className="mt-8 md:mt-10 w-full md:w-auto min-h-[48px] inline-flex items-center justify-center gap-3 bg-[#2E4F3E] text-white hover:bg-[#233B2E] active:scale-[0.99] transition-all px-8 md:px-10 py-3.5 md:py-4 text-xs tracking-[0.24em] uppercase font-medium touch-manipulation"
       >
-        <Search size={14} /> Verifica disponibilità
+        <Search size={14} /> {t("booking.search")}
       </button>
     </div>
   );

@@ -15,11 +15,11 @@ export default {
     ],
     rating: 9.3,
     reviews_count: 46,
-    amenities: ["parking_free", "wifi_free", "non_smoking"],
+    amenities: ["panoramic_terrace", "parking_free", "wifi_free", "non_smoking"],
     gallery_key: "pila-1800",
     description: "Studiò Pila 1800 prende il nome dall'altitudine che lo circonda. Un rifugio contemporaneo con arredi selezionati, ideale per chi cerca uno spazio intimo dopo una giornata sulle piste.",
     specs: {
-        typology: "Monolocale Studio a quota 1800m",
+        typology: "Monolocale Studio",
         floors: "Piano unico",
         beds: "2 posti letto (1 letto matrimoniale)",
         rooms: "Open space intimo con letto matrimoniale, angolo cottura essenziale, tavolo da pranzo, bagno con doccia"

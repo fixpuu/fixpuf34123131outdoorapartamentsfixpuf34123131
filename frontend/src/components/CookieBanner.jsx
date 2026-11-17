@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { X, Cookie, ShieldCheck } from "lucide-react";
 import { useConsent } from "@/context/ConsentContext";
+import { useLanguage } from "@/i18n/LanguageContext";
 import { CONSENT } from "@/constants/testIds";
 
 /**
@@ -13,6 +14,7 @@ import { CONSENT } from "@/constants/testIds";
  * - Riaperture: link "Gestisci cookie" nel footer.
  */
 export const CookieBanner = () => {
+  const { t } = useLanguage();
   const {
     showBanner,
     showPreferences,
@@ -41,23 +43,19 @@ export const CookieBanner = () => {
                 <Cookie size={22} className="text-[#5F8F76] flex-shrink-0 mt-1" />
                 <div>
                   <p className="text-xs uppercase tracking-[0.28em] text-white/50 mb-3">
-                    Cookie & Privacy
+                    {t("cookieBanner.tag")}
                   </p>
                   <h2 className="font-serif-display text-2xl md:text-3xl leading-tight mb-3">
-                    Rispettiamo la tua privacy.
+                    {t("cookieBanner.title")}
                   </h2>
                   <p className="text-white/70 text-sm leading-relaxed max-w-2xl">
-                    Utilizziamo cookie tecnici indispensabili al funzionamento del sito e,
-                    solo previo tuo consenso, cookie analitici, funzionali o di
-                    profilazione anche di terze parti. Puoi accettare tutti, rifiutarli
-                    tutti o personalizzare le tue preferenze in qualsiasi momento.
-                    Leggi la nostra{" "}
+                    {t("cookieBanner.desc")}{" "}
                     <Link to="/cookie-policy" className="underline text-[#B7CFC0]">
-                      Cookie Policy
+                      {t("cookieBanner.cookiePolicy")}
                     </Link>{" "}
-                    e l'{" "}
+                    /{" "}
                     <Link to="/privacy-policy" className="underline text-[#B7CFC0]">
-                      Informativa Privacy
+                      {t("cookieBanner.privacyPolicy")}
                     </Link>
                     .
                   </p>
@@ -71,7 +69,7 @@ export const CookieBanner = () => {
                   onClick={rejectAll}
                   className="bg-transparent border border-white/40 hover:border-white hover:bg-white/5 text-white transition-colors px-5 py-3 text-[11px] tracking-[0.22em] uppercase whitespace-nowrap"
                 >
-                  Rifiuta tutti
+                  {t("cookieBanner.rejectAll")}
                 </button>
                 <button
                   type="button"
@@ -79,7 +77,7 @@ export const CookieBanner = () => {
                   onClick={openPreferences}
                   className="bg-transparent border border-white/40 hover:border-white hover:bg-white/5 text-white transition-colors px-5 py-3 text-[11px] tracking-[0.22em] uppercase whitespace-nowrap"
                 >
-                  Personalizza
+                  {t("cookieBanner.customize")}
                 </button>
                 <button
                   type="button"
@@ -87,7 +85,7 @@ export const CookieBanner = () => {
                   onClick={acceptAll}
                   className="bg-transparent border border-white/40 hover:border-white hover:bg-white/5 text-white transition-colors px-5 py-3 text-[11px] tracking-[0.22em] uppercase whitespace-nowrap"
                 >
-                  Accetta tutti
+                  {t("cookieBanner.acceptAll")}
                 </button>
               </div>
             </div>
