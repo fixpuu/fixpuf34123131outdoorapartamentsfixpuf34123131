@@ -53,11 +53,14 @@ export default function ApartmentDetail() {
   }
 
   const galleryImages = apt.gallery?.length ? apt.gallery : [apt.image];
+  const isCharvensod = (apt.location || "").toLowerCase().includes("charvensod");
+  const localityLabel = isCharvensod ? "Charvensod — Aosta" : "Pila (Valle d'Aosta)";
+  const pageTitle = `${apt.name} — Affitto Appartamento a ${localityLabel}`;
 
   return (
     <div className="bg-[#0A0A0A] min-h-screen pb-32">
       <Seo
-        title={`${apt.name} — Appartamento vacanze a Pila`}
+        title={pageTitle}
         description={apt.description}
         path={`/appartamenti/${apt.id}`}
         image={galleryImages[0]}

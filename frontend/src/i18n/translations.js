@@ -79,9 +79,17 @@ export const TRANSLATIONS = {
       pillar3Title: "Prenotazione Diretta",
       pillar3Desc: "Miglior tariffa garantita senza costi di intermediazione dei portali. Comunicazione diretta e condizioni chiare e trasparenti.",
 
-      pilaTag: "Il comprensorio",
+      pilaTag: "Il comprensorio di Pila",
       pilaTitle: "Pila, una terrazza naturale sui quattromila.",
       pilaDesc: "Con oltre 70 km di piste da sci che arrivano fino a 2.700 metri, Pila è una delle mete più spettacolari e panoramiche della Valle d'Aosta. Raggiungibile comodamente in soli 18 minuti dal centro storico di Aosta con la telecabina panoramica, offre un panorama a 360° che abbraccia il Monte Bianco, il Cervino, il Monte Rosa e il Gran Paradiso.",
+      pilaStat1Val: "1.800 – 2.750 m",
+      pilaStat1Label: "Altitudine comprensorio",
+      pilaStat2Val: "70 km",
+      pilaStat2Label: "Piste da sci perfettamente battute",
+      pilaStat3Val: "18 min",
+      pilaStat3Label: "Telecabina diretta da Aosta centro",
+      pilaStat4Val: "360°",
+      pilaStat4Label: "Vista su Bianco, Cervino, Rosa, Gran Paradiso",
 
       faqTag: "Domande frequenti",
       faqTitle: "Tutto quello che c'è da sapere.",
@@ -117,8 +125,8 @@ export const TRANSLATIONS = {
     // Lista Appartamenti
     apartmentsList: {
       tag: "La collezione",
-      title: "I nostri appartamenti.",
-      subtitle: "Scopri la nostra selezione di chalet e appartamenti a Pila e dintorni. Ambienti accoglienti, viste spettacolari e comfort alpino per ogni esigenza di soggiorno.",
+      title: "Appartamenti e Chalet a Pila",
+      subtitle: "Scopri la nostra selezione di chalet e appartamenti in affitto a Pila (Valle d'Aosta) a 1800m sulle piste. Ambienti accoglienti, viste spettacolari sui quattromila, sci ai piedi e prenotazione diretta garantita senza commissioni.",
       filterAll: "Tutti",
       filterPila: "Pila",
       filterAosta: "Aosta",
@@ -345,9 +353,17 @@ export const TRANSLATIONS = {
       pillar3Title: "Direct Booking",
       pillar3Desc: "Best rate guaranteed with zero portal booking fees. Direct communication and transparent, straightforward terms.",
 
-      pilaTag: "The resort",
+      pilaTag: "The Pila ski resort",
       pilaTitle: "Pila, a natural balcony overlooking 4,000m peaks.",
       pilaDesc: "With over 70 km of ski slopes reaching up to 2,700 meters, Pila is one of the most scenic destinations in the Aosta Valley. Conveniently reached in just 18 minutes from Aosta's historic center via panoramic cable car, it features a 360° panorama encompassing Mont Blanc, the Matterhorn, Monte Rosa, and Gran Paradiso.",
+      pilaStat1Val: "1,800 – 2,750 m",
+      pilaStat1Label: "Resort altitude",
+      pilaStat2Val: "70 km",
+      pilaStat2Label: "Groomed ski slopes",
+      pilaStat3Val: "18 min",
+      pilaStat3Label: "Direct gondola from Aosta center",
+      pilaStat4Val: "360°",
+      pilaStat4Label: "Panoramic views of 4,000m peaks",
 
       faqTag: "FAQ",
       faqTitle: "Everything you need to know.",
@@ -383,8 +399,8 @@ export const TRANSLATIONS = {
     // Apartments List
     apartmentsList: {
       tag: "The collection",
-      title: "Our apartments.",
-      subtitle: "Explore our curated collection of chalets and apartments in Pila and surroundings. Warm interiors, panoramic views, and alpine comfort tailored to your stay.",
+      title: "Apartments & Chalets in Pila",
+      subtitle: "Explore our curated collection of vacation apartments and chalets for rent in Pila (Aosta Valley) at 1,800m on the slopes. Ski-in ski-out access, panoramic views, and direct booking guarantee.",
       filterAll: "All",
       filterPila: "Pila",
       filterAosta: "Aosta",
@@ -611,9 +627,17 @@ export const TRANSLATIONS = {
       pillar3Title: "Réservation Directe",
       pillar3Desc: "Meilleur tarif garanti sans frais de commission des plateformes. Communication directe et conditions claires et transparentes.",
 
-      pilaTag: "Le domaine",
+      pilaTag: "Le domaine skiable de Pila",
       pilaTitle: "Pila, un balcon naturel face aux 4 000 mètres.",
       pilaDesc: "Avec plus de 70 km de pistes s'élevant jusqu'à 2 700 mètres, Pila est l'une des destinations les plus spectaculaires de la Vallée d'Aoste. Accessible en seulement 18 minutes depuis le centre historique d'Aoste grâce à la télécabine panoramique, elle offre un panorama à 360° sur le Mont-Blanc, le Cervin, le Mont Rose et le Grand Paradis.",
+      pilaStat1Val: "1 800 – 2 750 m",
+      pilaStat1Label: "Altitude du domaine",
+      pilaStat2Val: "70 km",
+      pilaStat2Label: "Pistes de ski préparées",
+      pilaStat3Val: "18 min",
+      pilaStat3Label: "Télécabine directe depuis le centre d'Aoste",
+      pilaStat4Val: "360°",
+      pilaStat4Label: "Vue sur le Mont-Blanc, Cervin, Mont Rose, Grand Paradis",
 
       faqTag: "Questions fréquentes",
       faqTitle: "Tout ce que vous devez savoir.",
@@ -649,8 +673,8 @@ export const TRANSLATIONS = {
     // Apartments List
     apartmentsList: {
       tag: "La collection",
-      title: "Nos appartements.",
-      subtitle: "Découvrez notre sélection de chalets et appartements à Pila et ses environs. Atmosphères chaleureuses, vues splendides et confort alpin pour chaque séjour.",
+      title: "Appartements & Chalets à Pila",
+      subtitle: "Découvrez notre sélection d'appartements et chalets en location à Pila (Vallée d'Aoste) à 1 800m au pied des pistes. Accès skis aux pieds, vues panoramiques et réservation directe sans commission.",
       filterAll: "Tous",
       filterPila: "Pila",
       filterAosta: "Aoste",

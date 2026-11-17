@@ -11,7 +11,16 @@
         <!-- Titolo e meta descrizione di base (fallback no-JS).
              I meta per-pagina (description, canonical, Open Graph, Twitter, geo)
              sono gestiti dinamicamente da react-helmet-async: vedi src/components/Seo.jsx -->
-        <title>Outdoor Apartments | Appartamenti e Chalet a Pila, Valle d'Aosta</title>
+        <title>Appartamenti Pila Valle d'Aosta | Affitto Case Vacanza e Chalet — Outdoor Apartments</title>
+        <meta name="description" content="Affitto appartamenti e chalet a Pila (Valle d'Aosta) a 1800m direttamente sulle piste da sci. Case vacanza sci ai piedi, vista 360° Alpi, WiFi e prenotazione diretta senza commissioni." />
+        <meta name="keywords" content="appartamenti Pila, affitto appartamenti Pila, case vacanza Pila, chalet Pila, appartamenti Pila Valle d'Aosta, sci ai piedi Pila, affitto Pila 1800, settimana bianca Pila, Outdoor Apartments" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+        <!-- GEO Local SEO -->
+        <meta name="geo.region" content="IT-23" />
+        <meta name="geo.placename" content="Pila, Gressan, Valle d'Aosta, Italia" />
+        <meta name="geo.position" content="45.6856;7.3019" />
+        <meta name="ICBM" content="45.6856, 7.3019" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,16 +33,20 @@
         <script type="application/ld+json">
         {
           "@context": "https://schema.org",
-          "@type": "LodgingBusiness",
+          "@type": ["LodgingBusiness", "RealEstateAgent"],
           "@id": "https://www.outdoorapartments.it/#business",
-          "name": "Outdoor Apartments",
-          "description": "Gestione e affitto di appartamenti e chalet turistici a Pila, Valle d'Aosta. Vacanze sulla neve con sci ai piedi.",
+          "name": "Outdoor Apartments — Pila, Valle d'Aosta",
+          "legalName": "Outdoor Apartments",
+          "alternateName": ["Outdoor Apartments Pila", "Appartamenti Pila", "Affitto Chalet Pila"],
+          "description": "Gestione professionale e affitto diretto di appartamenti, case vacanza e chalet a Pila (Valle d'Aosta) a 1800m con sci ai piedi.",
           "url": "https://www.outdoorapartments.it",
-          "logo": "https://customer-assets.emergentagent.com/job_0edc567d-bda4-4c1d-90f5-e4bdc5cabf5a/artifacts/tnx5w7d9_image.png",
-          "image": "https://images.pexels.com/photos/1054218/pexels-photo-1054218.jpeg?auto=compress&cs=tinysrgb&w=1200",
+          "logo": "https://www.outdoorapartments.it/logo.png",
+          "image": "https://www.outdoorapartments.it/images/hero-outdoor-apartments.jpg",
           "email": "outdoor.apartments@gmail.com",
           "telephone": "+39 346 161 5188",
           "priceRange": "€€",
+          "currenciesAccepted": "EUR",
+          "paymentAccepted": "Credit Card, Bank Transfer",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "Frazione Pila",
@@ -45,9 +58,18 @@
           "geo": {
             "@type": "GeoCoordinates",
             "latitude": 45.6856,
-            "longitude": 7.3019
+            "longitude": 7.3019,
+            "elevation": "1800 m"
           },
-          "areaServed": ["Pila", "Aosta", "Valle d'Aosta"],
+          "areaServed": [
+            { "@type": "Place", "name": "Pila" },
+            { "@type": "Place", "name": "Gressan" },
+            { "@type": "Place", "name": "Aosta" },
+            { "@type": "Place", "name": "Valle d'Aosta" }
+          ],
+          "sameAs": [
+            "https://www.instagram.com/outdoor_apartments/"
+          ],
           "knowsLanguage": ["it", "en", "fr"]
         }
         </script>

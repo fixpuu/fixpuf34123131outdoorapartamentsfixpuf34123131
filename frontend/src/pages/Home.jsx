@@ -9,6 +9,7 @@ import { ApartmentCard } from "@/components/ApartmentCard";
 import { Seo } from "@/components/Seo";
 import { fetchHomeApartments } from "@/lib/api";
 import {
+  lodgingBusinessLd,
   websiteLd,
   breadcrumbLd,
   faqLd,
@@ -43,6 +44,7 @@ export default function Home() {
         path="/"
         jsonLd={[
           websiteLd(),
+          lodgingBusinessLd(featured),
           breadcrumbLd([{ name: t("nav.home"), path: "/" }]),
           faqs.length ? faqLd(faqs) : null,
         ].filter(Boolean)}
@@ -263,6 +265,74 @@ export default function Home() {
               <p className="text-white/60 text-sm leading-relaxed">{t("home.pillar3Desc")}</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* COMPRENSORIO PILA — LOCAL & GEO SEO */}
+      <section className="py-24 md:py-32 px-6 md:px-10 border-t border-white/5 bg-[#0e0e0e]">
+        <div className="max-w-[1400px] mx-auto">
+          <motion.div
+            variants={fade}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center"
+          >
+            <div className="lg:col-span-6 space-y-6">
+              <p className="text-[10px] uppercase tracking-[0.32em] text-[#5F8F76]">
+                {t("home.pilaTag")}
+              </p>
+              <h2 className="font-serif-display text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
+                {t("home.pilaTitle")}
+              </h2>
+              <p className="text-white/70 text-base md:text-lg leading-relaxed">
+                {t("home.pilaDesc")}
+              </p>
+              <div className="pt-2">
+                <Link
+                  to="/appartamenti"
+                  className="inline-flex items-center gap-3 text-[#5F8F76] hover:text-[#7bb195] transition-colors text-xs uppercase tracking-[0.28em]"
+                >
+                  {t("home.viewAllApartments")} <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 grid grid-cols-2 gap-4 sm:gap-6">
+              <div className="p-6 sm:p-8 border border-white/10 bg-[#141414]">
+                <div className="text-2xl sm:text-3xl font-serif-display text-white mb-2">
+                  {t("home.pilaStat1Val")}
+                </div>
+                <div className="text-xs uppercase tracking-[0.18em] text-white/60">
+                  {t("home.pilaStat1Label")}
+                </div>
+              </div>
+              <div className="p-6 sm:p-8 border border-white/10 bg-[#141414]">
+                <div className="text-2xl sm:text-3xl font-serif-display text-white mb-2">
+                  {t("home.pilaStat2Val")}
+                </div>
+                <div className="text-xs uppercase tracking-[0.18em] text-white/60">
+                  {t("home.pilaStat2Label")}
+                </div>
+              </div>
+              <div className="p-6 sm:p-8 border border-white/10 bg-[#141414]">
+                <div className="text-2xl sm:text-3xl font-serif-display text-white mb-2">
+                  {t("home.pilaStat3Val")}
+                </div>
+                <div className="text-xs uppercase tracking-[0.18em] text-white/60">
+                  {t("home.pilaStat3Label")}
+                </div>
+              </div>
+              <div className="p-6 sm:p-8 border border-white/10 bg-[#141414]">
+                <div className="text-2xl sm:text-3xl font-serif-display text-white mb-2">
+                  {t("home.pilaStat4Val")}
+                </div>
+                <div className="text-xs uppercase tracking-[0.18em] text-white/60">
+                  {t("home.pilaStat4Label")}
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
