@@ -42,7 +42,7 @@ export const ApartmentCard = ({ apartment, index = 0 }) => {
     >
       <Link to={`/appartamenti/${id}`} className="block">
         <div className="relative aspect-[4/5]">
-          <ApartmentGallery images={gallery?.length ? gallery : [image]} name={name} className="h-full w-full" />
+          <ApartmentGallery images={gallery?.length ? gallery : [image]} name={name} showName={false} className="h-full w-full" />
           {apartment.coming_soon ? (
             <div className="absolute top-5 left-5 flex items-center gap-1.5 bg-[#1B3327]/90 border border-[#5F8F76] backdrop-blur-md px-3 py-1.5 shadow-lg">
               <span className="text-[11px] uppercase tracking-wider text-white font-medium">

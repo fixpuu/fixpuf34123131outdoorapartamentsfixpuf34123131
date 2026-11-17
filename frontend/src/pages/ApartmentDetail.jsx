@@ -71,28 +71,90 @@ export default function ApartmentDetail() {
         ]}
       />
 
-      {/* TOP BAR / BACK */}
-      <div className="pt-28 md:pt-36 max-w-[1600px] mx-auto px-5 sm:px-6 md:px-10 pb-6 flex items-center justify-between">
-        <Link
-          to="/appartamenti"
-          data-testid={APT.backBtn}
-          className="inline-flex min-h-11 items-center gap-3 text-xs uppercase tracking-[0.28em] text-white/60 transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-        >
-          <ArrowLeft size={14} aria-hidden="true" /> {t("apartmentDetail.back")}
-        </Link>
-        <div className="flex items-center gap-2 text-white/50 text-xs">
-          <MapPin size={13} className="text-[#5F8F76]" />
-          <span>{apt.location}</span>
+      {/* HERO */}
+      <section className="relative h-[78vh] sm:h-[88vh] w-full overflow-hidden">
+        {/* Pulsante di navigazione / header ben visibile */}
+        <div className="absolute top-24 left-6 md:left-10 z-30 pointer-events-auto">
+          <Link
+            to="/appartamenti"
+            aria-label={t("apartmentDetail.back")}
+            data-testid={APT.backBtn}
+            className="inline-flex items-center gap-2.5 px-4 py-2.5 bg-black/65 hover:bg-black/90 text-white border border-white/20 hover:border-white/40 backdrop-blur-md text-xs uppercase tracking-[0.22em] transition-all duration-200 shadow-xl group"
+          >
+            <ArrowLeft size={14} className="text-[#5F8F76] transition-transform group-hover:-translate-x-1" aria-hidden="true" />
+            <span>← {t("apartmentDetail.back")}</span>
+          </Link>
         </div>
-      </div>
 
-      {/* GALLERY */}
-      <section className="max-w-[1600px] mx-auto px-5 sm:px-6 md:px-10">
-        <ApartmentGallery images={galleryImages} name={apt.name} variant="detail" />
+        <ApartmentGallery
+          images={galleryImages}
+          name={apt.name}
+          showName={false}
+          className="absolute inset-0 h-full w-full"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
+
+        <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-10 pb-16 md:pb-20 max-w-[1400px] mx-auto pointer-events-none">
+          <div className="pointer-events-auto">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9 }}
+              className="text-[10px] uppercase tracking-[0.32em] text-[#B7CFC0] mb-4 md:mb-6 flex items-center gap-3"
+            >
+              <MapPin size={12} className="text-[#5F8F76]" /> {apt.address || apt.location}
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.15 }}
+              className="font-serif-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] text-white break-words"
+            >
+              {apt.name}
+            </motion.h1>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.3 }}
+              className="mt-6 md:mt-8 flex flex-wrap items-center gap-4 text-white/80"
+            >
+              {apt.coming_soon && (
+                <div className="inline-flex items-center gap-2 bg-[#1B3327]/90 border border-[#5F8F76] backdrop-blur-md px-3.5 py-1.5 text-xs uppercase tracking-wider font-medium text-white shadow-lg">
+                  {t("common.comingSoon")}
+                </div>
+              )}
+              {!apt.coming_soon && apt.rating > 0 && (
+                <div className="flex items-center gap-2 bg-black/50 backdrop-blur-md px-3 py-1.5 border border-white/10">
+                  <Star size={16} className="text-[#5F8F76] fill-[#5F8F76]" />
+                  <span className="text-base font-medium">{apt.rating.toFixed(1)} / 10</span>
+                  {apt.reviews_count > 0 && (
+                    <span className="text-white/60 text-sm">({apt.reviews_count})</span>
+                  )}
+                </div>
+              )}
+              {apt.cin && (
+                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 text-xs font-mono tracking-wider border border-white/15">
+                  <ShieldCheck size={14} className="text-[#5F8F76]" /> {t("apartmentDetail.cin")}: {apt.cin}
+                </div>
+              )}
+              {apt.cir && (
+                <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md px-3 py-1.5 text-xs font-mono tracking-wider border border-white/10 text-white/70">
+                  {t("apartmentDetail.cir")}: {apt.cir}
+                </div>
+              )}
+              {apt.max_guests && (
+                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 text-xs tracking-wider border border-white/15 text-white/90">
+                  <Users size={14} className="text-[#5F8F76]" />
+                  <span>{t("common.maxGuests", { n: apt.max_guests })}</span>
+                </div>
+              )}
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* MAIN CONTENT + SIDEBAR */}
-      <section className="max-w-[1600px] mx-auto px-5 sm:px-6 md:px-10 mt-12 md:mt-20">
+      <section className="max-w-[1400px] mx-auto px-6 md:px-10 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 lg:gap-20">
           <div className="space-y-12">
             {/* IDENTIFICATION CODES & QUICK STATS */}

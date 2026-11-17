@@ -11,6 +11,9 @@
  */
 const fs = require("fs");
 const path = require("path");
+const util = require("util");
+const { execFile } = require("child_process");
+const execFileAsync = util.promisify(execFile);
 const convert = require("heic-convert");
 
 const sourceRoot = path.resolve(__dirname, "../FOTO");
@@ -253,30 +256,42 @@ const CURATED_GALLERIES = {
   ]
 };
 
-const copyPhoto = async (sourcePath, apartmentSlug, index) => {
-  const extension = path.extname(sourcePath).toLowerCase();
-  const destinationDirectory = path.join(outputRoot, apartmentSlug);
-  fs.mkdirSync(destinationDirectory, { recursive: true });
-  const isHeic = extension === ".heic";
-  const outExt = isHeic ? ".jpg" : extension;
-  const name = `${String(index + 1).padStart(3, "0")}${outExt}`;
-  const destinationPath = path.join(destinationDirectory, name);
-
-  // If already converted in /tmp/photo_inspection, we can copy from there for speed
-  const baseName = path.basename(sourcePath, path.extname(sourcePath));
-  const cachedTmp = path.join("/tmp/photo_inspection", apartmentSlug, baseName + (isHeic ? ".jpg" : extension));
-
-  if (fs.existsSync(cachedTmp)) {
-    await fs.promises.copyFile(cachedTmp, destinationPath);
-  } else if (isHeic) {
-    const input = await fs.promises.readFile(sourcePath);
-    const output = await convert({ buffer: input, format: "JPEG", quality: 0.88 });
-    await fs.promises.writeFile(destinationPath, output);
-  } else {
-    await fs.promises.copyFile(sourcePath, destinationPath);
+const optimizePhoto = async (sourcePath, destinationPath) => {
+  try {
+    await execFileAsync("magick", [
+      sourcePath,
+      "-auto-orient",
+      "-resize",
+      "2048x2048>",
+      "-quality",
+      "85",
+      destinationPath
+    ]);
+  } catch (error) {
+    const extension = path.extname(sourcePath).toLowerCase();
+    if (extension === ".heic") {
+      const input = await fs.promises.readFile(sourcePath);
+      const output = await convert({ buffer: input, format: "JPEG", quality: 0.85 });
+      await fs.promises.writeFile(destinationPath, output);
+    } else {
+      await fs.promises.copyFile(sourcePath, destinationPath);
+    }
   }
+};
 
-  return `/images/apartments/${apartmentSlug}/${name}`;
+const runWithConcurrency = async (items, concurrency, workerFn) => {
+  const results = new Array(items.length);
+  let currentIndex = 0;
+
+  const workers = Array.from({ length: concurrency }, async () => {
+    while (currentIndex < items.length) {
+      const index = currentIndex++;
+      results[index] = await workerFn(items[index], index);
+    }
+  });
+
+  await Promise.all(workers);
+  return results;
 };
 
 const main = async () => {
@@ -284,13 +299,13 @@ const main = async () => {
     .filter((entry) => entry.isDirectory() && entry.name !== "PILA 1400")
     .sort((a, b) => a.name.localeCompare(b.name, "it"));
   const manifest = {};
+  const tasks = [];
 
   for (const group of groups) {
     const apartmentSlug = toSlug(group.name);
     const groupDir = path.join(sourceRoot, group.name);
     const destDir = path.join(outputRoot, apartmentSlug);
 
-    // Clean destination directory completely
     if (fs.existsSync(destDir)) {
       fs.rmSync(destDir, { recursive: true, force: true });
     }
@@ -307,10 +322,24 @@ const main = async () => {
     }
 
     manifest[apartmentSlug] = [];
-    for (let index = 0; index < files.length; index += 1) {
-      manifest[apartmentSlug].push(await copyPhoto(files[index], apartmentSlug, index));
-    }
+    files.forEach((sourcePath, index) => {
+      const name = `${String(index + 1).padStart(3, "0")}.jpg`;
+      const destinationPath = path.join(destDir, name);
+      const publicUrl = `/images/apartments/${apartmentSlug}/${name}`;
+      manifest[apartmentSlug].push(publicUrl);
+      tasks.push({ sourcePath, destinationPath, apartmentSlug, name });
+    });
   }
+
+  console.log(`Optimizing ${tasks.length} photos with ImageMagick (concurrency 6)...`);
+  const startTime = Date.now();
+
+  await runWithConcurrency(tasks, 6, async (task) => {
+    await optimizePhoto(task.sourcePath, task.destinationPath);
+  });
+
+  const durationSec = ((Date.now() - startTime) / 1000).toFixed(1);
+  console.log(`Optimization completed in ${durationSec}s.`);
 
   const output = `// Generato da scripts/prepare-gallery-assets.cjs. Non modificare manualmente.\nexport const PHOTO_GALLERIES = ${JSON.stringify(manifest, null, 2)};\n`;
   fs.writeFileSync(manifestPath, output);

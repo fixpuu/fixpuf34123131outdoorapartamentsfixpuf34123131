@@ -7,6 +7,7 @@ export const ApartmentGallery = ({
   className = "",
   interactive = true,
   autoPlay = false,
+  showName = true,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [pressedControl, setPressedControl] = useState(null);
@@ -25,6 +26,18 @@ export const ApartmentGallery = ({
     }
   };
 
+  // Keyboard navigation
+  const handleKeyDown = (e) => {
+    if (!interactive || !hasMultipleImages) return;
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      show(activeIndex - 1, "previous");
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      show(activeIndex + 1, "next");
+    }
+  };
+
   // Optional auto-play, disabled by default for mobile performance and stability
   useEffect(() => {
     if (!autoPlay || !hasMultipleImages || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -37,6 +50,10 @@ export const ApartmentGallery = ({
   }, [autoPlay, hasMultipleImages, images.length]);
 
   if (!images.length) return null;
+
+  // Fallback aspect-ratio if className does not specify height or aspect
+  const hasExplicitSize = /\b(h-|aspect-|min-h-|max-h-|inset-0)/.test(className);
+  const fallbackSizeClass = hasExplicitSize ? "" : "w-full aspect-[16/10] sm:aspect-[16/9]";
 
   // Touch Swipe handlers
   const handleTouchStart = (e) => {
@@ -89,11 +106,15 @@ export const ApartmentGallery = ({
 
   return (
     <div
-      className={`group relative isolate overflow-hidden bg-[#141414] select-none ${className}`}
+      className={`group relative isolate overflow-hidden bg-[#141414] select-none ${fallbackSizeClass} ${className}`}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onClickCapture={handleClickCapture}
+      onKeyDown={handleKeyDown}
+      tabIndex={interactive ? 0 : undefined}
+      role="region"
+      aria-label={`Galleria fotografica ${name || ""}`}
     >
       {/* Light DOM rendering: only render active image and immediate neighbors */}
       {images.map((image, index) => {
@@ -162,7 +183,7 @@ export const ApartmentGallery = ({
       )}
 
       {/* Apartment Name */}
-      {name && (
+      {showName && name && (
         <span className="absolute left-4 bottom-4 z-20 bg-black/65 backdrop-blur-sm px-2.5 py-1 text-[11px] font-mono tracking-wider text-white/90 border border-white/10 rounded-sm">
           {name}
         </span>
