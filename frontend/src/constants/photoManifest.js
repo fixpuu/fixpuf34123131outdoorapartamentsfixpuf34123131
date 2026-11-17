@@ -157,9 +157,7 @@ export const PHOTO_GALLERIES = {
     "/images/apartments/saint-salod-fienile/034.jpg",
     "/images/apartments/saint-salod-fienile/035.jpg",
     "/images/apartments/saint-salod-fienile/036.jpg",
-    "/images/apartments/saint-salod-fienile/037.jpg",
-    "/images/apartments/saint-salod-fienile/038.jpg",
-    "/images/apartments/saint-salod-fienile/039.jpg"
+    "/images/apartments/saint-salod-fienile/037.jpg"
   ],
   "saint-salod-zia": [
     "/images/apartments/saint-salod-zia/001.jpg",
@@ -174,7 +172,12 @@ export const PHOTO_GALLERIES = {
     "/images/apartments/saint-salod-zia/010.jpg",
     "/images/apartments/saint-salod-zia/011.jpg",
     "/images/apartments/saint-salod-zia/012.jpg",
-    "/images/apartments/saint-salod-zia/013.jpg"
+    "/images/apartments/saint-salod-zia/013.jpg",
+    "/images/apartments/saint-salod-zia/014.jpg",
+    "/images/apartments/saint-salod-zia/015.jpg",
+    "/images/apartments/saint-salod-zia/016.jpg",
+    "/images/apartments/saint-salod-zia/017.jpg",
+    "/images/apartments/saint-salod-zia/018.jpg"
   ],
   "ski-and-sky": [
     "/images/apartments/ski-and-sky/001.jpg",
@@ -218,11 +221,6 @@ export const PHOTO_GALLERIES = {
     "/images/apartments/white-relax/025.jpg",
     "/images/apartments/white-relax/026.jpg",
     "/images/apartments/white-relax/027.jpg",
-    "/images/apartments/white-relax/028.jpg",
-    "/images/apartments/white-relax/029.jpg",
-    "/images/apartments/white-relax/030.jpg",
-    "/images/apartments/white-relax/031.jpg",
-    "/images/apartments/white-relax/032.jpg",
-    "/images/apartments/white-relax/033.jpg"
+    "/images/apartments/white-relax/028.jpg"
   ]
 };
